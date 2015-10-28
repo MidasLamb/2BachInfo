@@ -32,18 +32,70 @@ Soorten I/O bus:
 \begin{itemize}
 	\item \textbf{ATA} advanced technology attachment
 	\item \textbf{SATA} serial ATA
-	\item \textbf{eSATA}
+	\item \textbf{eSATA} external SATA
 	\item \textbf{USB} universal serial bus
 	\item \textbf{FC} fibre channel
 \end{itemize}
-
-
+\subsubsection{Controllers}
+\definition{Controller}{Elektronische processor die de data overzet op de bus.}
+\definition{Host controller}{Controller aan de kant van de computer op de bus.}
+\definition{Disk controller}{Controller ingebouwd in de disk drive.}
+Voor I/O: computer plaatst command in de host controller, die communiceert met de disk controller, die dan de disk-drive hardware aanstuurt om de command uit te voeren.
 \subsection{Solid-State Disks}
+\definition{SSD (Solid state disk)}{Niet-vluchtig geheugen dat gebruikt wordt als harde schijf}
+\subsubsection{Eigenschappen}
+\begin{itemize}
+	\item Geen bewegende delen
+	\item Geen `seek time' of `latency'
+	\item Verbruiken minder energie
+	\item Duurder dan harde schijf
+	\item Kleiner dan harde schijf
+	\item Kortere levensduur dan harde schijf
+\end{itemize}
+
+\subsubsection{Toepassingen}
+\begin{description}
+	\item[Storage arrays] voor file-system metadata dat hoge performantie nodig hebben.
+	\item[Laptops] om ze kleiner, sneller en meer energie-effici\"{e}nt te maken.
+\end{description}
+
+\subsubsection{Opmerkingen}
+Omdat SSD's veel sneller zijn dan HDD, kan de bus interface een bottleneck vormen. Sommige SSD's zijn daarom ontworpen om direct met de system bus te connecteren. \\
+Sommige SSD's worden ook gebruikt als een soort cache tussen een HDD en het geheugen.
 \subsection{Magnetic Tapes}
+\subsubsection{Eigenschappen}
+\begin{itemize}
+	\item Permanent
+	\item Kan grote hoeveelheden data bijhouden
+	\item Trage access time
+	\item Vooral gebruikt voor backup.
+\end{itemize}
 %-----------------------------------------------------------------------------------
 \section{Disk Structure}
+Grote 1-dimensionale arrays van `logical blocks', de kleinste eenheid van `transfer'. Deze logische blokken worden sequentieel gemapt op de disk, van buiten naar binnen. In theorie kunnen we dit gebruiken om een logische blok naar een fysieke plaats om te rekenen, maar in praktijk is dit niet zo om twee redenen.
+\begin{itemize}
+	\item Defecte sectors worden vervangen door reserve sectors ergens anders op de disk.
+	\item Het aantal sectoren per track is niet altijd constant.
+\end{itemize}
+\subsubsection{Constant Linear Velocity (CLV)}
+\begin{itemize}
+	\item Dichtheid van bits per track is uniform
+	\item Buitenkant meer sectoren dan binnenkant.
+	\item Disk draait sneller als ze van buiten naar binnen gaat.
+\end{itemize}
+\subsubsection{Constant Angular Velocity (CAV)}
+\begin{itemize}
+	\item Hoeksnelheid blijft dezelfde
+	\item Dichtheid van bits daalt van binnen naar buiten.
+\end{itemize}
+
 %-----------------------------------------------------------------------------------
 \section{Disk Attachment}
+Computers accessen disks op twee manieren:
+\begin{itemize}
+	\item I/O Ports (host-attached storage)
+	\item Remote host in distributed file system (Network-Attached Storage)
+\end{itemize}
 \subsection{Host-Attached Storage}
 \subsection{Network-Attached Storage}
 \subsection{Storage-Area Network}
