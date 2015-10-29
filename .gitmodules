@@ -1,3 +1,6 @@
 [submodule "ArtificialIntelligence"]
 	path = ArtificieleIntelligentie/SummaryJO0st
 	url = git://github.com/JO0st/samenvatting_AI.git
+[submodule "ArtificialIntelligence/SummaryJO0st"]
+	path = ArtificialIntelligence/SummaryJO0st
+	url = git://github.com/JO0st/samenvatting_AI.git
