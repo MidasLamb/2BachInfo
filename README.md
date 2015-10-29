@@ -4,6 +4,12 @@ Collection of summaries for the courses for second bachelor IT at KU Leuven.
 Feel free to contribute to this repository!
 I'm not that good with Latex, so changing some stupid stuff i did is also very welcome.
 
+#Guidelines
+* Since we're ICT students, try to use .tex-files as much as possible.
+* Please keep everything structured.
+* If you contribute, don't forget to add your name to the list (see below).
+* Only add pdf's that are not generated from tex files in here, the .gitignore includes .pdf, so if you want to add a .pdf, you must change the .gitignore at the root (other .gitignores are only to make the directory-structure appear on git).
+
 #Contributions
 * [Cptmathix](https://github.com/Cptmathix)
 
