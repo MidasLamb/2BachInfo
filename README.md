@@ -5,5 +5,6 @@ Feel free to contribute to this repository!
 I'm not that good with Latex, so changing some stupid stuff i did is also very welcome.
 
 #Contributions
+[Cptmathix](https://github.com/Cptmathix)
 
 
