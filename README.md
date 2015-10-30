@@ -11,8 +11,8 @@ I'm not that good with Latex, so changing some stupid stuff i did is also very w
 * Only add pdf's that are not generated from tex files in here, the .gitignore includes .pdf, so if you want to add a .pdf, you must change the .gitignore at the root (other .gitignores are only to make the directory-structure appear on git).
 
 #Contributions
-* [Cptmathix](https://github.com/Cptmathix)
-* [joppegeluykens](https://github.com/joppegeluykens)
+* [mathias spanhove](https://github.com/Cptmathix)
+* [joppe geluykens](https://github.com/joppegeluykens)
 
 #Other useful repositories
 * [KULeuven-cs](https://github.com/KULeuven-CS/kuleuven-cs.github.io)
