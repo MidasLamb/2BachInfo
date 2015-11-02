@@ -1,5 +1,7 @@
 
-\documentclass[12pt]{article}
+\documentclass[10pt]{article}
+\usepackage{titlesec}
+\usepackage{tocloft}
 
 
 \newcommand{\definition}[2]{\textbf{#1}: \textit{#2}}
@@ -7,8 +9,13 @@
 
 \renewcommand{\partname}{Deel}
 \renewcommand{\thepart}{\arabic{part}:}
-\renewcommand{\thesection}{Hoofdstuk \arabic{section}:}
+\titleformat{\section}{\normalfont\Large\bfseries}{Hoofdstuk \thesection}{1em}{}
+\renewcommand{\thesection}{\arabic{section}:}
 \renewcommand{\thesubsection}{\arabic{subsection}}
+
+\renewcommand\contentsname{Inhoudsopgave}}
+
+
 
 \title{\Huge Besturingssystemen}
 \date{October 31, 2014}
@@ -16,6 +23,9 @@
 
 \begin{document}
 \maketitle 
+\tableofcontents
+
+
 
 % Deel 1
 \include{chapterText/Chapter1}

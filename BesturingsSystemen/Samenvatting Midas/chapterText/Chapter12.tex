@@ -120,14 +120,16 @@ Shortest-seek-time-first: Kies hetgeen waar de lees/schrijf kop zo dicht mogelij
 \subsubsection{SCAN Scheduling}
 Vergelijkbaar met een lift: De lees/schrijf kop beweegt van de binnenkant naar de buitenkant en terug omgekeerd, requests inwilligen als ze voorbij komen. \\ \textbf{NADEEL:} Zodra je van richting verandert, zullen er weinig requests zijn vlakbij, maar meer ver weg, aan de andere kant, die al langer aan het wachten zijn.
 \subsubsection{C-SCAN Scheduling}
-Zoals SCAN, maar dan gaat het rond, d.w.z.: Zodra het aan het einde komt, springt de lees/schrijf kop terug naar het begin, om dan verder te gaan, i.p.v. zich gewoon "om te draaien". Dit zorgt voor een zeer uniforme wacht-tijd.
+Zoals SCAN, maar dan gaat de lees-schrijf kop rond (Daarom C-SCAN, voor circular), d.w.z.: Zodra het aan het einde komt, "springt" de lees/schrijf kop terug naar het begin (Dus geen requests inwilligen), om dan verder te gaan, i.p.v. zich gewoon "om te draaien". Dit zorgt voor een zeer uniforme wacht-tijd.
 \subsubsection{LOOK Scheduling}
 Implementatie van SCAN en C-SCAN, waarbij er gekeken wordt of er nog een request is dat zich verder begint, zo niet kan het direct terugdraaien/naar het begin springen.
 \subsubsection{Selection of a Disk-Scheduling Algorithm}
-
+De performantie van algoritmes hangt vooral af van het type en van de hoeveelheid requests. Het is ook belangrijk hoe de bestanden op de disk staan: sequentieel zorgt ervoor dat de arm weinig moet bewegen, maar als de file linked of indexed is, dan kan het zijn dat de arm over heel de disk moet bewegen. De locatie van directories en index blocks zijn ook belangrijk, aangezien iedere file geopend moet worden voor dat die gebruikt moet worden, moet eerst de directory structuur worden overlopen. \\ Voor deze redenen wordt een disk-scheduling algoritme als aparte module geschreven, zodat het vervangen kan worden indien nodig. \whiteline De hierboven beschreven algoritmes brengen enkel de seek-distances in rekening, maar op moderne disks is de rotational-latency bijna even groot als de seek-time. Maar een OS kan moeilijk rekening houden met rotational-latency, omdat de fysieke locatie van de logische blokken niet gekend is. Daarom implementeren disk manufacturers disk-scheduling algoritmes in de controller. Maar het OS kan ook andere restricties willen opleggen, en zal daarom niet volledig dit uit handen willen geven.
 %-----------------------------------------------------------------------------------
 \subsection{Disk Management}
 \subsubsection{Disk Formatting}
+\paragraph{Low-level formatting}
+\definition{Low-level formatting/Physical formatting}{Voor dat een disk data kan opslaan, moet het worden opgedeeld in sectors, hetgeen de disk controller kan lezen en schrijven.}
 \subsubsection{Boot Block}
 \subsubsection{Bad Blocks}
 %-----------------------------------------------------------------------------------
