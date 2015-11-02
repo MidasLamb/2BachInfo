@@ -1,21 +1,12 @@
-\documentclass[12pt]{article}
 
 
-\newcommand{\definition}[2]{\textbf{#1}: \textit{#2}}
 
-\title{{\Huge Besturingssystemen} \\ {\LARGE Deel 4: Storage management}\\{\Large Hoofdstuk 12: Mass-Storage Structure}}
-\date{October 31, 2014}
-\author{Midas Lambrichts}
-
-\begin{document}
-	\begin{titlepage}
-		\maketitle
-	\end{titlepage}
+\section{Mass-Storage Structure}
 
 %-----------------------------------------------------------------------------------
-\section{Overview of Mass-Storage Structure}
-\subsection{Magnetic Disks}
-\subsubsection{Fysieke eigenschappen}
+\subsection{Overview of Mass-Storage Structure}
+\subsubsection{Magnetic Disks}
+\subparagraph{Fysieke eigenschappen}
 \definition{Magnetische Schijf}{Een schijf van 1.8-3.5in aan beide kanten bedekt met magnetisch materiaal.} \\
 Een `read-write head' vliegt juist over iedere schijf. Deze `head' hangt vast aan een `disk arm'. \\
 Het oppervlak van de schijf is logisch ingedeeld in `tracks', die weer onderverdeeld zijn in `sectors'. De set van `tracks' boven/onder elkaar is een `cylinder'. \\
@@ -25,7 +16,7 @@ Het oppervlak van de schijf is logisch ingedeeld in `tracks', die weer onderverd
 \definition{Rotational latency}{De tijd nodig vooraleer de juiste `sector' onder de `read-write head' komt.} \\
 \definition{Head crash}{Normaal zweeft de `read-write head' op een dun luchtkussen boven de disk, als dit niet het geval is kan de `read-write head' contact maken met de disk, dit zal het magnetische oppervlak beschadigen. Dit is een `Head crash'. Dit valt zelden te repareren.} \\ \\
 Disks kunnen `removable' zijn. \\ \\
-\subsubsection{I/O bus}
+\subparagraph{I/O bus} 
 \definition{I/O bus}{De set van kabels die de disk drive met de computer verbindt.}
 \\ \\
 Soorten I/O bus:
@@ -36,14 +27,14 @@ Soorten I/O bus:
 	\item \textbf{USB} universal serial bus
 	\item \textbf{FC} fibre channel
 \end{itemize}
-\subsubsection{Controllers}
+\subparagraph{Controllers}
 \definition{Controller}{Elektronische processor die de data overzet op de bus.}
 \definition{Host controller}{Controller aan de kant van de computer op de bus.}
 \definition{Disk controller}{Controller ingebouwd in de disk drive.}
 Voor I/O: computer plaatst command in de host controller, die communiceert met de disk controller, die dan de disk-drive hardware aanstuurt om de command uit te voeren.
-\subsection{Solid-State Disks}
+\subsubsection{Solid-State Disks}
 \definition{SSD (Solid state disk)}{Niet-vluchtig geheugen dat gebruikt wordt als harde schijf}
-\subsubsection{Eigenschappen}
+\subparagraph{Eigenschappen}
 \begin{itemize}
 	\item Geen bewegende delen
 	\item Geen `seek time' of `latency'
@@ -53,17 +44,17 @@ Voor I/O: computer plaatst command in de host controller, die communiceert met d
 	\item Kortere levensduur dan harde schijf
 \end{itemize}
 
-\subsubsection{Toepassingen}
+\subparagraph{Toepassingen}
 \begin{description}
 	\item[Storage arrays] voor file-system metadata dat hoge performantie nodig hebben.
 	\item[Laptops] om ze kleiner, sneller en meer energie-effici\"{e}nt te maken.
 \end{description}
 
-\subsubsection{Opmerkingen}
+\subparagraph{Opmerkingen}
 Omdat SSD's veel sneller zijn dan HDD, kan de bus interface een bottleneck vormen. Sommige SSD's zijn daarom ontworpen om direct met de system bus te connecteren. \\
 Sommige SSD's worden ook gebruikt als een soort cache tussen een HDD en het geheugen.
-\subsection{Magnetic Tapes}
-\subsubsection{Eigenschappen}
+\subsubsection{Magnetic Tapes}
+\subparagraph{Eigenschappen}
 \begin{itemize}
 	\item Permanent
 	\item Kan grote hoeveelheden data bijhouden
@@ -71,63 +62,74 @@ Sommige SSD's worden ook gebruikt als een soort cache tussen een HDD en het gehe
 	\item Vooral gebruikt voor backup.
 \end{itemize}
 %-----------------------------------------------------------------------------------
-\section{Disk Structure}
+\subsection{Disk Structure}
 Grote 1-dimensionale arrays van `logical blocks', de kleinste eenheid van `transfer'. Deze logische blokken worden sequentieel gemapt op de disk, van buiten naar binnen. In theorie kunnen we dit gebruiken om een logische blok naar een fysieke plaats om te rekenen, maar in praktijk is dit niet zo om twee redenen.
 \begin{itemize}
 	\item Defecte sectors worden vervangen door reserve sectors ergens anders op de disk.
 	\item Het aantal sectoren per track is niet altijd constant.
 \end{itemize}
-\subsubsection{Constant Linear Velocity (CLV)}
+\subparagraph{Constant Linear Velocity (CLV)}
 \begin{itemize}
 	\item Dichtheid van bits per track is uniform
 	\item Buitenkant meer sectoren dan binnenkant.
 	\item Disk draait sneller als ze van buiten naar binnen gaat.
 \end{itemize}
-\subsubsection{Constant Angular Velocity (CAV)}
+\subparagraph{Constant Angular Velocity (CAV)}
 \begin{itemize}
 	\item Hoeksnelheid blijft dezelfde
 	\item Dichtheid van bits daalt van binnen naar buiten.
 \end{itemize}
 
 %-----------------------------------------------------------------------------------
-\section{Disk Attachment}
+\subsection{Disk Attachment}
 Computers accessen disks op twee manieren:
 \begin{itemize}
 	\item I/O Ports (host-attached storage)
 	\item Remote host in distributed file system (Network-Attached Storage)
 \end{itemize}
-\subsection{Host-Attached Storage}
-\subsection{Network-Attached Storage}
-\subsection{Storage-Area Network}
+\subsubsection{Host-Attached Storage}
+\definition{Host-Attached Storage}{Opslag toegankelijk door lokale I/O poorten}
+I/O ports:
+\begin{itemize}
+	\item meestal IDE or ATA, maximaal 2 drives per I/O bus
+	\item High-end: Fibre channel: Optische kabel of 4-conductor koperkabel. Er zijn twee varianten:
+	\begin{itemize}
+		\item Large switched fabric: 24bit adres, door grootte adresruimte en switched-natuur, kunnen er meerdere hosts en storage devices aan verbonden worden.
+		\item Arbitraded loop (FC-AL): kan 126 devices (drivers en controllers)
+	\end{itemize}
+\end{itemize}
+\subsubsection{Network-Attached Storage}
+\definition{Network-Attached Storage (NAS)}{Special-purpose opslagsysteem dat over een netwerk wordt geaccessed.} \\ Clients access NAS door een remote-procedure-call (RPC) interface (vb NFS (UNIX) of CIFS (Windows)). RPC's gaan via TCP of UDP over een IP netwerk. \\ NAS zorgt voor een eenvoudige manier voor alle computers op een LAN om een storage-pool te delen, met hetzelfde gemak als host-attached storage. \\ NADEEL: Het is wel trager en minder effici\"{e}nt.
+\subsubsection{Storage-Area Network}
+\definition{Storage-Area Network}{Privaat netwerk, dat gebruik maakt van storage protocols ipv networking protocols, dat servers en storage units verbindt} \\ \hfill \\OPMERKING: dit is GEEN manier van DATA OPSLAG, maar een manier om data over een netwerk te verplaatsen (denk aan LAN).
 %-----------------------------------------------------------------------------------
-\section{Disk Scheduling}
-\subsection{FCFS Scheduling}
+\subsection{Disk Scheduling}
+\subsubsection{FCFS Scheduling}
 
-\subsection{SSTF Scheduling}
-\subsection{SCAN Scheduling}
-\subsection{C-SCAN Scheduling}
-\subsection{LOOK Scheduling}
-\subsection{Selection of a Disk-Scheduling Algorithm}
+\subsubsection{SSTF Scheduling}
+\subsubsection{SCAN Scheduling}
+\subsubsection{C-SCAN Scheduling}
+\subsubsection{LOOK Scheduling}
+\subsubsection{Selection of a Disk-Scheduling Algorithm}
 %-----------------------------------------------------------------------------------
-\section{Disk Management}
-\subsection{Disk Formatting}
-\subsection{Boot Block}
-\subsection{Bad Blocks}
+\subsection{Disk Management}
+\subsubsection{Disk Formatting}
+\subsubsection{Boot Block}
+\subsubsection{Bad Blocks}
 %-----------------------------------------------------------------------------------
-\section{Swap-Space Management}
-\subsection{Swap-Space Use}
-\subsection{Swap-Space Location}
-\subsection{Swap-Space Management: An Example}
+\subsection{Swap-Space Management}
+\subsubsection{Swap-Space Use}
+\subsubsection{Swap-Space Location}
+\subsubsection{Swap-Space Management: An Example}
 %-----------------------------------------------------------------------------------
-\section{RAID Structure}
-\subsection{Improvement of Reliability via Redundancy}
-\subsection{Improvement in Performance via Parallelism}
-\subsection{RAID Levels}
-\subsection{Extensions}
-\subsection{Problems with RAID}
+\subsection{RAID Structure}
+\subsubsection{Improvement of Reliability via Redundancy}
+\subsubsection{Improvement in Performance via Parallelism}
+\subsubsection{RAID Levels}
+\subsubsection{Extensions}
+\subsubsection{Problems with RAID}
 %-----------------------------------------------------------------------------------
-\section{Stable-Storage Implementation}
+\subsection{Stable-Storage Implementation}
 %-----------------------------------------------------------------------------------
-\section{Summary}
+\subsection{Summary}
 
-\end{document}
