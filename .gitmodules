@@ -1,3 +1,7 @@
 [submodule "ArtificialIntelligence/SummaryJO0st"]
 	path = ArtificialIntelligence/SummaryJO0st
 	url = git://github.com/JO0st/samenvatting_AI.git
+	
+[submodule "LineaireAlgebra/SamenvattingNorFairKing"]
+	path = LineaireAlgebra/SamenvattingNorFairKing
+	url = git://github.com/NorfairKing/lineairealgebra
