@@ -13,7 +13,10 @@
 \renewcommand{\thepart}{\arabic{part}:}
 \titleformat{\section}{\normalfont\Large\bfseries}{Hoofdstuk \thesection}{1em}{}
 \renewcommand{\thesection}{\arabic{section}:}
-\renewcommand{\thesubsection}{\arabic{subsection}}
+\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
+\renewcommand{\thesubsubsection}{\arabic{section}.\arabic{subsection}.\arabic{subsubsection}}
+
+\renewcommand{\paragraph}[1]{\paragraph{#1}\mbox{}\\}
 
 \renewcommand\contentsname{Inhoudsopgave}
 
@@ -48,6 +51,8 @@
 \include{chapterText/Chapter10}
 \include{chapterText/Chapter11}
 \include{chapterText/Chapter12}
+\include{chapterText/Chapter13}
+\include{chapterText/Chapter14}
 
 
 \end{document}
