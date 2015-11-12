@@ -4,4 +4,4 @@
 	
 [submodule "LineaireAlgebra/SamenvattingNorFairKing"]
 	path = LineaireAlgebra/SamenvattingNorFairKing
-	url = git://github.com/NorfairKing/lineairealgebra
+	url = git://github.com/NorfairKing/lineairealgebra.git
