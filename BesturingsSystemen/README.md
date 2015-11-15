@@ -8,6 +8,8 @@
     * 3.6 - Communication in client-server systems
 * Hoofdstuk 4:
     * 4.6.5 - Scheduler Activations
+* Hoofdstuk 14:
+    * 14.8 - Capability-Based Systems
 * Hoofdstuk 15:
    * Geen enkele "formule" kennen
 
