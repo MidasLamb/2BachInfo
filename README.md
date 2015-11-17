@@ -18,8 +18,9 @@ If you fork/clone this repository, you will find that the directories for the su
 * [Mathias Spanhove](https://github.com/Cptmathix)
 * [Joppe Geluykens](https://github.com/joppegeluykens)
 
-#Other useful repositories
+#Other useful links
 * [KULeuven-cs](https://github.com/KULeuven-CS/kuleuven-cs.github.io)
+* [Wina Wiki](https://wiki.wina.be/examens/index.php/Categorie:2bi)
 
 # Extra stuff
 * [A curated list of awesome lists](https://github.com/sindresorhus/awesome)
