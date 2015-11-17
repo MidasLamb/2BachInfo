@@ -3,6 +3,7 @@ Collection of summaries for the courses for second bachelor IT at KU Leuven.
 # Helping
 Feel free to contribute to this repository!
 I'm not that good with Latex, so changing some stupid stuff i did is also very welcome.
+If you find a mistake, please let us know.
 
 #Guidelines
 * Since we're ICT students, try to use .tex-files as much as possible.
@@ -19,7 +20,7 @@ If you fork/clone this repository, you will find that the directories for the su
 * [Joppe Geluykens](https://github.com/joppegeluykens)
 
 #Other useful links
-* [KULeuven-cs](https://github.com/KULeuven-CS/kuleuven-cs.github.io)
+* [KULeuven-CS repository](https://github.com/KULeuven-CS/kuleuven-cs.github.io)
 * [Wina Wiki](https://wiki.wina.be/examens/index.php/Categorie:2bi)
 
 # Extra stuff
