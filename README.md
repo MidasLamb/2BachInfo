@@ -12,7 +12,7 @@ If you find a mistake, please let us know.
 * Only add pdf's that are not generated from tex files in here, the .gitignore includes .pdf, so if you want to add a .pdf, you must change the .gitignore at the root (other .gitignores are only to make the directory-structure appear on git).
 
 #How to use the submodules:
-If you fork/clone this repository, you will find that the directories for the submodules are empty. To solve this, run "git submodule init" in the submodule directory and then "git submodule update".
+If you fork/clone this repository, you will find that the directories for the submodules are empty. To solve this, run "git submodule init" in the submodule directory and then "git submodule update", this will pull all the submodules files onto your computer.
 
 #Contributions
 * [Midas Lambrichts](https://github.com/MidasLamb)
