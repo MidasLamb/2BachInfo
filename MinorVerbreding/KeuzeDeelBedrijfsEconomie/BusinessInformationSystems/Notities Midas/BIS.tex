@@ -1,0 +1,112 @@
+%% Based on a TeXnicCenter-Template by Tino Weinkauf.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% HEADER
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[a4paper,twoside,10pt]{report}
+% Alternative Options:
+%	Paper Size: a4paper / a5paper / b5paper / letterpaper / legalpaper / executivepaper
+% Duplex: oneside / twoside
+% Base Font Size: 10pt / 11pt / 12pt
+
+
+%% Language %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[USenglish]{babel} %francais, polish, spanish, ...
+\usepackage[T1]{fontenc}
+\usepackage[ansinew]{inputenc}
+
+\usepackage{lmodern} %Type1-font for non-english texts and characters
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% DOCUMENT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\pagestyle{empty} %No headings for the first pages.
+
+
+%% Title Page %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% ==> Write your text here or include other files.
+
+%% The simple version:
+\title{Business Information Systems \\ 2015-2016}
+\author{Midas Lambrichts}
+%\date{} %%If commented, the current date is used.
+\maketitle
+
+
+%% Inhaltsverzeichnis %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tableofcontents %Table of contents
+\cleardoublepage %The first chapter should start on an odd page.
+
+\pagestyle{plain} %Now display headings: headings / fancy / ...
+
+
+\chapter{Business Intelligence and Data Analytics}
+\section{Business Intelligence}
+\subsection{Intro}
+\begin{itemize}
+	\item Until 1990, organisations invested in IT to increase efficiency/production.
+	\item After 1990, analyzing the data become more important \Rightarrow Transactional systems were not good for this \Rightarrow even more pressure.
+\end{itemize}
+
+In Business Intelligence, you need to query a lot of data (which are all transactions) \Rightarrow You need high performance queries \Leftrightarrow Normalised database would require lot of (time consuming) JOINS.
+\\
+A transactional system is a system which queries 1 record at a time.
+
+\subsection{Business Intelligence Techniques}
+\begin{itemize}
+	\item \textbf{Verifaction based techniques:} Shows what we already know, does not generate new data. Summarize already existing data. Used for reporting.
+	\item \textbf{Disovery based techniques:} Generates new data, shows new things. (e.g. Will people leave the company)
+\end{itemize}
+\subsubsection{Verification based techniques}
+\paragraph{Enterprise reporting} Analytic applications that offer ready-made report templates for industry specific metrics and thresholds for alerts. \\ 
+Examples:
+\begin{itemize}
+	\item Balanced scoreboards
+	\item Digital dashboards
+	\item Customized reports
+\end{itemize}
+\subparagraph{Balanced scorecards} 
+\begin{itemize}
+	\item Strategic level BI technique!
+	\item Provides overall view of company \rightarrow See how well company is performing.
+\end{itemize}
+\subparagraph}Digital dashboards or BI dashboards} 
+\begin{itemize}
+	\item Visual representation of information.
+	\item Tailor-mode for each organisation.
+	\item Often browser based.
+\end{itemize}
+
+\paragraph{Corporate Performance Management}
+\begin{itemize}
+	\item Tactical level (Sales, products,...)
+	\item Dashboard for operations \rightarrow NOT strategic.
+	\item More detailed than balanced scorecards.
+	\item Functionally oriented.
+\end{itemize}
+\subparagraph{Businesss Activity Monitoring}
+\begin{itemize}
+	\item Real-time reporting.
+	\item Summary statistics.
+	\item Operational level
+\end{itemize}
+
+\paragraph{OLAP}
+\begin{itemize}
+	\item \textbf{OLAP:} \textbf{O}n\textbf{L}ine \textbf{A}nalytical \textbf{P}rocessing.
+\end{itemize}
+\subsubsection{Discovery based techniques}
+
+
+\section{Data Warehousing}
+
+
+\section{Data Analytics}
+
+\end{document}
+
