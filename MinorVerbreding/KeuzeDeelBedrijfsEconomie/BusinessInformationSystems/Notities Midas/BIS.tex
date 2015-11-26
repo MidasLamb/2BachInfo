@@ -16,6 +16,8 @@
 \usepackage[T1]{fontenc}
 \usepackage[ansinew]{inputenc}
 
+
+
 \usepackage{lmodern} %Type1-font for non-english texts and characters
 
 
@@ -50,10 +52,10 @@
 \subsection{Intro}
 \begin{itemize}
 	\item Until 1990, organisations invested in IT to increase efficiency/production.
-	\item After 1990, analyzing the data become more important \Rightarrow Transactional systems were not good for this \Rightarrow even more pressure.
+	\item After 1990, analyzing the data become more important $\Rightarrow$ Transactional systems were not good for this $\Rightarrow$ even more pressure.
 \end{itemize}
 
-In Business Intelligence, you need to query a lot of data (which are all transactions) \Rightarrow You need high performance queries \Leftrightarrow Normalised database would require lot of (time consuming) JOINS.
+In Business Intelligence, you need to query a lot of data (which are all transactions) $\Rightarrow$ You need high performance queries $\Leftrightarrow$ Normalised database would require lot of (time consuming) JOINS.
 \\
 A transactional system is a system which queries 1 record at a time.
 
@@ -73,9 +75,9 @@ Examples:
 \subparagraph{Balanced scorecards} 
 \begin{itemize}
 	\item Strategic level BI technique!
-	\item Provides overall view of company \rightarrow See how well company is performing.
+	\item Provides overall view of company $\rightarrow$ See how well company is performing.
 \end{itemize}
-\subparagraph}Digital dashboards or BI dashboards} 
+\subparagraph{Digital dashboards or BI dashboards} 
 \begin{itemize}
 	\item Visual representation of information.
 	\item Tailor-mode for each organisation.
@@ -85,7 +87,7 @@ Examples:
 \paragraph{Corporate Performance Management}
 \begin{itemize}
 	\item Tactical level (Sales, products,...)
-	\item Dashboard for operations \rightarrow NOT strategic.
+	\item Dashboard for operations $\rightarrow$ NOT strategic.
 	\item More detailed than balanced scorecards.
 	\item Functionally oriented.
 \end{itemize}
@@ -107,10 +109,46 @@ Examples:
 \begin{itemize}
 	\item BI software includes techniques that can  be used for the exploration and analysis of large amounts of data, not just producing or querying information (understanding what happens), but also knowledge (understanding which actions to take).
 \end{itemize}
-\subsubsection{Discovery based techniques}
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Data Warehousing}
+%---------------------------------------------
+\subsection{Introduction}
+In a transactional system, everything is often silo'd, instead, we can use one big database, a \textbf{Data Warehouse database}
+\begin{itemize}
+	\item Data warehousing is the design and exploitation of a data warehouse database, with
+	\begin{itemize}
+		\item Data from operational (OLTP) databases
+		\item Enriched with data from other sources
+	\end{itemize}
+	\item Organized around the most important subjects of a company, instead of applications and systems.
+\end{itemize}
+%--------------------------
+\subsection{OLTP vs OLAP}
+\textbf{OLTP:}
+\begin{itemize}
+	\item Designed to support daily operations
+	\item Ensure fast, concurrent access to data
+	\item Normalization is crucial (Preventing anomalies)
+	\item $\Rightarrow$ Poor performance for executing more complex queries.
+\end{itemize}
+~\\
+\textbf{OLAP:} (Data warehouse)
+\begin{itemize}
+	\item Focused on analytical queries
+	\item Queries involve aggregation (Traversing all records)
+	\item $\Rightarrow$ Normalization would be suboptimal because of high number of joins.
+	\item $\Rightarrow$ Anomalies are impossible because you only add records, not change them.
+\end{itemize}
+
+\paragraph{Data warehouse}
+\textbf{``A subject-oriented, integrated, time-variant, and non-volatile
+collection of data in support of management's decision-making
+process''} \\
+The purpose of a warehouse is to integrate data from various sources into a uniform view. It is centralized and cross functional. \\
+Examples of data sources are: OLTP systems, Legacy systems, External data,... \\
+The \textbf{Data integration} is about 80\% of the data warehouse building effort. It is dificult because of lack of metadata, bad data quality, different codings, inconsistent semantics,...
+
 
 
 \section{Data Analytics}
