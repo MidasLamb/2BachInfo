@@ -13,7 +13,8 @@
 * Hoofdstuk 15:
    * Geen enkele "formule" kennen
 
-
+#Te kennen, maar niet in het boek:
+* De laatste oefenzitting omtrent Hypervisors (Uitleggen waarom en hoe, geen code kunnen geven)
 
 #Wordt uitgedeeld op het examen:
 Onderstaande stukken worden uit het boek gekopieerd en op het examen uitgedeeld, het is dus niet nodig om deze stukken vanbuiten te leren, maar bekijk ze zeker op voorhand!
