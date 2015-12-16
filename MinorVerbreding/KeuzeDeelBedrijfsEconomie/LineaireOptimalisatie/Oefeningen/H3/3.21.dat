@@ -1,0 +1,13 @@
+/*********************************************
+ * OPL 12.5.1.0 Data
+ * Author: Stijn
+ * Creation Date: 16-dec.-2015 at 21:46:52
+ *********************************************/
+nbAfdelingen = 2;
+nbDelen = 3;
+
+SheetConnection bestand("3.21.xlsx");
+productieritme from SheetRead(bestand, "C2:E3");
+capaciteit from SheetRead(bestand, "B2:B3");
+
+uren to SheetWrite(bestand, "F2:F3");
