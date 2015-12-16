@@ -19,6 +19,7 @@ If you fork/clone this repository, you will find that the directories for the su
 * [Mathias Spanhove](https://github.com/Cptmathix)
 * [Joppe Geluykens](https://github.com/joppegeluykens)
 * [Hanne Peeters](https://github.com/HannePeeters)
+* [Stijn Caerts](https://github.com/StijnCaerts)
 
 #Other useful links
 * [KULeuven-CS repository](https://github.com/KULeuven-CS/kuleuven-cs.github.io)
