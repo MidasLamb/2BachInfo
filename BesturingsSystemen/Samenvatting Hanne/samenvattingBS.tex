@@ -609,6 +609,73 @@ groot probleem = \textbf{indefinite blocking} of \textbf{starvation}
 
 \chapter{Synchronization}
 \chapter{Deadlocks}
+in multiprogramming environment =$>$ verschillende processen concurreren voor eindig aantal resources
+\\process =$>$ vraagt resources aan
+\\=$>$ resources dan niet beschikbaar =$>$ proces in waiting state
+\\\textbf{deadlock} = wanneer waiting proces nooit meer van staat kan veranderen doordat resources dat het aangevraagd had  door andere processen vastgehouden worden
+\section{System Model}
+systeem =$>$ bestaat uit eindig aantal resources om te verdelen over aantal concurrerende processen
+\\resources =$>$ verdeeld over types of klassen =$>$ bestaande uit aantal identieke instances
+\\proces =$>$ resource aanvragen voor gebruik en loslaten na gebruik
+\\=$>$ zoveel resources aanvragen als nodig om taak te kunnen uitvoeren
+\\resource gebruiken in volgorde:
+\begin{enumerate}
+\item request
+\\= proces vraagt resource aan 
+\\als aanvraag niet onmiddelijk toegekend kan worden =$>$ vragende proces moet wachten tot resource kan verkrijgen
+\item use
+\\= proces kan gebruik maken van resource
+\item release
+\\= proces laat resource vrij
+\end{enumerate}
+set processen =$>$ in deadlocked staat 
+\\= elk proces in de set wacht op event dat alleen veroorzaakt kan worden door ander proces in de set
+\\resources =$>$ zowel physical resources(bv.: printers, memory space..) als logical resources(bv.: semaphores, files..)
+\\deadlock kan ook bij verschillende resource types
+
+\section{Deadlock Characterization}
+in deadlock: processen die nooit uitvoering be\"eindigen en system resources opgebruikt waardoor andere jobs voorkomen worden van beginnen
+\subsection{Necessary Conditions}
+deadlock als volgende condities tegelijk voorkomen
+\begin{enumerate}
+\item mutual exclusion
+\\minstens \'e\'en proces in nonsharable mode
+\\= \'e\'en proces tegelijk kan resource gebruiken
+\\als ander proces resource aanvraagd wordt dat uitgesteld tot de resource vrijgelaten wordt
+\item hold and wait
+\\proces moet minstens \'e\'en resource hebben en wachten op bijkomende resources die momenteel bijgehouden worden door andere processen
+\item no preemption
+\\resources worden niet gepreempt =$>$ resource kan alleen vrijwillig vrijgelaten worden door proces dat het heeft nadat taak uitgevoerd is
+\item circular wait
+\\zodat $P_{0}$ wacht op resource dat $P_{1}$ heeft, $P_{1}$ wacht op resource van $P_{2}$,..., $P_{n-1}$ wacht op resource van $P_{n}$ en $P_{n}$ op resource $P_{0}$
+
+\end{enumerate} 
+vier condities =$>$ niet helemaal onafhankelijk (circular wait impliceert hold-and-wait)
+
+\subsection{Resource-Allocation Graph}
+=$>$ meer precies beschreven in termen van gerichte graaf = \textbf{system resource-allocation graph}
+\\= bestaat uit set knopen V en set bogen E
+\\knopen V:
+\begin{itemize}
+\item actieve processen
+\\= $P = {P_{1},P_{2},...,P_{n}}$
+\\= set bestaande uit alle actieve processen in systeem
+\\= voorgesteld door cirkel
+\item resource types
+\\= $R = {R_{1},R_{2},...,R_{m}}$
+\\= set bestaande uit alle resource types in systeem
+\\= voorgesteld door rechthoek
+
+\end{itemize}
+\textbf{request edge} = gerichte boog $P_{i} \rightarrow R_{j}$
+\\\textbf{assignment edge}= gerichte boog $R_{j} \rightarrow P_{i}$
+\\
+\\als graaf geen cycles bevat =$>$ geen proces in systeem is deadlocked
+\\als elk resource type precies \'e\'en instance heeft =$>$ cycle impliceert deadlock
+\\als elk resource type verschillende instances heeft =$>$ cycle impliceert niet noodzakelijk deadlock
+
+\section{Methods for Handling Deadlocks}
+
 \chapter{Memory-Management Strategies}
 \chapter{Virtual-Memory Management}
 \chapter{File System}
