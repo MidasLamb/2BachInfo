@@ -341,6 +341,103 @@ single program =$>$ meestal niet of CPU of I/O devices hele tijd bezighouden
 \\=$>$ vereist \textbf{interactive} computersysteem = voorziet directe communicatie tussen user en systeem
 \\=$>$ user geeft instructies aan operating system of programma direct door toetsenbord, muis, touch pad of touch screen en wacht voor onmiddelijke resultaten op output device
 \\=$>$ \textbf{response time} moet kort zijn, minder dan 1 seconde
+\\
+\\time-shared operating system =$>$ meerdere gebruikers op computer tegelijkertijd
+\\=$>$ indruk dat computer systeem toegewijd is aan \'e\'en gebruiker hoewel het verdeeld wordt over vele gebruikers
+\\
+\\\textbf{process} = programma dat in het geheugen geladen wordt en uitvoert
+\\time sharing en multiprogramming =$>$ vereisen verschillende jobs tegelijk in geheugen 
+\\=$>$ verschillende jobs klaar om in geheugen gebracht te worden =$>$ niet genoeg plek voor allemaal =$>$ systeem moet kiezen met behulp van \textbf{job scheduling}
+\\\textbf{CPU scheduling} = kiezen welke job eerst runt 
+\\
+\\in time sharing systeem =$>$ operating system moet redelijke response time verzekeren =$>$ soms door \textbf{swapping}(= waarbij processen in en uit het hoofdgeheugen naar disk worden verwisseld
+\\meer gebruikte methode voor redelijke response time = \textbf{virtual memory}(= laat uitvoering van proces toe dat niet helemaal in geheugen zit)
+\\=$>$ grote voordeel: laat gebruikers toe om grotere programma's te runnen dan eigenlijke \textbf{physical memory}
+\\=$>$ hoofdgeheugen wordt weergegeven door grote uniforme arrray van storage, waarin \textbf{logical memory} wordt gescheiden van physical memory
+\\
+\\time-sharing systeem =$>$ moet ook file systeem, mechanisme om resources te beschermen van ongepast gebruik, mechanisme voor job sychronizatie en communicatie voorzien
+
+\section{Operating-System Operations}
+moderne operating systems = \textbf{interrupt driven}(= als er niets te doen is, wacht operating system tot er iets gebeurt)
+\\gebeurtenissen worden gesignaliseerd door \textbf{trap} of \textbf{exception} = software-generated interrupt ofwel door error ofwel door specifiek request van user program dat operating-system service nodig heeft
+\\voor elke interrupt =$>$ aparte segments of code bepalen welke actie 
+\\=$>$ interrupt service routine voorzien om interrupt af te handelen
+\\
+\\omdat operating system en users hardware en software resources delen =$>$ zorgen dat error in user programma alleen problemen veroorzaakt voor het ene programma dat runt
+\\=$>$ met sharing =$>$ vele processen nadelig be\"invloed door bug in \'e\'en programma 
+\\ deftig ontworpen operating system moet verzekeren dat incorrect programma er niet voor kan zorgen dat andere programma's incorrect uitvoeren
+\subsection{Dual-Mode And Multimode Operation}
+onderscheiden van uitvoering:
+\begin{itemize}
+\item operating-system code
+\item user-defined code
+\end{itemize}
+meeste besturingssystemen voorzien hardware-ondersteuning die toelaat om af te wisselen tussen verschillende modes van uitvoering
+\\=$>$ tenminste 2 modes nodig:
+\begin{itemize}
+\item \textbf{user mode}
+\item \textbf{kernel mode}
+\\= \textbf{supervisor mode}
+\\= \textbf{system mode}
+\\= \textbf{privileged mode}
+\end{itemize}
+bit om huidige mode aan te geven in hardware = \textbf{mode bit}
+\begin{itemize}
+\item kernel
+\\ = 0
+\item user
+\\ = 1
+\end{itemize}
+bij system boot time hardware =$>$ in kernel mode
+\\met dual mode =$>$ operating systeem beschermen tegen errant users(en errant users tegen elkaar)
+\\bescherming door sommige machine-instructies die schade kunnen veroorzaken aan te duiden als \textbf{privileged instructions}(= alleen in kernel mode uitgevoerd)
+\\
+\\concept van modes =$>$ uitgebreid met meer modes dan twee
+\\=$>$ CPU's die virtualizatie ondersteunen =$>$ vaak aparte mode om aan te geven wanneer \textbf{virtual machine manager(VMM)} (en virtualization management software) controle heeft over systeem
+\\=$>$ meer privileges dan user processen maar minder dan kernel
+dus: eerst in kernel mode instructies uitvoeren =$>$ dan controle aan user applicatie =$>$ mode op user mode gezet =$>$ daarna controle terug aan operating system via interrupt, trap of system call
+\\
+\\system calls = methode gebruikt door proces om actie aan te vragen bij operating system
+\\=$>$ wordt behandeld door hardware als software interrupt
+\\
+\\gebrek aan hardware-supported dual mode =$>$ serieuze tekortkomingen in systeem veroorzaken
+\\hardware protection detecteert errors die modes schenden =$>$ normaal afgehandeld door operating system
+
+\subsection{Timer}
+om te vermijden dat user programma in oneindige loop terechtkomt om of faalt om system services te callen en controle nooit teruggeeft aan operating system
+\\=$>$ \textbf{timer}(= gezet worden om computer te interrupten na specifieke periode))
+\\=$>$ periode =$>$ vast of variabel
+\\textbf{variable timer} =$>$ meestal ge\"implementeerd door fixed-rate klok en counter
+\\voordat controle aan user wordt gegeven =$>$ zeker zijn dat timer gezet is om te onderbreken
+\\timer gebruiken om te voorkomen dat user programma te lang runt
+
+\section{Process Management}
+programma doet niets totdat instructies worden uitgevoerd door CPU
+\\programma in uitvoering = proces
+\\proces =$>$ bepaalde resources nodig
+\\programma = passief, proces = actief
+\\single-threaded proces =$>$ \'e\'en \textbf{program counter} dat volgende instructie die moet uitgevoerd worden specifieert
+\\=$>$ uitvoering ervan =$>$ sequentieel 
+\\proces = unit van work in system
+\\system =$>$ bestaat uit verzameling processen:
+\begin{itemize}
+\item operating-system processen
+\\=$>$ voeren system code uit
+\item user processen
+\\=$>$ voeren user code uit
+\end{itemize}
+alle deze processen =$>$ gelijktijdig uitgevoerd worden
+\\operating system =$>$ volgende activiteiten in verband met process management:
+\begin{itemize}
+\item schedulen processen en threads op CPU's
+\item creëren en verwijderen van user en system processen
+\item opschorten en hervatten processen
+\item mechanismen voor process synchronizatie voorzien
+\item mechanismen voor process communication voorzien
+\end{itemize}
+
+\section{Memory Management}
+
 
 \chapter{System Structures}
 \section{Operating-System Services}
@@ -470,6 +567,8 @@ command interpreter =$>$ in kernel of als speciaal programma behandeld(Window en
 
 
 \chapter{Process Concept}
+batch system =$>$ voert \textbf{jobs} uit
+\\time-shared systeem =$>$ \textbf{user programs} of \textbf{tasks}
 \chapter{Multithreaded Programming}
 \chapter{Process Scheduling}
 \section{Basic Concepts}
@@ -485,19 +584,23 @@ succes van CPU scheduling hangt af van eigenschap van processen
 \\I/O-bound programma =$>$ veel korte CPU bursts
 \\CPU-bound programma =$>$ paar lange CPU bursts
 \\=$>$ verdeling kan belangrijk zijn in selectie van gepaste CPU-scheduling
+
 \subsection{CPU scheduler}
 wanneer CPU = vrij =$>$ operating system =$>$ proces uit ready queue selecteren om uitgevoerd te worden
 \\selectieproces door \textbf{short-term sheduler}(= CPU scheduler)
 \\= selecteert proces uit geheugen die klaar zijn om uit te voeren en kent CPU toe aan dat process
 \\=$>$ records in ready que =$>$ meestal process control blocks(PCBs) van processen
+
 \subsection{Preemptive Scheduling}
 CPU-scheduling beslissingen onder volgende 4 omstandigheden:
+
 \begin{enumerate}
 \item switch van running state naar waiting state van proces
 \item switch van running state naar ready state van proces
 \item switch van waiting state naar ready state van proces
 \item wanneer proces eindigt
 \end{enumerate}
+
 scheduling alleen onder omstandigheden 1 en 4 =$>$ scheduling schema = \textbf{nonpreemtive} of \textbf{cooperative}
 \\=$>$ wanneer CPU toegekent is aan proces =$>$ CPU pas vrijgelaten ofwel door be\"eindiging proces ofwel door switchen naar waiting state
 \\=$>$ vereist geen speciale hardware
@@ -577,6 +680,7 @@ andere component betrokken bij CPU-scheduling functie = \textbf{dispatcher}(= mo
 \\=$>$ preemptive SJF =$>$ huidig running process be\"eindigen 
 \\=$>$ nonpreemptive SJF =$>$ huidig running proces mag CPU burst afmaken
 \\=$>$ preemptive SJF wordt soms \textbf{shortest-remaining-time-first} scheduling genoemd
+
 \subsection{Priority Scheduling}
 SJF = speciaal geval van \textbf{priority-scheduling} algoritme
 \\met elk proces =$>$ priority geassocieerd en dan wordt CPU toegekend aan proces met hoogste priority
@@ -605,8 +709,29 @@ groot probleem = \textbf{indefinite blocking} of \textbf{starvation}
 \\= gelijkaardig met FCFS scheduling maar preemption is toegevoegd het systeem in staat te stellen om te kunnen switchen tussen processen
 \\kleine unit tijd is gedefineerd = \textbf{time quantum} of \textbf{time slice}
 \\=$>$ meestal van 10 tot 100 milliseconden in lengte
-\\=$>$ ready queue behandeld als circular queue
+\\=$>$ ready queue behandeld als circular queue(= CPU scheduler gaat rond in ready queue en wijst CPU toe aan elk proces voor tijdinterval tot 1 quantum)
+\\=$>$ ready queue = FIFO queue
+\\CPU scheduler haalt eerste proces uit ready queue =$>$ zet timer om te onderbreken na 1 tijd quantum =$>$ dispatches proces:
+\begin{itemize}
+\item CPU burst is minder dan 1 tijdquantum
+\\=$>$ proces laat CPU vrijwillig los
+\item CPU burst van huidig running proces is langer dan 1 tijdquantum
+\\timer gaat af =$>$ veroorzaakt interrupt bij operating system =$>$ context switch =$>$ proces aan tail ready queue =$>$ CPU volgende proces in ready queue uitvoeren
+\end{itemize}
 
+RR =$>$ gemiddelde wachttijd is vaak lang
+\\tijdquantum =$>$ lang tegenover context switch time
+\\turnaround time hangt ook af van tijd quantum
+\\maar: tijdquantum ook niet te lang(anders: RR degenerate in FCFS)
+\\=$>$ 80 procent van CPU bursts moeten korter zijn dan time quantum
+
+\subsection{Multilevel Queue Scheduling}
+andere klasse schedulingalgoritmes voor situaties waarin processen gemakkelijk geclassificeerd worden in verschillende groepen
+\\vaak verdeelt in:
+\begin{itemize}
+\item \textbf{foreground} (interactive) processes
+\item \textbf{background} (batch) processes
+\end{itemize}
 \chapter{Synchronization}
 \chapter{Deadlocks}
 in multiprogramming environment =$>$ verschillende processen concurreren voor eindig aantal resources
@@ -675,7 +800,22 @@ vier condities =$>$ niet helemaal onafhankelijk (circular wait impliceert hold-a
 \\als elk resource type verschillende instances heeft =$>$ cycle impliceert niet noodzakelijk deadlock
 
 \section{Methods for Handling Deadlocks}
-
+deadlocks afhandelen op 3 manieren:
+\begin{itemize}
+\item protocol voor voorkomen of vermijden van deadlocks om zo te verzekeren dat systeem nooit in deadlocked state komt
+\item toelaten dat systeem in deadlock komt, het detecteren en herstellen
+\item probleem negeren en doen alsof deadlocks nooit voorkomen
+\end{itemize}
+meeste operating system =$>$ 3de oplossing =$>$ application developer moet programma's schrijven die deadlocks afhandelen
+\\om te verzekeren dat deadlocks nooit voorkomen:
+\begin{itemize}
+\item \textbf{deadlock prevention} 
+\\= voorziet set methodes zodat minstens \'e\'en van de noodzakelijke condities niet geldt
+\\=$>$ beperken hoe resources aangevraagd kunnen worden
+\item \textbf{deadlock avoidance}
+\\= vereist dat operating system op voorhand bijkomende informatie krijgt met welke resources proces gaat aanvragen en gebruiken tijdens lifetime
+\end{itemize}
+systeem =$>$ geen deadlock-prevention of deadlock-avoidance =$>$ deadlock kan voorkomen =$>$ tenslotte
 \chapter{Memory-Management Strategies}
 \chapter{Virtual-Memory Management}
 \chapter{File System}
