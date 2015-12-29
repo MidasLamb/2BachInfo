@@ -569,6 +569,67 @@ command interpreter =$>$ in kernel of als speciaal programma behandeld(Window en
 \chapter{Process Concept}
 batch system =$>$ voert \textbf{jobs} uit
 \\time-shared systeem =$>$ \textbf{user programs} of \textbf{tasks}
+\\zelfs single-user system =$>$ verschillende programma's tegelijk = \textbf{processes}
+
+\section{Process Concept}
+\subsection{The Process}
+proces  = programma in uitvoering
+\\=$>$ meer dan programma code = \textbf{text section}
+\\=$>$ bevat ook huidige activiteit 
+\begin{itemize}
+\item waarde van \textbf{program counter}
+\item inhoud registers
+\item \textbf{stack}
+\\ = bevat tijdelijke data, bv.: functieparameters, returnadressen)
+\item \textbf{data section}
+\\ = bevat globale variabelen
+\item \textbf{heap}
+\\ = geheugen dat dynamisch wordt toegewezen tijdens proces runtime
+\end{itemize}
+programma = passieve entity zoals \textbf{executable file} (= file dat lijst instructies bevat bewaard op disk)
+\\proces = actieve entity
+\\programma wordt proces wanneer uitvoerbare file in geheugen wordt geladen door:
+\begin{itemize}
+\item double-clicking icon 
+\item entering naam in command line
+\end{itemize}
+proces zelf kan execution environment zijn voor andere code (bv.: Java programming environment)
+
+\subsection{Process State}
+staat van proces =$>$ bepaald door huidige activiteit van proces
+\\mogelijke staten:
+\begin{itemize}
+\item new
+\item running
+\item waiting
+\item ready
+\item terminated
+\end{itemize}
+
+\subsection{Process Control Block}
+elk proces wordt in operating system voorgesteld door \textbf{process control block(PCB)} = \textbf{task control blok}
+\\=$>$ bevat veel stukken informatie geassocieerd met specifiek proces:
+\begin{itemize}
+\item process state
+\item program counter
+\item CPU registers
+\item CPU-scheduling information
+\item memory-management information
+\item accounting information
+\item I/O status information
+\end{itemize}
+
+\subsection{Threads}
+proces = programma dat single \textbf{thread} van executie uitvoert
+\\=$>$ meeste operating systems hebben process concept uitgebreid om toe te laten dat een proces meerdere uitvoeringsthreads heeft en dus meer dan \'e\'en taak kan uitvoeren tegelijk
+
+\section{Process Scheduling}
+doel van mulitprogramming: aantal processen altijd hebben runnen om CPU utilization te maximaliseren
+\\doel van time sharing: CPU zo vaak tussen processen switchen dat gebruikers kunnen interacten met elk programma terwijl het runt
+\\om deze doelen te bereiken: \textbf{process scheduler} selecteert beschikbaar proces voor program execution op CPU
+
+\subsection{Scheduling Queues}
+%verder pagina 109
 \chapter{Multithreaded Programming}
 \chapter{Process Scheduling}
 \section{Basic Concepts}
