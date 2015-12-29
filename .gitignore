@@ -1,5 +1,7 @@
 *.pdf
 *.aux
+*.out
+*.toc
 *.log
 *.synctex.gz
 *.tcp
