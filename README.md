@@ -22,6 +22,7 @@ If you fork/clone this repository, you will find that the directories for the su
 * [Stijn Caerts](https://github.com/StijnCaerts)
 * [Kiefer van Bel](https://github.com/Highlordgimli)
 * [Thor Galle](https://github.com/th0rgall)
+* [Kevin Coorens](https://github.com/coorenskevin)
 
 #Other useful links
 * [KULeuven-CS repository](https://github.com/KULeuven-CS/kuleuven-cs.github.io)
