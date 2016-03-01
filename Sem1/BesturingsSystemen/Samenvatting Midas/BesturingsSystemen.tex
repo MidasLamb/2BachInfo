@@ -1,0 +1,2884 @@
+
+\documentclass[10pt]{report}
+
+\usepackage{color}
+\usepackage{hyperref}
+
+\title{\Huge Besturingssystemen}
+\date{January 3, 2016}
+\author{Midas Lambrichts}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Part 1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Chapter 1
+\chapter{Introduction} \label{ch:Chapter1}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Chapter 2
+\chapter{System Structures} \label{ch:Chapter2}
+	\textbf{Operating system:}
+	\begin{itemize}
+		\item Provide environment within which programs are executed.
+		\item Vary greatly.
+		\item View that focuses on the services it provides, on the interface, or on the components
+	\end{itemize}
+
+	\section{Operating-System Services}
+		\begin{itemize}
+			\item Provided for the programmer.
+			\item Helpful to the user:
+			\begin{itemize}
+				\item User interface.
+				\item Program execution.
+				\item I/O operations.
+				\item File-system manipulation.
+				\item Communications.
+				\item Error detection.
+			\end{itemize}
+			\item For efficient operation of the system itself:
+			\begin{itemize}
+				\item Resource allocation.
+				\item Accounting.
+				\item Protection and security.
+			\end{itemize}
+		\end{itemize}
+
+		\section{User and Operating-System Interface}
+			\subsection{Command Interpreters}
+  			\begin{itemize}
+  				\item Can be in the kernel or an individual (special) program.
+  				\item If there are more than one command interpreter to choose from $\rightarrow$ "shells"
+  				\item \textbf{Main function:} get and execute the next user-specified command.
+  				\item Command can be implemented in two ways:
+  				\begin{itemize}
+  					\item Command interpreter contains code to execute the command.
+  					\item Implement commands through system programs $\rightarrow$ The command interpreter does not understand the comand. It identifies a file to be loaded and executed. (\textcolor{green}{+: New commands can be easily implemented})
+  				\end{itemize}
+  			\end{itemize}
+
+			\subsection{Graphical User Interfaces}
+  			\begin{itemize}
+  				\item User-friendly.
+  				\item Mouse-based window-and-menu sytem (desktop metaphor)
+  				\item Icons: represent program, files, directories,...
+  				\item \textcolor{red}{-: Mouse is impractical for mobile systems} $\rightarrow$ Touchscreen interface with gestures.
+  			\end{itemize}
+			\subsection{Choice of Interface}
+  			\begin{itemize}
+  				\item Personal preference
+  				\begin{itemize}
+  					\item Power users/System administrators: Command-line interface (GUI only has subset of system functions) and Use of shell scripts (\textcolor{green}{+: Command-line interface programmability})
+  				\end{itemize}
+  				\item \textbf{Design of user interface is not a direct function of the operating system!}
+  			\end{itemize}
+		\section{System calls}
+  		\begin{itemize}
+  			\item Provide an intervace to the available services of the OS.
+  			\item Application Programming Interface (API) $\rightarrow$ invokes system calls on behalf of the application.
+  			\item Programming with API rather than system calls:
+  			\begin{itemize}
+  				\item \textcolor{green}{+: Portability}
+  				\item \textcolor{green}{+: System calls are more detailed and diffficult.}
+  			\end{itemize}
+  			\item Run-time support system: provides system-call interface (intercepts function calls in the API and invokes necessary system calls)
+  			\item Passing parameters to the operating system: 3 approaches:
+  			\begin{itemize}
+  				\item Parameters in registers (\textcolor{green}{+: Simplest}, \textcolor{red}{-: Can be more parameters as registers})
+  				\item Parameters in a block $\rightarrow$ Address of block is passsed as parameter in register.
+  				\item Parameters pushed onto the stack by the program and popped of by the OS.
+  			\end{itemize}
+  		\end{itemize}
+
+		\section{Types of System Calls}
+  		Six major categories:
+  		\begin{itemize}
+  			\item Process control
+  			\item File manipulation
+  			\item Device manipulation
+  			\item Information maintenance
+  			\item Communications
+  			\item Protection
+  		\end{itemize}
+			\subsection{Process Control}
+  			\begin{itemize}
+  				\item Running program can halt normally or abnormally (abnormally $\rightarrow$ error trap, dump of memory, and error message $\leftarrow$ can be examined by Debugger) After abnormal halt, the OSmust transfer control to the invoking command interpreter.
+  				\item Error level $\rightarrow$ can combine normal (Errorlevel 0) and abnormal (Errorlevel > 0) termination
+  				\item Process may load and execute another program (Where to return control when loaded program terminates $\rightarrow$ existing program: lost/saved/allowed to continue)
+  				\item Share data: Ensure integrity $\rightarrow$ lock shared data
+  			\end{itemize}
+			\subsection{File Management}
+  			\begin{itemize}
+  				\item 	File system: see \autoref{ch:Chapter10} and \autoref{ch:Chapter11}.
+  				\item Common system calls when dealing with files:
+  				\begin{itemize}
+  					\item Create
+  					\item Delete
+  					\item Open
+  					\item Read and Write
+  					\item Reposition
+  					\item Close
+  				\end{itemize}
+  				\item Fie attributes:
+  				\begin{itemize}
+  					\item Name
+  					\item File type
+  					\item ...
+  				\end{itemize}
+  			\end{itemize}
+			\subsection{Device Management}
+  			\begin{itemize}
+  				\item Process needs several resources, if they are available they can be granted, else, the process must wait. (Request and release a resource)
+  				\item Deadlocks: see \autoref{ch:Chapter7}
+  				\item Similarities between I/O and files $\rightarrow$ Merge into combined file-device structures.
+  			\end{itemize}
+			\subsection{Information Maintenance}
+  			\begin{itemize}
+  				\item
+  			\end{itemize}
+			\subsection{Communication}
+  			\begin{itemize}
+  				\item See \autoref{ch:Chapter6}
+  			\end{itemize}
+			\subsection{Protection}
+  			\begin{itemize}
+  				\item Protection: \autoref{ch:Chapter14}
+  				\item Security: \autoref{ch:Chapter15}
+  			\end{itemize}
+    \section{System Programs}
+      System programs (System utilities) provide a convenient environment for program development and execution. They can be divided into categories:
+      \begin{itemize}
+        \item File management
+        \item Status information about the system
+        \item File modification
+        \item Programming-language support
+        \item Program loading and execution
+        \item Communications
+        \item Background services: Constantly running system-program processes. Known as: services, subsystems or daemons.
+      \end{itemize}
+      Other programs can also be included, such as a web browers, these are \textbf{application programs}
+
+    \section{Operating-System Design and Implementation}
+      \subsection{Design Goals}
+        \begin{itemize}
+          \item Define goals and specifications, affected by:
+          \begin{itemize}
+            \item Hardware
+            \item Type of system: batch, time sharing, single user, multiuser, distributed, real time, general purpose.
+          \end{itemize}
+          \item Requirements can be divided in two groups:
+          \begin{itemize}
+            \item User goals
+            \item System goals
+          \end{itemize}
+          \item Field of software engineering
+        \end{itemize}
+
+        \subsection{Mechanisms and Policies}
+          \begin{itemize}
+            \item Separation of mechanism (how) and policies (what)
+            \item Separation is important for flexibility.
+            \item Policies are likely to change $\rightarrow$ general mechanism insensitive to changes in policy.
+          \end{itemize}
+
+        \subsection{Implementation}
+          \begin{itemize}
+            \item Operating System can be written in more than one language:
+            \begin{itemize}
+              \item Lowest levels of the kernel: assembly language
+              \item Higher levels of the kernel: C
+              \item System programs: C or C++
+            \end{itemize}
+            \item Advantages of higher-level language: Code can be written faster, more compact, easier to understand, debug. And improvements in the compiler will improve the generated code. And easier to port.
+            \item Disadvantages: Reduced speed and increased storage requirements.
+            \item Major improvements in performance $\leftarrow$ better data structures and algorithms. Only small amount of code is critical to high performance:
+            \begin{itemize}
+              \item Interrupt handler
+              \item I/O manager
+              \item Memory manager
+              \item CPU scheduler
+            \end{itemize}
+          \end{itemize}
+
+      \section{Operating-System Structure}
+        \begin{itemize}
+          \item Engineered carefully to function properly and modified easily $\leftrightarrow$ Monolithic system
+        \end{itemize}
+        \subsection{Simple Structure}
+          \begin{itemize}
+            \item Most OS started small and grew beyond scope $\rightarrow$ No well-defined structures.
+          \end{itemize}
+        \subsection{Layered Approach}
+          \begin{itemize}
+            \item Bottom layer (layer 0): hardware
+            \item Highest layer (layer N): user interface.
+            \item Each layer consists of data structures and routines for higher-level layers.
+            \item Main advantage: Simplicity of construction and debugging.
+            \item Major difficulty: Defining the various layers $\rightarrow$ careful planning.
+            \item \textbf{Less efficient}: Each layer adds overhead $\rightarrow$ fewer layers with more functionality $\rightarrow$ advantages of modularized code while avoiding the problems.
+          \end{itemize}
+
+        \subsection{Microkernels}
+          \begin{itemize}
+            \item Remove all nonessential components and implementing them as system and user-level programs.
+            \item Provide minimal process and memory management, in addition to communications facility.
+            \item \textbf{Main function: Provide communication (message passing) between client program and the services.}
+            \item Benefit: makes extending the operating system easier (new services are added to user space).
+            \item Performance of microkernels suffer due to increased system-function overhead.
+          \end{itemize}
+
+        \subsection{Modules}
+          \begin{itemize}
+            \item \textbf{Best current methodology!}
+            \item Loadable kernel modules
+            \item Kernel: core components and links in additional services via modules (at boot or during run time)
+            \item No recompiling fo the kernel every time a change was made.
+            \item Resembles a layered system, but more flexible than a layered system, any module can call any other module.
+            \item More efficient: Modules do not need to invoke message passing.
+          \end{itemize}
+
+        \subsection{Hybrid Systems}
+          \begin{itemize}
+            \item Most OS combine different structures.
+          \end{itemize}
+
+      \section{Operating-System Debugging}
+        \subsection{Failure Analysis}
+          \begin{itemize}
+            \item Proces fails $\rightarrow$ error information to a log file and take a \textbf{core dump} (capture of the memory of the process) and store it in a file. These can be probed by a debugger.
+            \item Kernel fails: \textbf{crash}. Error information saved to a log file and memory state is saved to a crash dump. Save kernel memory state to a section af disk set aside for this purpose, that contains no file system. System reboot: gather data from this area and write it to a crash dump file.
+          \end{itemize}
+
+        \subsection{Performance Tuning}
+          \begin{itemize}
+            \item Improve performance by removing processing bottlenecks.
+            \item Monitor system performance $\rightarrow$ OS produces trace listings (all interesting events are logged with their time and important parameters)
+          \end{itemize}
+
+      \section{Operating-System Generation}
+        \begin{itemize}
+          \item OS are designed to run on any class of machines $\rightarrow$ system generation (SYSGEN)
+          \item SYSGEN reads from a given file, asks the operator for information or probes the hardware for:
+          \begin{itemize}
+            \item CPU
+            \item boot disk format
+            \item amount of memory
+            \item devices
+            \item OS options
+          \end{itemize}
+          \item Three possibilities:
+          \begin{itemize}
+            \item completely compile output-object version of the OS tailored to system.
+            \item create tables and select modules from a precompiled library, modules are linked together to form the generated OS
+            \item Construct a system that is completely table driven. (All code is always part of theOS)
+          \end{itemize}
+        \end{itemize}
+
+      \section{System Boot}
+        \begin{itemize}
+          \item Bootstrap program/loader loctes the kernel and loads it into main memory and starts the execution.
+          \item Two-step bootstrap process: simple bootstrap loader fethces a more complex boot program from disk, which loads the kernel.
+          \item Instruction register loaded with a predefined memory location and starts execution.
+          \item ROM: read only memory: convient: no initialization and cannot easily be infected.
+          \item bootstrap stored in firmware and the OS is on disk. Bootstrap runs diagnotics and has a bit of code that can read a single block at a fixed location: \textbf{boot block}
+          \item Disk that has a bot partition is called a boot disk or system disk.
+        \end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Part 2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Chapter 3
+
+\chapter{Process Concept} \label{ch:Chapter3}
+	\section{Process Concept}
+		\subsection{The Process}
+			\begin{itemize}
+				\item A process consists of:
+				\begin{itemize}
+					\item Program code: "text section"
+					\item Current activity: Value of the program counter and the contents of the processor's registers
+					\item Process stack: temporary data
+					\item Data section: global variables
+					\item Heap: memory dynamically allocated during runtime
+				\end{itemize}
+				\item A program is \textbf{passive} while a process is \textbf{active}
+				\item Two processes can come from the same program, they are still two separate execution sequences. Only the text sections are equivalent.
+			\end{itemize}
+
+		\subsection{Process State}
+			\begin{itemize}
+				\item While a process executes, it changes state:
+				\begin{itemize}
+					\item \textbf{New}: being created
+					\item \textbf{Running}: in execution
+					\item \textbf{Waiting}: waiting for an event
+					\item \textbf{Ready}: waiting for the processor
+					\item \textbf{Terminated}: finished execution
+				\end{itemize}
+				\item Only one process can be "running" on any processor at any instant.
+			\end{itemize}
+
+		\subsection{Process Control Block}
+			\begin{itemize}
+				\item A process is represented in the OS by a \textbf{Process Control Block (PCB)}. It keeps information:
+				\begin{itemize}
+					\item \textbf{Process state}
+					\item \textbf{Program counter}: address of the next instruction.
+					\item \textbf{CPU registers}: saved when an interrupt occurs, to allow the process to continued afterwards.
+					\item \textbf{CPU-scheduling information}: Process priority, pointers to scheduling queues, scheduling parameters.
+					\item \textbf{Memory-management information}: Value of the base and limit registers, the page tables (\autoref{ch:Chapter8})
+					\item \textbf{Accounting information}: CPU and real time used, time limits, account numbers, process numbers,...
+					\item \textbf{I/O status information}: List of I/O deices allocated to the processs, list of open files,...
+				\end{itemize}
+			\end{itemize}
+
+		\subsection{Threads}
+			\begin{itemize}
+				\item \autoref{ch:Chapter4}
+			\end{itemize}
+
+	\section{Process Scheduling}
+		\subsection{Scheduling Queues}
+			\begin{itemize}
+				\item Queues:
+				\begin{itemize}
+					\item \textbf{Job queue}: All processes in the system
+					\item \textbf{Ready queue}: Process in main memory and ready and waiting to execute
+					\item \textbf{Device queue}: Processes waiting for I/O. (Each device has its own device queue)
+				\end{itemize}
+				\item \textbf{Dispatched}: selected for execution
+			\end{itemize}
+
+		\subsection{Schedulers}
+			\begin{itemize}
+				\item Selection process by the appropriate scheduler.
+				\item \textbf{Long-term Scheduler}: Select processes from mass-storage device and load into memory.
+				\item \textbf{Short-term Scheduler}: Selects from processes ready to execute and allocates CPU.
+				\item \textbf{Medium-term Scheduler}: Remove process from memory to decrease multiprogramming (swapping \autoref{ch:Chapter8}).
+			\end{itemize}
+
+		\subsection{Context Switch}
+			\begin{itemize}
+				\item Save current context to later restore it.
+				\item Context: Represented in PCB: CPU registers, Process state, Memory-management information.
+				\item Context-switching is pure overhead.
+				\item Context-switch time is dependend on hardware support.
+			\end{itemize}
+
+	\section{Operations on Processes}
+		\begin{itemize}
+			\item Provide a mechanism for process creation and termination.
+		\end{itemize}
+		\subsection{Process Creation}
+			\begin{itemize}
+				\item Tree of processes (Linux: init process is root parent)
+				\item Child process can get resources from the OS or constrained to a subset of the parent's resources.
+				\item Parent process can pass initialization data.
+				\item Process creates new process: execution:
+				\begin{itemize}
+					\item Parent continues to execute
+					\item Parent waits untill all children have terminated
+				\end{itemize}
+				\item Process creates new process: address-space:
+				\begin{itemize}
+					\item Child process is duplicate of the parent process
+					\item New program
+				\end{itemize}
+			\end{itemize}
+
+		\subsection{Process Termination}
+			\begin{itemize}
+				\item Process terminates when it finishes executing its final statement and asks the OS to delete it ( exit() )
+				\item Can return status value to the parent process
+				\item Parent can terminate it's child for different reasons:
+				\begin{itemize}
+					\item Child exceed its usage of resources.
+					\item Assigned task is no longer needed.
+					\item The parent itself is exiting, and the OS does not allow a child to continue if it's parent terminates. (Cascading termination)
+				\end{itemize}
+
+				\item When a process terminates, its deallocated, but its entry in the process table remains until the parent calls wait() (process table contains exit status)
+				\item \textbf{Zombie process}: Process that has terminated, but who's parent has not called wait().
+				\item \textbf{Orphan process}: Parent did not invoke wait() and instead terminated.
+				\item LINUX: init periodically calls wait() releasing orphan's rpocess identifiers.
+			\end{itemize}
+
+	\section{Interprocess Communication}
+		\begin{itemize}
+			\item \textbf{Independent Process}: Cannot affect or be affected by other processes.
+			\item \textbf{Cooperating Process}: Can affect or be affected by other processes.
+			\item Reasons for providing an environment that allows cooperation:
+			\begin{itemize}
+				\item Inforamtion Sharing
+				\item Computation speedup
+				\item Modularity
+				\item Convencience
+			\end{itemize}
+			\item \textbf{Interprocess Communication (IPC)}: a mechanism which allows exhange of data and informations, two fundamental models:
+			\begin{itemize}
+				\item \textbf{Shared memory}: Faster because it only requires system calls to set up the shared-memory regions.
+				\item \textbf{Message passing}: For smaller amounts of data, easier to implement. Better for more cores (no cache coherency issues).
+			\end{itemize}
+		\end{itemize}
+
+		\subsection{Shared-Memory Systems}
+			\begin{itemize}
+				\item Establish region of shared memory, typically in the address space of the process creating the shared-memory segement.
+				\item Buffers:
+				\begin{itemize}
+					\item Unbounded buffer: No limit on the size.
+					\item Bounded buffer: Fixed bufer size.
+				\end{itemize}
+			\end{itemize}
+
+		\subsection{Message-Passing Systems}
+			\begin{itemize}
+				\item Two operations: send(message) and receive(message)
+				\item Fixed or variable in size
+				\item Communication link
+				\item Implementations:
+				\begin{itemize}
+					\item Direct or indirect communication
+					\item Synchronous or asynchronous communication
+					\item Automatic or explicit buffering
+				\end{itemize}
+			\end{itemize}
+
+			\subsubsection{Naming}
+				\begin{itemize}
+					\item \textbf{Direct communication}: must explicitly name recipient or sender.
+					\begin{itemize}
+						\item Communication link:
+						\begin{itemize}
+							\item Link is established automatically
+							\item Link is associated with exactly two processes
+							\item Each pair of processes, exactly one link
+						\end{itemize}
+						\item Symmetry in addressing (both sender and recipient name eachother)
+						\item Asymmetry in addressing (Only sender names recipient)
+						\item Disadvantage: limited modularity of resulting process definitions.
+					\end{itemize}
+					\item \textbf{indirect communication}: sent to and receive from mailboxes/port.
+					\begin{itemize}
+						\item Communication link:
+						\begin{itemize}
+							\item Link is established between pair of process if both members have a shared mailbox.
+							\item Link may be associated with more than two processes.
+							\item Each pair of communicating processes, a number of different links may exist.
+						\end{itemize}
+						\item Mailbox can be owned by process or the OS.
+						\begin{itemize}
+							\item Process: Distinguish owner and user of mailbox. If the owner terminates, the mailbox disappears.
+							\item OS: Provide mechanisms:
+							\begin{itemize}
+								\item Create a new mailbox
+								\item Send and receive through mailbox
+								\item Delete a mailbox
+							\end{itemize}
+							\item Process that creates the mailbox is the owner, but ownership may be passed.
+						\end{itemize}
+					\end{itemize}
+				\end{itemize}
+			\subsubsection{Synchronization}
+				\begin{itemize}
+					\item Implementations: blocking/synchronous or nonblocking/asynchronous.
+					\begin{itemize}
+						\item \textbf{Blocking send}
+						\item \textbf{Nonblocking send}
+						\item \textbf{Blocking receive}
+						\item \textbf{Nonblocking receive}
+					\end{itemize}
+					\item \textbf{rendez-vous}: both send and receive are blocking.
+				\end{itemize}
+
+			\subsubsection{Buffering}
+				\begin{itemize}
+					\item \textbf{Zero capacity}: Sender must block until recipient receives.
+					\item \textbf{Bounded capacity}: Sender must block when queue is full.
+					\item \textbf{Unbouded capacity}: Sender must never blocks.
+				\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Chapter 4
+\chapter{Multithreaded Programming} \label{ch:Chapter4}
+	\section{Overview}
+		\begin{itemize}
+			\item \textbf{Thread}: basic unit of CPU utilization
+			\begin{itemize}
+				\item Thread ID
+				\item Program counter
+				\item Register set
+				\item Stack
+			\end{itemize}
+			\item It shares its code section, data section and OS resources (open files,...)
+		\end{itemize}
+
+		\subsection{Motivation}
+			\begin{itemize}
+				\item Application ofen separate process with several threads.
+				\item Process creation is time consuming.
+				\item OS kernels are now multithreaded: managing devices, managing memory, interrupt handling,...
+			\end{itemize}
+
+		\subsection{Benefits}
+			\begin{enumerate}
+				\item \textbf{Responsiveness}
+				\item \textbf{Resource sharing}
+				\item \textbf{Economy}: Process creation is costly, while thread creation and context-switching threads is cheap (five time faster).
+				\item \textbf{Scalability}
+			\end{enumerate}
+
+	\section{Multicore Programming}
+		\begin{itemize}
+			\item \textbf{Parallelism}: Perform more than one task simultaneously.
+			\item \textbf{Concurrency}: All tasks make progress.
+			\item \textbf{Amdahl's law}: The more cores, the more the speed is dependent on the serial part of the code.
+		\end{itemize}
+
+		\subsection{Programming Challenges}
+			\begin{enumerate}
+				\item \textbf{Identifying tasks}
+				\item \textbf{Balance}: Tasks perform equal work.
+				\item \textbf{Data splitting}:
+				\item \textbf{Data dependency}: If two tasks are dependent on data from eachother, they must synchronize (See \autoref{ch:Chapter6}).
+				\item \textbf{Testing and debugging}: Inherently more difficult.
+			\end{enumerate}
+
+		\subsection{Types of Parallelism}
+			\begin{itemize}
+				\item \textbf{Data parallelism}: Subsets of same data and performing the same operation on it.
+				\item \textbf{Task parallelism}: Unique operations.
+				\item In practice, few follow one or the other, mostly \textbf{hybrid}.
+			\end{itemize}
+
+	\section{Multithreading Models}
+		\begin{itemize}
+			\item Support for kernels may be on the user level for user threads, or on the kernel level for kernel threads. We need a relationship between user threads and kernel threads.
+		\end{itemize}
+
+		\subsection{Many-to-one Model}
+			\begin{itemize}
+				\item Many user level threads to one kernel thread.
+				\item Thread management done by thread library in user space.
+				\item Entire process will block if thread makes blocking system call.
+				\item Inability to take advantage of multiple processing cores.
+			\end{itemize}
+
+		\subsection{One-to-One Model}
+			\begin{itemize}
+				\item Each user thread has a kernel thread.
+				\item More concurrency
+				\item Drawback: Creating a user thread requires creating a kernel thread: \textbf{Overhead!}
+			\end{itemize}
+
+		\subsection{Many-to-Many model}
+			\begin{itemize}
+				\item Multiplexes user-level threads to less or equal amount of kernel threads.
+				\item Can create as many user level threads as necessary.
+				\item Kernel threads can run in parallel.
+				\item \textbf{Variation: Two level model}: User level threads can be bound to a kernel thread.
+			\end{itemize}
+
+	\section{Thread Libraries}
+		\begin{itemize}
+			\item Provides API for creating and managing threads to the programmer.
+			\item Several approaches:
+			\begin{itemize}
+				\item \textbf{Library entirely in user space}
+				\item \textbf{Kernel-level library}: Invaking a function in the API results in a system call.
+			\end{itemize}
+			\item Strategies for creating multiple threads:
+			\begin{itemize}
+				\item \textbf{Asynchronous threading}: Parent creates child thread and resumes execution.
+				\item \textbf{Synchronous threading}: Parent creates (multiple) child threads and must wait for all of its children to terminate before continuing execution (\textbf{fork-join strategy}).
+			\end{itemize}
+		\end{itemize}
+
+	\section{Implicit Threading}
+		\begin{itemize}
+			\item Transfer creation and management of threading to comilers and run-time libraries.
+		\end{itemize}
+
+		\subsection{Thread Pools}
+			\begin{itemize}
+				\item Create number of threads at process startup and place the minto a pool, waiting for work.
+				\item Awaken thread from this pool
+				\item Thread completes $\rightarrow$ return to the pool and wait for more work.
+				\item \textbf{Benefits}:
+				\begin{enumerate}
+					\item Faster (no overhead from creating thread)
+					\item Limits the number of threads that exist.
+					\item Separating the task to be perfromed from the mechanics of creating the task $\rightarrow$ allows different strategies.
+				\end{enumerate}
+				\item Number of threads in pool can be determined heuristically based on number of CPU's,...
+				\item Dynamically adjust number of threads (more sophisticated).
+			\end{itemize}
+
+		\subsection{OpenMP}
+			\begin{itemize}
+				\item Set of compiler directives and API for programs
+				\item Indicate \textbf{parallel regions} that may run in parallel.
+				\item If OpenMP encounters directive (\#pragme omp parallel), create as many threads as there are processing cores. $\rightarrow$ All the threads execute the parallel region.
+			\end{itemize}
+
+		\subsection{Grand Central Dispatch}
+
+		\subsection{Other Approaches}
+
+	\section{Threading Issues}
+		\subsection{The fork() and exec() System Calls}
+			\begin{itemize}
+				\item exec() immediatly after forking, duplicating only the calling thread.
+				\item exec() not called, duplicate all threads
+			\end{itemize}
+
+		\subsection{Signal Handling}
+			\begin{itemize}
+				\item \textbf{Signal}: Unix: notifiy a process that event has occured. It can be received synchronously or asynchronously.
+				\item Pattern:
+				\begin{enumerate}
+					\item Signal is gerenated
+					\item Signal is delivered to process
+					\item Signal must be handled
+				\end{enumerate}
+				\item Siganl can be handled by:
+				\begin{itemize}
+					\item \textbf{Default signal handler}: Every signal has one that the kernel runs.
+					\item \textbf{User-defined signal handler}: Overrides Default signal handler.
+				\end{itemize}
+				\item Handling singals in multithreaded programs:
+				\begin{itemize}
+					\item Deliver signal to thread to which the signal applies.
+					\item Deliver signal to every thread.
+					\item Deliver signal to certain threads.
+					\item Assign a thread to receive all signals.
+				\end{itemize}
+				\item \textbf{Windows}: APC (asynchronous precedure call) in stead of signal.
+			\end{itemize}
+
+		\subsection{Thread Cancellation}
+			\begin{itemize}
+				\item Terminating a thread before it has compleded.
+				\item Cancellation can occur in two different scenarios:
+				\begin{itemize}
+					\item \textbf{Asynchronous cancellation}: Immediate termination
+					\item \textbf{Deferred cancellation}: Thread check if it shoud terminate and terminates itself.
+				\end{itemize}
+				\item Difficulty: resources and while updating data (especially with Asynchronous cancellation).
+				\item OS will reclaim resources but not all resources $\rightarrow$ may not reclaim system-wide resource!
+				\item Default cancellation is deferred cancelation: cancellation occurs when thread reaches cancellation point $\rightarrow$ cleanup handler is invoked.
+			\end{itemize}
+
+		\subsection{Thread-Local Storage (TLS)}
+			\begin{itemize}
+				\item Not local variables, it's visible across function calls.
+				\item Own copy of certain data.
+			\end{itemize}
+
+	\section{Operating-System Examples}
+		\subsection{Windows Threads}
+
+		\subsection{Linux Threads}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Chapter 5
+\chapter{Process Scheduling} \label{ch:Chapter5}
+	\section{Basic Concepts}
+		\subsection{CPU-I/O Burst Cycle}
+			\begin{itemize}
+				\item Cycle of CPU execution and I/O wait.
+				\item Large number of short CPU bursts
+			\end{itemize}
+
+		\subsection{CPU Scheduler}
+			\begin{itemize}
+				\item When CPU becomes idle $\rightarrow$ select process from the ready queue (short-term scheduler)
+			\end{itemize}
+
+		\subsection{Preemptive Scheduling}
+			\begin{itemize}
+				\item Process switches from running to waiting state.
+				\item Process switches from running to ready state (interrupt)
+				\item process switches from waiting to ready.
+				\item Process terminates.
+				\item Nonpreemtpive/cooperative $\leftrightarrow$ preemptive.
+			\end{itemize}
+
+		\subsection{Dispatcher}
+			\begin{itemize}
+				\item \textbf{Dispatcher}: the module that gives control of the CPU to the proces
+				\item Involves:
+				\begin{itemize}
+					\item Switching context
+					\item Switching to user mode
+					\item Jumpint to proper location in user program
+				\end{itemize}
+				\item Dispatch latency: overhead from stopping one process and starting another.
+			\end{itemize}
+
+	\section{Scheduling Criteria}
+		\begin{itemize}
+			\item Criteria:
+			\begin{itemize}
+				\item CPU utilization
+				\item Throughput: number of processes completed per time unit
+				\item Turnaround time: time from start to finish of process
+				\item Waiting time: process spends waiting in ready queue.
+				\item Response time: Time from submission of request to first response
+			\end{itemize}
+			\item Important to minimize variance in the response time (rather than minimize the average response time)
+		\end{itemize}
+
+	\section{Scheduling Algorithms}
+		\subsection{First-Come, First-Served Scheduling}
+			\begin{itemize}
+				\item \textbf{Convoy effect}: Other processes wait for one big process.
+			\end{itemize}
+
+		\subsection{Shortest-Job-First Scheduling}
+			\begin{itemize}
+				\item Better name: shortest-next-CPU-burst
+				\item Burst is calculated as exponential average of previous bursts.
+				\item Can be preemptive (\textbf{"shortest-remaining-time-first"}) or nonpreemptive
+			\end{itemize}
+
+		\subsection{Priority Scheduling}
+			\begin{itemize}
+				\item Priority associated with each process
+				\item low number = high priority
+				\item Problem: starvation $\rightarrow$ aging
+			\end{itemize}
+
+		\subsection{Round-Robin Scheduling}
+			\begin{itemize}
+				\item Each process gets a time quantum/time slice
+			\end{itemize}
+
+		\subsection{Multilevel Queue Scheduling}
+			\begin{itemize}
+				\item Division between \textbf{foreground} processes en \textbf{background} processes
+				\item Parition the ready queue in separate queues
+				\item Process is assigned to one queue
+				\item scheduling is among the queues: fixed-priority preemptive scheduling
+				\item Can also use time-slice among the queues
+			\end{itemize}
+
+		\subsection{Multilevel Feedback Queue Scheduling}
+			\begin{itemize}
+				\item Allows a process to move between queues.
+				\item Multilevel feedback queue scheduler is defined by following parameters:
+				\begin{itemize}
+					\item Number of queues
+					\item Scheduling algorithm for each queue
+					\item Method used to determine when to upgrade a process to a higher-priority queue
+					\item Method for degrading a process
+					\item Mothed for determining which queue to put a new process in.
+				\end{itemize}
+			\end{itemize}
+
+
+	\section{Thread Scheduling}
+		\subsection{Contention Scope}
+			\begin{itemize}
+				\item \textbf{Process-Contention Scope}: competition for the CPU is among threads belonging to the same process.
+				\item \textbf{System-Contention Scope}: Competition is between all threads in the system.
+				\item PCS happens according to priority, it will preempt the thread.
+				\item PCS does not guarantee time slicing among threads of equal priority.
+			\end{itemize}
+
+		\subsection{Pthread Scheduling}
+
+	\section{Multiple-Processor Scheduling}
+		\subsection{Approaches to Multiple-Processor Scheduling}
+			\begin{itemize}
+				\item \textbf{Asymmetric multiprocessing}: System activities handled by a single processor (master server) other processors execute user code.
+				\item \textbf{Symmetric multiprocessing (SMP)}: Each processor is self-scheduling. Can have common or private queue.
+			\end{itemize}
+
+		\subsection{Processor Affinity}
+			\begin{itemize}
+				\item Process wants to run on processor that it is currently running on.
+				\item \textbf{Soft affinity}: No guarantee for remaining on the same processor.
+				\item \textbf{Hard affinity}: Do guarantee
+				\item Most systems provide both.
+			\end{itemize}
+
+		\subsection{Load Balancing}
+			\begin{itemize}
+				\item Attempt to keep workload evenly distributed
+				\item Two general approaches:
+				\begin{itemize}
+					\item \textbf{Push Migration}: Check if there is an inbalance, if so, migrate processes from overloaded to idle processors.
+					\item \textbf{Pull Migration}: Idle processors pulls in a waiting task from a busy processor.
+				\end{itemize}
+				\item Counteracts processor affinity.
+			\end{itemize}
+
+		\subsection{Multicore Processors}
+			\begin{itemize}
+				\item \textbf{Memory stall}: waiting for data
+				\item To remedy memory stalls: multithreaded processor cores: one stalls, other starts.
+				\item Two ways to multithread a processing core:
+				\begin{itemize}
+					\item \textbf{Coarse-grained multithreading}: Execute untill long latency event, then switch.
+					\item \textbf{Fine-grained multithreading}: Switch at finer level, eg: boundary of instruction cycle.
+				\end{itemize}
+				\item Multithreaded multicore processor: two levels of scheduling, for the OS and for each core which thread to run.
+			\end{itemize}
+
+	\section{Real-Time CPU Scheduling}
+		\begin{itemize}
+			\item \textbf{Hard real-time systems}: Task must be serviced by its deadline.
+			\item \textbf{Soft real-time systems}: No guarantee when a critical process will be scheduled.
+		\end{itemize}
+
+		\subsection{Minimizing Latency}
+			\begin{itemize}
+				\item \textbf{Event latency}: Amount of time from occuring of event to when it is serviced.
+				\item Two types of latency:
+				\begin{itemize}
+					\item \textbf{Interrupt latency}: Arrival of an interrupt to the start of the routine that services the interrupt.
+					\begin{itemize}
+						\item Important factor: amount of time interrupts may be disabled.
+					\end{itemize}
+					\item \textbf{Dispatch latency}: Time required for the dispatcher to stop one process and start another.
+					\begin{itemize}
+						\item Preemptive kernels help keep dispatch latency low.
+						\item \textbf{Conflic phase} has two components
+						\begin{itemize}
+							\item Preemption of any process running
+							\item Release of low-priority processes of resources needed by a high-priority process.
+						\end{itemize}
+					\end{itemize}
+				\end{itemize}
+			\end{itemize}
+
+		\subsection{Priority-Based Scheduling}
+
+		\subsection{Rate-Monotonic Scheduling}
+
+		\subsection{Earliest-Deadline-First Scheduling}
+
+		\subsection{Proportional Share Scheduling}
+
+		\subsection{POSIX Real-Time Scheduling}
+
+
+	\section{Algorithm Evaluation}
+		\begin{itemize}
+			\item Criteria:
+			\begin{itemize}
+				\item Maximizing CPU utilization
+				\item Maximizing throughput
+			\end{itemize}
+		\end{itemize}
+
+		\subsection{Deterministic Modeling}
+			\begin{itemize}
+				\item Analytic Evaluation: uses given algorithm an system workload to produce a formula to evaluate the performance.
+				\item Deterministic modeling is analytic evaluation.
+				\item Simple and fast, but requires exact numbers.
+			\end{itemize}
+
+		\subsection{Queueing Models}
+			\begin{itemize}
+				\item Can't determine static set of processes, but can determine distribution of CPU and I/O bursts.
+				\item Queueing-network analysis.
+			\end{itemize}
+
+		\subsection{Simulations}
+			\begin{itemize}
+				\item Expensive
+				\item Trace tapes: monitor the real system and record sequence of actual events.
+			\end{itemize}
+
+		\subsection{Implementation}
+			\begin{itemize}
+				\item Completely accurate
+				\item High cost
+			\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Chapter 6
+\chapter{Synchronization} \label{ch:Chapter6}
+	\section{Background}
+		\begin{itemize}
+			\item \textbf{Race condition}: Two processes manipulate a variable concurrently $\rightarrow$ incorrect state.
+			\item \textbf{Process synchronization} and \textbf{Coordination}
+		\end{itemize}
+
+	\section{The Critical-Section Problem}
+		\begin{itemize}
+			\item \textbf{Critical-section problem}: Design a protocol that processes can use to cooperate.
+			\item Entry section, critical section, exit section, remeainder section.
+			\item A solution to the critical-section prbolem must satisfy three requirements
+			\begin{enumerate}
+				\item \textbf{Mutual exclusion}: If a process is executing its critical section, no other process may execute its critical section.
+				\item \textbf{Progress}: Only processes which want to execute its critical section can decide which process may enter its critical section next. The selection can not be postponed indefinitely.
+				\item \textbf{Bounded waiting}: There is a limit on number of times that other processes are allowed to enter their critical sections after a process request to enter its critical section.
+			\end{enumerate}
+			\item Two general approaches:
+			\begin{itemize}
+				\item Preemptive kernel:
+				\item Nonpreemptive kernel: Free from race conditions.
+			\end{itemize}
+		\end{itemize}
+
+	\section{Peterson's Solution}
+		\begin{itemize}
+			\item Software based solution
+			\item Modern computer: No guarantees this will work.
+			\item Restricted to two processes that alternate execution.
+		\end{itemize}
+
+	\section{Synchronization Hardware}
+		\begin{itemize}
+			\item Solutions based on \textbf{locks}
+			\item Hardware features can make any programming task easier and improve system efficiency.
+			\item Provide special hardware instructions to test and modify or swap the contents of two words \textbf{atomically}
+		\end{itemize}
+
+	\section{Mutex Locks}
+		\begin{itemize}
+			\item \textbf{Mut}ual \textbf{Ex}clusion
+			\item acquire() and release() functions for acquiring and releasing locks.
+			\item Mutex lock has a boolean variable: available
+			\item Calls to acquire() and release() must happen atomically
+			\item Main disadvantage: busy waiting (\textbf{"spinlock"})
+			\item Spinlocks do have an advantage: no context switch, so for short waiting periods this is good.
+		\end{itemize}
+
+	\section{Semaphores}
+		\begin{itemize}
+			\item An Integer variable, acces through two operations:
+			\begin{itemize}
+				\item wait() (Proberen)
+				\item signal() (Verhogen)
+			\end{itemize}
+		\end{itemize}
+
+		\subsection{Semaphore Usage}
+			\begin{itemize}
+				\item Distinguish between:
+				\begin{itemize}
+					\item \textbf{Counting semaphore}: range over unrestricted domain.
+					\item \textbf{Binary sempahore}: can only be 0 or 1
+				\end{itemize}
+			\end{itemize}
+
+		\subsection{Semaphore Implementation}
+			\begin{itemize}
+				\item Rather than busy waiting: block itself.
+				\item Blocking puts the process in the waiting queue associated with the semaphore.
+				\item a process that is blocked, should be restarted when another process signal()'s (V) that semaphore. This is done by a wakeup() operation.
+				\item Each semaphore has an integer value and list of proceses. If a process must wait on that semaphore, it is added to the list. Singal() removes one process from the list.
+				\item block() and wakeup(P) are basic system calls.
+				\item If a semaphore is negative, the magnitude is the number of processes waiting.
+				\item \textbf{Critical:} semaphore operations happen atomically.
+				\begin{itemize}
+					\item Single processor: disable all interrupts
+					\item Multiple processors: Provide alternative locking, compare\textunderscore and\textunderscore swap() or spinlocks.
+				\end{itemize}
+				\item Moved busy waiting to critical sections of wait() and signal()
+			\end{itemize}
+
+		\subsection{Deadlocks and Starvation}
+			\begin{itemize}
+				\item Problem: indefinite blocking/starvation
+				\item Problem: Deadlock (inversed order of acquiring two semaphores)
+			\end{itemize}
+
+		\subsection{Priority Inversion}
+			\begin{itemize}
+				\item High priority must wait for low priority!
+				\item Solution: \textbf{Priority-inheritance protocol}: Processes that have a resource that is needed by a higher priority, gain the same priority.
+			\end{itemize}
+
+	\section{Classic Problems of Synchronization}
+		\subsection{The Bounded-Buffer Problem}
+
+		\subsection{The Readers-Writers Problem}
+			\begin{itemize}
+				\item first readers-writers problem: no reader be kept waiting, unless a writer has already obtained permission. (writers may starve)
+				\item second readers-writers problem: once a writer is ready, it performs its write ASAP. (readers may starve)
+				\item Generalized to: reader-writer locks.
+			\end{itemize}
+
+		\subsection{The Dining-Philosophers Problem}
+
+	\section{Monitors}
+		\subsection{Monitor Usage}
+			\begin{itemize}
+				\item \textbf{Abstract Data Type (ADT)}: encapsulates data with set of functions to operate on that data.
+				\item \textbf{Monitor Type} is an ADT that includes a set of programmer-defined operations, with mutual exclusion within the monitor.
+				\item Ensures only one process at a time is active within the monitor.
+				\item Two possibilities after signalling:
+				\begin{itemize}
+					\item \textbf{Signal and wait}: after a process signals, it waits again.
+					\item \textbf{Signal and continue}: after a process signals, it continues execution.
+				\end{itemize}
+			\end{itemize}
+
+		\subsection{Dining-Philosophers Solution Using Monitors}
+
+		\subsection{Implementing a Monitor Using Semaphores}
+			\begin{itemize}
+				\item Semaphore initialized to one.
+				\item Process must wait() before entering and signal() after leaving.
+			\end{itemize}
+
+		\subsection{Resuming Processes within a Monitor}
+
+
+	\section{Alternative Apporaches}
+		\subsection{Transactional Memory}
+			\begin{itemize}
+				\item \textbf{Memory transaction}: sequence of memory read-write operations that are atomic.
+				\item construct atomic{s}, ensures operations in S execute as transaction.
+				\item Advantage: transactional memory (not the developer) is responsible for guaranteeing atomicity.
+				\item Two possibilities:
+				\begin{itemize}
+					\item \textbf{Software Transactional Memory (STM)}
+					\item \textbf{Hardware Transactional Memory (HTM)}
+				\end{itemize}
+			\end{itemize}
+
+		\subsection{OpenMP}
+
+		\subsection{Functional Programming Languages}
+			\begin{itemize}
+				\item Once a variable has been defined and assigned a value, its value is immutable.
+				\item Don't have the problems: race condition and deadlocks.
+			\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Chapter 7
+\chapter{Deadlocks} \label{ch:Chapter7}
+	\section{System Model}
+		\begin{itemize}
+			\item Under normal mode of operation, a process may utilize a resource in following sequence:
+			\begin{enumerate}
+				\item Request: if request can not be granted immediatly, the process must wait.
+				\item Use
+				\item Release
+			\end{enumerate}
+		\end{itemize}
+
+	\section{Deadlock Characterization}
+		\subsection{Necessary Conditions}
+			\begin{itemize}
+				\item \textbf{Mutual exclusion}
+				\item \textbf{Hold and wait}
+				\item \textbf{No preemption}
+				\item \textbf{Circular wait}
+			\end{itemize}
+
+		\subsection{Resource-Allocation Graph}
+			\begin{itemize}
+				\item Directed edge from process to resource: request
+				\item Directed edge from resource to process: assignment
+				\item If the graph contains cycles, a deadlock \textbf{may} exist.
+			\end{itemize}
+
+	\section{Methods for Handling Deadlocks}
+		\begin{itemize}
+			\item Protocol to prevent or avoid deadlocks, so the sytem will never \textbf{enter} a deadlock.
+			\item Allow deadlocks, but detect and recover
+			\item Ignore the problem (Most used by OS's)
+		\end{itemize}
+
+	\section{Deadlock Prevention}
+		\subsection{Mutual Exclusion}
+			\begin{itemize}
+				\item At least one resource must be nonsharable
+				\item Mostly cannot prevent this (mutex locks)
+			\end{itemize}
+
+		\subsection{Hold and Wait}
+			\begin{itemize}
+				\item Request all resources before beginning execution.
+				\item Request recources only when it has none.
+				\item Disadvantage: resource utilization may be low
+				\item Disadvantage: Starvation is possible.
+			\end{itemize}
+
+		\subsection{No Preemption}
+			\begin{itemize}
+				\item Protocol: process is holding a resource and requests another one that cannot be immediately allocated, all resources it is holding are preempted.
+				\item Alternative: If a process requests a resource that is hold by another one, we check if that process is waiting for additional resources, if so, we preempt the desired resource.
+				\item Often applied to resources whose state can be easily saved an restored.
+			\end{itemize}
+
+		\subsection{Circular Wait}
+			\begin{itemize}
+				\item Impose a total ordering of all resource types.
+			\end{itemize}
+
+	\section{Deadlock Avoidance}
+		\begin{itemize}
+			\item Requires additional information about hwo resources are to be requested.
+			\item Simplest: a process declares the maximum number of resources of each type it may need.
+		\end{itemize}
+
+		\subsection{Safe State}
+			\begin{itemize}
+				\item State is afe if system can allocate resources to each proces in some order (\textbf{safe sequence}) and still avoid a deadlock
+				\item Not all unsafe states are deadlocks.
+				\item System can go from a safe state to an unsafe state.
+				\item With safe state, we can define avoidance algorithms that will never deadlock.
+			\end{itemize}
+
+		\subsection{Resource-Allocation-Graph Algorithm}
+			\begin{itemize}
+				\item One instance of each resource type
+				\item Variant of resource-allocation graph: claim edge: process may request resource at some time.
+				\item Resources must be claimed a priori
+				\item Request can be granted only if converting the request edge to an assignment edge does not result in a cycle.
+			\end{itemize}
+
+		\subsection{Banker's Algorithm}
+			\begin{itemize}
+				\item See youtube: \url{https://www.youtube.com/watch?v=w0LwGqffUkg}
+			\end{itemize}
+
+	\section{Deadlock Detection}
+		\begin{itemize}
+			\item System may provide:
+			\begin{itemize}
+				\item Algorithm that examines state of the system to determine whether a deadlock occurred.
+				\item Algorithm to recover from the deadlock.
+			\end{itemize}
+		\end{itemize}
+
+		\subsection{Single Instance of Each Resource Type}
+			\begin{itemize}
+				\item Variant of resource-allocation graph: \textbf{wait-for} graph (Remove resource nodes)
+				\item Deadlock exists if the wait-for graph contains a cycle.
+				\item System maintains the graph and periodically checks (with algorithm)
+			\end{itemize}
+
+		\subsection{Several Instances of a Resource Type}
+			\begin{itemize}
+				\item Time-varying data structures (similar to banker's algorithm)
+				\begin{itemize}
+					\item Available
+					\item Allocation
+					\item Request
+				\end{itemize}
+			\end{itemize}
+
+		\subsection{Detection-Algirthm Usage}
+			\begin{itemize}
+				\item When should we invoke the detection algorithm?
+				\begin{itemize}
+					\item How often is deadlock likely to occur.
+					\item How Many proceses will be affected by deadlock
+				\end{itemize}
+				\item Extreme: every time a resource request is made and cannot be granted
+				\item At defined intervals.
+			\end{itemize}
+
+	\section{Recovery from Deadlock}
+		\begin{itemize}
+			\item Inform the operator a deadlock occured.
+			\item Recover from deadlock automatically:
+			\begin{itemize}
+				\item Abort one ore pore processes to break the circular wait.
+				\item Preempt some resources.
+			\end{itemize}
+		\end{itemize}
+
+		\subsection{Process Termination}
+			\begin{itemize}
+				\item Two methods:
+				\begin{itemize}
+					\item Abort all deadlocked processes. (Lots of loss)
+					\item Abort processes one at a time until deadlock is gone. (More overhead) We need to consider which processes to abort, according to minimum cost:
+					\begin{itemize}
+						\item Priority of process
+						\item How long the process computed
+						\item How many and what types of resources used
+						\item How many resources it still needs
+						\item How many processes will need to be terminated.
+						\item Is the process interactive or batch.
+					\end{itemize}
+				\end{itemize}
+			\end{itemize}
+
+		\subsection{Resource Preemption}
+			\begin{itemize}
+				\item Three issues:
+				\begin{itemize}
+					\item \textbf{Selecting a victim}
+					\item \textbf{Rollback}: Roll back the process to safe state and restart it from that state. It is hard to determine the safe state so total rollback.
+					\item \textbf{Starvation}: A process may be picked as a victim only a finite number of times
+				\end{itemize}
+			\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Part 3 Memory Management
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Chapter 8
+\chapter{Memory-Management Strategies} \label{ch:Chapter8}
+	\section{Background}
+		\subsection{Basic Hardware}
+			\begin{itemize}
+				\item Portect the OS from user access, protection must be provided by hardware because OS doesn't intervene between CPU and memory accesses.
+				\item Each process has a separate memory space.
+				\item \textbf{Base register}: smallest legal physical memory address
+				\item \textbf{Limit register}: size of the range
+				\item Protection is accomplished by comparing every address generated in user mode. (Error is trap to the OS)
+				\item Base and limit registers can be loaded by the OS.
+				\item OS has no base and limit because it must load other programs.
+			\end{itemize}
+
+		\subsection{Address Binding}
+			\begin{itemize}
+				\item Addresses are gerally symbolic: Comiler binds symbolic addresses to relocatble addresses $\rightarrow$ linkage editor/loader binds the reloacatble addresses to absolute addresses.
+				\item Binding of instructions to memory addresses can be done at any step:
+				\begin{itemize}
+					\item \textbf{Compile time}: If you know where the process will reside at compile time: Absolute code
+					\item \textbf{Load time}: Compiler must generate relocatable code
+					\item \textbf{Execution time}: Special hardware must be available.
+				\end{itemize}
+			\end{itemize}
+
+		\subsection{Logical Versus Physical Address Space}
+			\begin{itemize}
+				\item Address generated by the CPU: \textbf{Logical/virtual address}
+				\item Address loaded into memory-address register: \textbf{Physical address}
+				\item Runtime mapping from virtual to physical address done by \textbf{Memory-Management Unit (MMU)}
+				\item Base register is now \textbf{Relocation register}, its value is added to every address.
+				\item User program never sees the real physical addresses.
+			\end{itemize}
+
+		\subsection{Dynamic Loading}
+			\begin{itemize}
+				\item A routine is not loaded until it is called.
+				\item All routines are kept on disk in relocatable load format.
+			\end{itemize}
+
+		\subsection{Dynamic Linking and Shared Libraries}
+			\begin{itemize}
+				\item \textbf{Dynamically linked libraries}: system libraries linked to user programs.
+				\item \textbf{Static linking}: System libraries treated as object module and combined by the loader into the binary program.
+				\item \textbf{Dynamic linking}: linking is postponed until execution. \textbf{Stub} is included in image: small piece of code that indicates how to locate the memory-resident library routine/how to load the library. The stub replaces itself with the address of the routing and executes the routine. Version information is included in the program and the library.
+			\end{itemize}
+
+	\section{Swapping}
+		\subsection{Standard Swapping}
+			\begin{itemize}
+				\item Moving entire processes between main memory and backing store.
+				\item \textbf{Ready queue}: all processes whose memory images are on the backing store or in memory.
+				\item Dispatcher checks if processes is in memory, if not, dispatcher swaps.
+				\item Major part of swap time is transfer time.
+				\item Pending I/O is a concern, two solutions:
+				\begin{itemize}
+					\item Never swap a process with pending I/O
+					\item Execute I/O in OS buffers (double buffering): adds overhead.
+				\end{itemize}
+			\end{itemize}
+
+		\subsection{Swapping on Mobile Systems}
+			\begin{itemize}
+				\item Do not support swapping because of flash memory with limited writes.
+			\end{itemize}
+
+
+	\section{Contiguous Memory Allocation}
+		\begin{itemize}
+			\item Each process is contained in a single section of memory that is contiguous.
+		\end{itemize}
+
+		\subsection{Memory Protection}
+			\begin{itemize}
+				\item Relocation register and limit register
+				\item \textbf{Transient OS code}: comes and goes as needed. (If OS changes dynamically).
+			\end{itemize}
+
+		\subsection{Memory Allocation}
+			\begin{itemize}
+				\item Divide memory in fixed-sized partitions, which can contain one process.
+				\item When partition is free, a process is loaded into it.
+				\item OS keeps a table indicating which partitions are available.
+				\item Initially: one big hole
+				\item Memory is allocated until it can't satisfy the next request.
+				\item \textbf{Dynamic-storage allocation problem} solutions:
+				\begin{itemize}
+					\item First fit
+					\item Best fit
+					\item Worst fit
+				\end{itemize}
+			\end{itemize}
+
+		\subsection{Fragmentation}
+			\begin{itemize}
+				\item Internal and External fragmentation
+				\item Solution to fragmentations: \textbf{Compaction}: place all free memory together
+				\item Other solution: noncontiguous!
+			\end{itemize}
+
+	\section{Segmentation}
+		\subsection{Basic Method}
+			\begin{itemize}
+				\item Each segment: name and length
+				\item two tuple: segment-number, offset
+			\end{itemize}
+
+		\subsection{Segmentation Hardware}
+			\begin{itemize}
+				\item Mapping by segment table: each entry: segment base, segment limit.
+			\end{itemize}
+
+	\section{Paging}
+		\begin{itemize}
+			\item Avoids external fragmentation
+		\end{itemize}
+		\subsection{Basic Method}
+			\begin{itemize}
+				\item Physical memory: \textbf{Frames}
+				\item Logical memory: \textbf{Pages}
+				\item Backing store is devided into fixed-sized blocks, same size as the frames.
+				\item Every address from the CPU divided into two parts: page number(index in page table) and page offset.
+				\item Page/frame size is defined by the hardware (but a power of 2)
+				\item \textbf{Frame table}: one entry for each physical page frame (free or allocated).
+			\end{itemize}
+
+		\subsection{Hardware Support}
+			\begin{itemize}
+				\item Simplest: dedicated registers.
+				\item Page table in main memory and \textbf{Page-table base register} points to the page table.
+				\item Solution: \textbf{Table look-aside buffer (TLB)}
+				\begin{itemize}
+					\item Each antry: key(tag) and value.
+					\item TLB must be kept small.
+					\item \textbf{Wired down} entries: cannot be deleted.
+					\item \textbf{Address-space identifiers (ASIDs)} in each entry: provide address space protection. If ASID is not supported: flush TLB with each context switch.
+				\end{itemize}
+			\end{itemize}
+
+		\subsection{Protection}
+			\begin{itemize}
+				\item Protection bits associated with each frame.
+				\item Bit for read or read-write.
+				\item Additional bit: \textbf{valid-invalid bit}: valid: associated page is in logical address space. Illegal addresses are trapped.
+				\item \textbf{Page-table length register (PTLR)} size of page table: error causes trap.
+			\end{itemize}
+
+		\subsection{Shared Pages}
+			\begin{itemize}
+				\item Sharing common code
+				\item Code must be reentrant/pure (non self modifying)
+			\end{itemize}
+
+	\section{Structure of the Page Table}
+		\subsection{Hierarchical Paging}
+			\begin{itemize}
+				\item Two level paging (page table is also paged.) \textbf{"Forward-mapped page table"}
+			\end{itemize}
+
+		\subsection{Hashed Page Tables}
+			\begin{itemize}
+				\item hash table with linked lists.
+				\item Variaton: clustered page tables: each entry refers to several pages. (useful for sparse address spaces)
+			\end{itemize}
+
+		\subsection{Inverted Page Tables}
+			\begin{itemize}
+				\item One entry for each frame of memory, the entry consists of virtual address of the page stored.
+			\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Chapter 9
+\chapter{Virtual-Memory Management} \label{ch:Chapter9}
+	\section{Background}
+		\begin{itemize}
+			\item Large virtual address space.
+			\item Each process takes less physical space, thus more processes can run at the same time.
+			\item Less I/O to load/swap.
+			\item \textbf{Virtual Memory}: seperation of logical and physical memory.
+			\item Virtual address spaces that include holes: sparse address spcees.
+			\item Sharing is easier.
+		\end{itemize}
+
+	\section{Demand Paging}
+		\begin{itemize}
+			\item Only load pages that are needed.
+			\item \textbf{Lazy swapper}: only swaps when needed. (swapper is incorrect)
+		\end{itemize}
+
+		\subsection{Basic Concepts}
+			\begin{itemize}
+				\item valid bit: associated page is legal and in memory
+				\item invalid bit: page is not valid or valid but on disk.
+				\item If a process tries to access a page that was not brought into memory, a page fault is generated.
+				\item Procedure for handling page fault:
+				\begin{enumerate}
+					\item Check internal table to see if reference was valid or invalid.
+					\item Invalid: terminate process, valid: page it in
+					\item Find a free frame
+					\item Schedule disk operation to read desired page in the allocated frame
+					\item Disk read complete: modify internal table and page table to indicate the page is in memory.
+					\item Restart instruction that was interrupted by the trap.
+				\end{enumerate}
+				\item Extreme case: start executing with no pages in memory (Pure demand paging)
+				\item Programs tend to have locality of reference.
+				\item Hardware support:
+				\begin{itemize}
+					\item Page Table
+					\item Secondary Memory (swap space)
+				\end{itemize}
+				\item Crucial ability: restart any instruction.
+				\item Major difficulty: one instruction modify several different locations. Two solutions:
+				\begin{itemize}
+					\item microcode computes and attempts to acces both ends of both blocks, so page fault occurs now.
+					\item Use temporary registers to hold the values of overwritten location, if page fault: old values are written back.
+				\end{itemize}
+				\item Paging is aded between the CPU and the memory, it should be entirely transparrent to the user.
+			\end{itemize}
+
+		\subsection{Performance of Demand Paging}
+			\begin{itemize}
+				\item Page fault causes:
+				\begin{enumerate}
+					\item Trap to OS
+					\item Save user registers and process state
+					\item Determine the interrupt was a page fault
+					\item Check if reference was legal.
+					\item Issue a read
+					\item While waiting: allocate CPU to other process
+					\item Receive interrupt
+					\item Save registers
+					\item Determine interrupt was from disk
+					\item Correct the page table
+					\item Wait for the CPU to allocate to this process
+					\item Restore user registers.
+				\end{enumerate}
+				\item Three major components of page-fault service time:
+				\begin{enumerate}
+					\item Service the page-fault interrupt
+					\item Read in the page
+					\item Restart the process.
+				\end{enumerate}
+				\item Effective access time is proportional to the page-fault rate.
+			\end{itemize}
+
+	\section{Copy-On-Write}
+		\begin{itemize}
+			\item When writing on shared page, it is copied.
+			\item \textbf{zero-fill-on-demand}: zeroed out before being allocated.
+		\end{itemize}
+
+	\section{Page Replacement}
+		\subsection{Basic Page Replacement}
+			\begin{itemize}
+				\item Modify bit/dirty bit: set by hardware whenever there has been written into the page.
+				\item Two majors problems when implementing demand paging:
+				\begin{itemize}
+					\item Frame-allocation algorithm
+					\item Page-replacement algorithm
+				\end{itemize}
+				\item Evaluate an algorithm computing the number of page faults on reference string.
+			\end{itemize}
+
+		\subsection{FIFO Page Replacement}
+			\begin{itemize}
+				\item \textbf{Belady's anomaly}: number of frames increases, so does the page-fault rate.
+			\end{itemize}
+
+		\subsection{Optimal Page Replacement}
+			\begin{itemize}
+				\item Lowest page fault rate
+				\item Replace the page that will not be used for the longest period of time.
+				\item Difficult to implement, requires future knowledge.
+				\item Used as comparison.
+			\end{itemize}
+
+		\subsection{LRU Page Replacement}
+			\begin{itemize}
+				\item Major problem: how to implement:
+				\begin{itemize}
+					\item Counters: Time of use field associated with each page, updated on reference.
+					\item Stack: Stack of page numbers, when a page is referenced it is put back on top.
+				\end{itemize}
+			\end{itemize}
+
+		\subsection{LRU-Approximation Page Replacement}
+			\begin{itemize}
+				\item When not enough hardware support is available for LRU.
+				\item Reference bit: set by hardware whenever the page is referenced: we do not know order of use.
+			\end{itemize}
+
+			\subsubsection{Additional-Reference-Bits Algorithm}
+				\begin{itemize}
+					\item Record reference bits at intervals, keep it in a byte.
+					\item Page with lowest number is LRU page.
+				\end{itemize}
+
+			\subsubsection{Second-Chance Algorithm}
+				\begin{itemize}
+					\item FIFO, but when selected, inspect reference bit, if it is 0, we replace it, if it is 1, give it a second chance (reference bit is cleared, and arrival is set to current time)
+				\end{itemize}
+
+			\subsubsection{Enhanced Second-Chance Algorithm}
+				\begin{itemize}
+					\item Consider reference bit and modify bit as ordered pair:
+					\begin{itemize}
+						\item (0,0): Not modified or recently used, best to replace
+						\item (0,1): Not recently used, but modified
+						\item (1,0): Recently used but clean, will probably be used again shortly
+						\item (1,1): Recently modified and used.
+					\end{itemize}
+					\item Replace the first page encountered in the lowest nonempty class.
+				\end{itemize}
+
+		\subsection{Counting-Based Page Replacement}
+			\begin{itemize}
+				\item LFU vs MFU (page was probably just brought in and still needs to be used)
+			\end{itemize}
+
+		\subsection{Page-Buffering Algorithms}
+			\begin{itemize}
+				\item Maintain list of modified pages, when the paging device is idle: write one to the disk and reset modify bit.
+				\item Keep a pool of free frames but remember which page was in each frame, since the frame contents are not modified when written to disk, it can be reused directly.
+			\end{itemize}
+
+		\subsection{Applications and Page Replacement}
+			\begin{itemize}
+				\item Database has it own memory management and I/O buffering: can use Raw disk (bypasses file-system and paging)
+			\end{itemize}
+
+	\section{Allocation of Frames}
+		\subsection{Minimum Number of Frames}
+			\begin{itemize}
+				\item Must hold all the pages a single instruction can reference
+				\item Less pages is more page faults
+				\item Minimum number is defined by computer architecture.
+				\item Maximum number is defined by amount of available physical memory.
+			\end{itemize}
+
+		\subsection{Allocation Algorithms}
+			\begin{itemize}
+				\item Easiest: \textbf{equal allocation}
+				\item \textbf{Proportional allocation}: Allocate memory according to size.
+				\item With Equal or proportional allocation: high and low priority processes get the same treatment.
+				\item Solution: Proportional allocation with ratio of frames depends on priority or combination of size and priority.
+			\end{itemize}
+
+		\subsection{Global Versus Local Allocation}
+			\begin{itemize}
+				\item \textbf{Global Replacement}: Select replacement frame from all frames (process cannot control it's own page fault rate, but greater throughput)
+				\item \textbf{Local Replacement}: Select only from its own set of frames.
+			\end{itemize}
+
+		\subsection{Non-Uniform Memory Access}
+			\begin{itemize}
+				\item With pultile CPUs, some CPUs have slower access to some regions of memory.
+				\item Managing which page frames are stored where can affect performance.
+				\item Memory frames allocated "as close as possible"
+			\end{itemize}
+
+	\section{Thrashing}
+		\subsection{Cause of Thrashing}
+			\begin{itemize}
+				\item Limit the effects of thrashing by using local replacement algorithm.
+				\item Prevent thrashing: locality modle: set of pages that are actively used together. If all pages of locality are in memory, it will not fault again untill it changes locality.
+			\end{itemize}
+
+		\subsection{Working-Set Model}
+			\begin{itemize}
+				\item Based on assumption of locality.
+				\item Define working-set window: most recent $\delta$ page references is the working set. The working set is an approximation of the program's locality.
+				\item Accuracy depends on $\delta$: too big: may overlap localities, to small: not encompass the entire locality.
+				\item If the summ of all working sets is larger than the available memory, thrashing will likely occur: suspend a process.
+			\end{itemize}
+
+		\subsection{Page-Fault Frequency}
+			\begin{itemize}
+				\item \textbf{Page-Fault Frequency (PFF)}: Prevent trashing by controlling the page-fault rate.
+				\item PFF too low: process has too many frames
+				\item PFF too high: process has not enough frames
+				\item Establish lower and higher bounds.
+			\end{itemize}
+
+		\subsection{Concluding Remarks}
+			\begin{itemize}
+				\item Thrashing and swapping have large impact on performance: current best practice: include enough physical memory.
+			\end{itemize}
+
+	\section{Memory-Mapped Files}
+		\subsection{Basic Mechanism}
+			\begin{itemize}
+				\item Initial access to file proceeds through demand paging, resulting in page fault.
+				\item Writes to file mapped in memory not immediate.
+				\item Some systems: memory-map through specific system call, otherwise standard I/O Calls.
+				\item Multiple processes can map the same file, to allow sharing of data.
+				\item Shared memory is implemented by memory mapping files.
+			\end{itemize}
+
+		\subsection{Shared Memory in the Windows API}
+
+		\subsection{Memory-Mapped I/O}
+			\begin{itemize}
+				\item
+			\end{itemize}
+
+	\section{Allocating Kernel Memory}
+		\begin{itemize}
+			\item Often allocated from a free-memory pool:
+			\begin{itemize}
+				\item Kernel requests memory for data structures of varying sizes.
+				\item Pages allocated to user-mode proceses do not have to be contiguous. Certain hardware devices interact directly with physical memory.
+			\end{itemize}
+		\end{itemize}
+
+		\subsection{Buddy System}
+			\begin{itemize}
+				\item Allocate memory from fixed-size segment of physically contiguous pages, memory is alocated from this segment using a power-of-2 allocator.
+				\item Advantage: adjacent buddies can be combined quickly (Coalescing)
+				\item Drawback: rounding up to the next highest power of 2.
+			\end{itemize}
+
+		\subsection{Slab Allocation}
+			\begin{itemize}
+				\item \textbf{Slab}: one or more contiguous pages
+				\item Cache with one or more slabs, single cache for each unique kernel data structure.
+				\item Each cache is populated with objects
+			\end{itemize}
+
+	\section{Other Considerations}
+		\subsection{Prepaging}
+			\begin{itemize}
+				\item Remember the working set of suspended process and bring that in again.
+			\end{itemize}
+
+		\subsection{Page Size}
+			\begin{itemize}
+				\item Less internal fragmentation with smaller pages.
+				\item Less page faults with larger pages.
+				\item Trend towards larger sizes
+			\end{itemize}
+
+		\subsection{TLB Reach}
+			\begin{itemize}
+				\item \textbf{TLB Reach}: amount of memory accessible from the TLB, number of entries times the page size.
+				\item Support for multiple pages sizes requires the OS to manage the TLB. $\rightarrow$ cost in performance, but increased it ratio and TLB reach offset this.
+			\end{itemize}
+
+		\subsection{Inverted Page Tables}
+			\begin{itemize}
+				\item Reduce the amount of physical memory needed.
+				\item No longer contains complete information about logical address space.
+				\item \textbf{External Page table} (one per process): only needed when page fault occurs, they do not need to be available quickly. They are themselves paged in and out.
+			\end{itemize}
+
+		\subsection{Program Structure}
+			\begin{itemize}
+				\item System performance can be improved if the user or compiler is aware of the underlying demand paging.
+				\item Compiler and loader can have significant effect: Separating code and data, generating reentrant code. Loader can avoid placing routines across page boundaries, routines that call eachother in the same page,...
+			\end{itemize}
+
+		\subsection{I/O Interlock and Page Locking}
+			\begin{itemize}
+				\item Allow some pages to be locked in memory, for I/O.
+				\item Two common solutions:
+				\begin{itemize}
+					\item Never execute I/O in user space. Data is copied from system memory to user memory, and I/O between system memory and I/O device.
+					\item Allow pages to be locked: lock bit for every frame.
+				\end{itemize}
+				\item Frequently, some or all of the OS kernel is locked into memory.
+				\item \textbf{Pinning} of pages is fairly common: most OS have system call for request.
+				\item Also usefull to lock page untill it is used at least once (prevent starvation of low priority)
+				\item Ability of high-priority to replace low-priority pages is policy decision.
+				\item Using lock bit can be dangerous: Turned on but never turned off.
+			\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Part 4: Storage Management
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Chapter 10
+\chapter{File System} \label{ch:Chapter10}
+	\section{File Concept}
+		\begin{itemize}
+			\item Provide uniform logical view of stored information.
+			\item Abstracts from the physical properties of storage device to define logical storage unit: the \textbf{File}.
+			\item Files are mapped onto physical devices by the OS.
+			\item File: named collection of related information that is recorded on secondary storage.
+			\item User perspective: File is the smallest allotment of logical secondary storage.
+		\end{itemize}
+
+		\subsection{File Attributes}
+			\begin{itemize}
+				\item Typically consist of:
+				\begin{itemize}
+						\item Name
+						\item Identifier: unique tag
+						\item Type
+						\item Location
+						\item Size
+						\item Protection
+						\item Tame, date, and user identification.
+				\end{itemize}
+				\item Newer file systems support extended file attributes, including character encoding, security features (checksum)
+				\item Information about all files is kept in the directory structure, resides on secondary storage.
+				\item Directory entry: file's name and unique identifier. (identifier locates other file attributes).
+			\end{itemize}
+
+		\subsection{File Operations}
+			\begin{itemize}
+					\item File is abstract data type, we consider the operations:
+					\begin{itemize}
+							\item Creating a file
+							\item Writing a file
+							\item Reading a file
+							\item Repositioning within a file
+							\item Deleting a file
+							\item Truncating a file
+					\end{itemize}
+					\item Comprise the minimal set of required file operations.
+					\item Avoid constant searching: require open() to be called.
+					\item Open-file table: contains information about all open files.
+					\item File operation is requested, specified via index into this table (no searching).
+					\item open() returns a pointer to the entry in the open file table.
+					\item OS: Two levels of internal tables: per-process table and system-wide table.
+					\item Each entry in per-process table points to system-wide open file table.
+					\item System wide table contains process-independent information.
+					\item Open-file table has an open count.
+					\item Summary of information associated with open file:
+					\begin{itemize}
+							\item File pointer
+							\item File-open count
+							\item Disk location of the file
+							\item Access rights
+					\end{itemize}
+					\item Locking an open file.
+					\item One process to lock a file and prevent other processes from gaining access to it.
+					\item \textbf{Shared Lock}: like reader lock: several processes can acquire the lock concurrently.
+					\item \textbf{Exclusive lock}: like writer lock.
+					\item OS provide \textbf{Mandatory} or \textbf{advisory} file locking.
+			\end{itemize}
+
+
+		\subsection{File Types}
+			\begin{itemize}
+					\item Should OS recognize and support file types?
+					\item Implementing file types to include the type as part of the file name.
+					\item System uses the extension to indiciate the type of the file and type of operations that can be done on that file.
+					\item Extensions are not always required, extensions are not supported by the OS: hints to applications that operate on them.
+					\item UNIX: magic number at the beginning of some files to indicate roughly the type of the file.
+			\end{itemize}
+
+		\subsection{File Structure}
+			\begin{itemize}
+					\item File types can also indicate the internal structure.
+					\item Disadvantage of OS support: resulting size of the OS.
+					\item OS must at least support executable file, so that the system is able to load an run programs.
+			\end{itemize}
+
+		\subsection{Internal File Structure}
+			\begin{itemize}
+					\item File can be considered sequence of blocks. All the basic I/O functions operate in terms of blocks.
+			\end{itemize}
+
+	\section{Access Methods}
+		\subsection{Sequential Access}
+			\begin{itemize}
+					\item File is processed in order.
+					\item reset to begin
+					\item skip forward or backward.
+			\end{itemize}
+
+		\subsection{Direct Access}
+			\begin{itemize}
+					\item File is made up of fixed-length logical records, that can be read and written in no particular order.
+					\item File is viewed as a numbered sequence of blocks or records.
+					\item File operations must be modified to include the block number as parameter.
+					\item relative block number (to beginning of the file.)
+					\item Allocation problem \autoref{ch:Chapter11}
+					\item Not all OS support both sequential and direct access, some systems require that files be defined sequential or direct when created.
+			\end{itemize}
+
+		\subsection{Other Access Methods}
+			\begin{itemize}
+					\item Construction of index, that contains pointers to the various blocks.
+					\item First search the index, then use the pointer to access the file directly.
+					\item Large files, the index file may become too large.
+					\item Create index for the index file.
+			\end{itemize}
+
+	\section{Directory and Disk Structure}
+		\begin{itemize}
+				\item Disk can be partitioned, each partition can hold a sparate file system.
+				\item Any entity containing a file system: \textbf{Volume}
+				\item Each volume must contain information about files in the sytem. This information is kept in entries in a \textbf{Deice directory/Volume table of contents}
+		\end{itemize}
+
+		\subsection{Storage Structure}
+			\begin{itemize}
+					\item
+			\end{itemize}
+
+		\subsection{Directory Overview}
+			\begin{itemize}
+					\item Directory translates file names into their directory entries
+					\item Operations on directory:
+					\begin{itemize}
+							\item Search for a file
+							\item Create a file
+							\item Delete a file
+							\item List a directory
+							\item Rename a file
+							\item Traverse the file system
+					\end{itemize}
+			\end{itemize}
+
+		\subsection{Single-Level Directory}
+			\begin{itemize}
+					\item Simplest directory structure
+					\item limitations: all files must have unique names.
+			\end{itemize}
+
+		\subsection{Two-Level Directory}
+			\begin{itemize}
+					\item Each user has his own \textbf{user file directory (UFD)}: lists only the files of a single user.
+					\item \textbf{Master file directory (MFD)}: contains MFD's
+					\item User refers to a file, only his UFD is searched.
+					\item Disadvantage: it isolates users.
+					\item User name and file name define a path name.
+					\item Additional syntax to specify the volume of a file.
+					\item System files: Standar solution: special user directory is defnied to contain the system files. The OS first searches the local UFD and then searches the special user directory.
+					\item Sequence of directories searched: \textbf{search path}
+			\end{itemize}
+
+		\subsection{Tree-Structured Directories}
+			\begin{itemize}
+					\item Tree of arbitrary height
+					\item tree has a root directory, every file in the system has a unique path name.
+					\item Directory contains files or subdirectories.
+					\item subdirectory is simply another file, treated in a special way.
+					\item One bit in each directory entry defines the entry as a file or subdirectory.
+					\item Current directory should contain most of the files to current interest.
+					\item Reference is made, current directory is searched.
+					\item Absolute and relative path names.
+					\item Policy decision: deletion of a directory.
+					\begin{itemize}
+							\item Do not delete directory unless it is empty
+							\item Delete directory's files and subdirectories.
+					\end{itemize}
+			\end{itemize}
+
+		\subsection{Acyclic-Graph Directories}
+			\begin{itemize}
+					\item Tree structure prohibits the sharing of files or directories.
+					\item \textbf{Acyclid graph}: allows directories to share subdirectories and files.
+					\item Shared files and subdirectories can be implemented in several ways:
+					\begin{itemize}
+							\item \textbf{Link}: a pointer to another file or directory.
+							\item Duplicate all information, both entries are identical and equal.
+					\end{itemize}
+					\item Deletion: (file may have multiple paths)
+					\begin{itemize}
+							\item Leave links untill attempt is made to use it.
+							\item Preserve file until all references to it are deleted: require mechanism: keep a list of all references.
+					\end{itemize}
+			\end{itemize}
+
+		\subsection{General Graph Directory}
+			\begin{itemize}
+					\item Problem with acyclic-graph structures: ensuring no cycles.
+					\item Primary advantage: relative simplicity of the algorithms to traverse.
+					\item Avoid searching any component twice:
+					\begin{itemize}
+							\item Limit number of directories that will be accessed during a search.
+					\end{itemize}
+					\item Cycles: reference count may not be 0 even though it can't be accessed. $\rightarrow$ \textbf{Garbage collection}
+					\item Simpler algorithm: bypass links during directory traversal, and no extra overhea is incurred.
+			\end{itemize}
+
+	\section{File-System Mounting}
+		\begin{itemize}
+				\item File sstem must be mounted before it can be available.
+				\item OS is given the device name and the mount point (location within the file structure)
+				\item Typically, mount point is an empty directory.
+				\item OS verifies that de cevice contains a valid file system.
+				\item System may disallow a mount over a directory that cointains files or obscure the directory's existing files.
+		\end{itemize}
+
+	\section{File Sharing}
+		\subsection{Multiple Users}
+			\begin{itemize}
+					\item For implementing sharing and protection, the system must maintain more file and directory attributes.
+					\item Most systems: file owner and a group.
+					\item Owner is the user who can change attributes
+					\item group attribute defines subset of users who can share access to the file.
+					\item Owner and group IDs are stored with the other file attributes.
+			\end{itemize}
+
+		\subsection{Consistency Semantics}
+			\begin{itemize}
+					\item Specify how multiple users of a system are to access a shared file simultaneously: modification of data by one user is observable by other users.
+					\item Series of accesses between open() and close(): \textbf{File session}
+			\end{itemize}
+
+			\subsubsection{UNIX Semantics}
+				\begin{itemize}
+						\item All is immediate visible
+						\item All accesses are treated as originating from the same.
+				\end{itemize}
+
+			\subsubsection{Session Semantics}
+				\begin{itemize}
+						\item
+				\end{itemize}
+
+			\subsubsection{Immutable-Shared-Files Semantics}
+
+	\section{Protection}
+		\begin{itemize}
+				\item Reliabilty provided by duplicate copies of files.
+		\end{itemize}
+
+		\subsection{Types of Access}
+			\begin{itemize}
+					\item Protection mechanisms provide controlled access by limiting the types of file acces that can be made.
+			\end{itemize}
+
+		\subsection{Access Control}
+			\begin{itemize}
+					\item Make access dependent on the identity of the user.
+					\item Associate with each file and directory an \textbf{Access-control list (ACL)}: Specifying user names and the types of access allowed for each user.
+					\item OS checks access list associated with that file.
+					\item Advantage: enabling complex access methodolgies
+					\item Main problem: length
+					\item Two undesirable consequences:
+					\begin{itemize}
+							\item Constructing such list (tedious)
+							\item Directory entry must be of variable size.
+					\end{itemize}
+					\item To condese length, three classifications: Owner, group, universe.
+					\item Most common approach: combine ACL with more general owner group universe.
+					\item Scheme to work properly: permissions and access lsits must be controlled tightly.
+					\item Difficulty: user interface.
+					\item General rule: Specificity should have priority.
+			\end{itemize}
+
+		\subsection{Other Protection Approaches}
+			\begin{itemize}
+					\item Associate a passwordt with each file.
+					\item Disadvantage: number of passwords to remember/using only one password grants access to all files.
+					\item Knowledge of the existence and name of a file is significant.
+					\item Mechanism for directory protection.
+			\end{itemize}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Chapter 11
+\chapter{Implementing File systems} \label{ch:Chapter11}
+	\section{File-System Structure}
+		\begin{itemize}
+				\item Disks are convenient for:
+				\begin{itemize}
+						\item Able te rewrite in place.
+						\item Access any block directly
+				\end{itemize}
+				\item To improve I/O efficiency, I/O transfers between memory and disk are performed in units of blocks (one or more sectors)
+				\item File systems provide efficient and convenient acces to disk.
+				\item Two design problems:
+				\begin{itemize}
+						\item Defining how the file system looks to the user.
+						\item Creating algorithms and data structures to map the logical file system onto the physical secondary storage.
+				\end{itemize}
+				\item File system itself is composed of many different levels:
+				\begin{itemize}
+						\item \textbf{I/O control}: device drivers and interrupt handlers to transfer information.
+						\item \textbf{Basic file system}: issues generic commands to the appropriate device driver. It manages the memory buffers and caches that hold various file-system , directory, and data blocks.
+						\item \textbf{File-organization module}: Files and their logical blocks and physical blocks. Translates logical block addresses to physical block addresses.
+						\item \textbf{Logical file system}: Manages metadata information: all of the file-system structure except for the actual data. Manages the directory structure. Maintains file structure via file-control blocks (FCB): contains information about the file (ownership, permissions, location of the file contents.)
+				\end{itemize}
+				\item Layered structure: duplication of code is minimized.
+				\item Use of layering and how  many layers is major challenge in designing systems.
+		\end{itemize}
+
+	\section{File-System Implementation}
+		\subsection{Overview}
+			\begin{itemize}
+					\item \textbf{Boot control block}: information to boot an OS (typically first block of the disk.)
+					\item \textbf{Volume control block}:volume details: number of blocks, size of blocks, free-block count, free-block pointers, free-FCB count and FCB pointers.
+					\item \textbf{Directory structure}: Organize the files
+					\item \textbf{Per file FCB}: details about the files.
+					\item \textbf{In-Memory Mount table}: information about each mounted volume
+					\item in-memory directory-structure cache: holds directory information of recenty accessed directories.
+					\item \textbf{System-wide open-file table}: contains copy of the FCB of each open file. Entry in Windows File handle, Entry in UNIX: file descriptor.
+					\item \textbf{Per-process open-file table}: contains a pointer to the entry in the system-wide open-file table.
+					\item Buffers hold file-system blocks.
+			\end{itemize}
+
+		\subsection{Partitions and Mounting}
+			\begin{itemize}
+				\item Disk can be sliced in multiple partitions
+				\item Volume can span multiple partitions on multiple disks.
+				\item Partition can be Raw (no file system) or Cooked (file system)
+				\item Boot information can be stored in a separate partition. It has no file system there (because file system is not loaded)
+				\item \textbf{Root partition}: contains the operating-system kernel, is mounted at boot time.
+			\end{itemize}
+
+		\subsection{Virtual File Systems}
+			\begin{itemize}
+				\item Modern OS must support multiple types of file-systems concurrently.
+				\item Suboptimal method: write directory and file routines for each type.
+				\item File-system implementation consists of three major layers:
+				\begin{itemize}
+					\item File-system interface
+					\item \textbf{Virtual file system (VFS)}: two important functions:
+					\begin{itemize}
+						\item Separate file-system generic operations from their implementations by defining a clean VFS interface.
+						\item Provide a mechanism for uniquely representing a file. VFS is based on a file-representation structure: \textbf{vnode}. Kernel maintains one vnode structure for each active node.
+					\end{itemize}
+					\item Layer implementing the file-system type.
+				\end{itemize}
+			\end{itemize}
+
+	\section{Directory Implementation}
+		\subsection{Linear List}
+			\begin{itemize}
+				\item Keep list of free directory entries (after deletion)
+				\item Disadvantage: finding a file requires linear search.
+			\end{itemize}
+
+		\subsection{Hash Table}
+			\begin{itemize}
+				\item Difficulty: fixed size and dependence of the hash function on that size.
+				\item Alternative: Chained-overflow hash table
+			\end{itemize}
+
+
+	\section{Allocation Methods}
+		\subsection{Contiguous Allocation}
+			\begin{itemize}
+				\item Each file occupies a set of contiguous blocks.
+				\item Defined by disk address and length.
+				\item Accessing a file that is contiguous is easy.
+				\item Problem finding space for a new file.
+				\item Problem determining how much space is needed for a file.
+				\item Cannot make the file larger in place.
+				\item Possiblity to search for a larger hole.
+				\item Solution: modified contiguous allocation: non contiguous chunks of contiguous blocks.
+			\end{itemize}
+
+		\subsection{Linked Allocation}
+			\begin{itemize}
+				\item Each file is a linked list of disk blocks.
+				\item Directory contains pointer to first and last block.
+				\item Each block contains a pointer to the next block.
+				\item Pointer is initialized to null to signify an empty file (size is also 0).
+				\item Disadvantages: Only for sequential-access files.
+				\item Space required for pointers.
+				\item Usual solution: collect blocks into multiples: \textbf{clusters}, allocate clusters rather than blocks.
+				\item Problem: reliabilty (what if one blocks corrupts)
+				\item Variation: \textbf{File-allocation table (FAT)}: Section of disk at the beginning of each volume is set aside to contain the table. The table has one entry for each disk block and is indexed by block number. Directory entry contains block number of the first block of the file. Table entry indexed by that block number contains the block number of the next block of the file. $\rightarrow$ Lots of disk head seeks!
+			\end{itemize}
+
+		\subsection{Indexed Allocation}
+			\begin{itemize}
+				\item Bring all pointers to blocks together into one \textbf{index block}
+				\item One index block per file.
+				\item Disadvantage: Wasted space: pointer overhead of the index block.
+				\item How large the index block should be? Mechanisms:
+				\begin{itemize}
+					\item \textbf{Linked Scheme}: next address (last word in the index block) is the pointer to the next index block.
+					\item \textbf{Multilevel index}: First-level index block points to a set of second-level index blocks, which point to the file blocks.
+					\item \textbf{Combined scheme}: UNIX: 15 pointers in index blocks:
+					\begin{itemize}
+						\item First 12: pointers to direct blocks.
+						\item Next 3: Point to single indirect block, double indirect block and triple indirect block.
+					\end{itemize}
+				\end{itemize}
+				\item Suffers from same performance isssues as linked allocation. Index blocks can be cached, but data may be spread.
+			\end{itemize}
+
+
+		\subsection{Performance}
+			\begin{itemize}
+				\item Vary in storage efficiency and data-block access time.
+				\item Some systems support direct-access files by using contiguous allocation and sequential-access files by using linked allocation. Type must be declared at creation. OS must have appropriate data structures and algorithms to support both allocation methods.
+				\item Indexed allocation depends on wether the index block is in memory.
+				\item Combine contiguous allocation (small files) with indexed allocation (large files).
+				\item Instructions to improve head seek time are good, because a lot of instructions can be executed while a disk head moves.
+			\end{itemize}
+
+	\section{Free-Space Management}
+		\begin{itemize}
+			\item To keep track of free disk space, the system maintains a \textbf{Free-space list}, which records all free disk blocks.
+		\end{itemize}
+
+		\subsection{Bit Vector}
+			\begin{itemize}
+				\item Each block is represented by one bit, free block: 1, allocated block: 0
+				\item Advantage: Simplicity, efficiency in finding the first free block or n consecutive free blocks.
+				\item Bit vectors are inefficient unless the entire vecotr is kept in main memory.
+			\end{itemize}
+
+		\subsection{Linked List}
+			\begin{itemize}
+				\item Link all free blocks, keeping a pointer to the first one.
+				\item Not efficient: traverse the list, we must read each block, but traversing is not a frequent action.
+				\item FAT incorporates free-block accouting into the allocation data structure.
+			\end{itemize}
+
+		\subsection{Grouping}
+			\begin{itemize}
+				\item Store addresses of n free block in the first free blocks, last block contains addresses of another n free block.
+			\end{itemize}
+
+		\subsection{Couting}
+			\begin{itemize}
+				\item Several contiguous blocks may be freed.
+				\item Keep address of the first free block and the number of free contiguous blocks that follow.
+				\item Each entry requires more space but overall lsit is shorter.
+			\end{itemize}
+
+	\section{Efficiency and Performance}
+		\subsection{Efficiency}
+			\begin{itemize}
+				\item Depends on disk-allocation and directory algorithms.
+				\item Affected by the size of the pointers to access data.
+			\end{itemize}
+
+		\subsection{Performance}
+			\begin{itemize}
+				\item Disk controllers include local memory to form a cache.
+				\item Separate section of main memory for a buffer cache. Other systems cache file data using a page cache (virtual memory). Caching file data using virtual addresses is efficient than caching: \textbf{Unified virtual memory}.
+				\item \textbf{Unified buffer cache}
+				\item Virtual memory system does not interface with the buffer cache, contents of the file in the buffer cache must be copied into the page cache: double buffering.
+				\item Issue: do writes happen synchronously or not?
+				\item Optimize page cache by different replacement algorithms:
+				\begin{itemize}
+					\item \textbf{Free-behind}: once the next page is requestes, remove a page from teh buffer.
+					\item \textbf{Read-ahead}: requested page and several subsequent pages are read and cached.
+				\end{itemize}
+			\end{itemize}
+
+	\section{Recovery}
+		\begin{itemize}
+			\item System crash can cause inconsistencies among on-disk file-system data structures.
+		\end{itemize}
+
+		\subsection{Consistency Checking}
+			\begin{itemize}
+				\item Detection, scan all metadata.
+				\item Alternative: File system records its state within the file-system metadata. At the start a bit is set that change is happening, after change the bit is cleared.
+				\item \textbf{Consistency checker}: compares the data in the directory structure with data blocks on disk and tries to fix inconsistencies.
+			\end{itemize}
+
+		\subsection{Log-Structured File Systems}
+			\begin{itemize}
+				\item \textbf{Log-based transaction-oriented/Journaling} file systems.
+				\item Matadata changes written sequentially to a log. Each set of operations for performing a specific task is a transaction.
+				\item If changes are written to this log, they are considered commited.
+				\item Log entries are replayed acros the actual file-system structures. As the chages are made, a pointer is updated to indicate which actions have completed and which are still incomplete.
+				\item If a commited transaction is complete, it is removed from the file.
+				\item Circular buffer writes to the end of its space and then continues at the beginning, overwriting older values.
+				\item System crash: zero or more transactions in log file: transactions in the file were not completed, so they must now be completed.
+				\item Problem: transaction aborted (not committed before crash): changes must be undone.
+				\item Side benefit: updates proceed much faster.
+			\end{itemize}
+
+		\subsection{Other Solutions}
+			\begin{itemize}
+				\item Never overwrite data: write to new blocks, update pointers.
+				\item If old pointers and blocks are kept: \textbf{Snapshot}
+			\end{itemize}
+
+		\subsection{Backup and Restore}
+			\begin{itemize}
+				\item Back up data to another storage device.
+				\item Restore from backup.
+				\item Minimize data copied: only copy new items.
+				\item \textbf{Full backup}: Copy all data
+				\item \textbf{Incremental backup}: Copy data that changed.
+				\item Benefit: restore files accidentaly deleted.
+			\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Chapter 12
+\chapter{Mass-Storage Structure} \label{ch:Chapter12}
+	\section{Overview of Mass-Storage Structure}
+
+	\section{Disk Structure}
+		\begin{itemize}
+			\item \textbf{Low-level formatted}: can change block size
+			\item \textbf{Constant Linear Velocity (CLV)}: Density of bits per track is uniform. Further from center, longer track, more sectors.
+			\item \textbf{Constant Angular velocity (CAV)}: Density of bits from inner to outer tracks decreases to keep data rate constant.
+		\end{itemize}
+
+	\section{Disk Scheduling}
+		\begin{itemize}
+			\item \textbf{Seek time}: time for the disk arm to move the head
+			\item \textbf{Rotational latency}: time till the desired sector is under the head.
+			\item \textbf{Disk bandwith}: number of bytes transferred, divided by the total time between the first request and completion of the last transfer.
+		\end{itemize}
+
+		\subsection{FCFS Scheduling}
+
+		\subsection{SSTF Scheduling}
+
+		\subsection{SCAN Scheduling}
+			\begin{itemize}
+				\item Called \textbf{Elevator algorithm}
+			\end{itemize}
+
+		\subsection{C-SCAN Scheduling}
+
+		\subsection{LOOK Scheduling}
+
+		\subsection{Selection of a Disk-Scheduling Algorithm}
+			\begin{itemize}
+				\item Influenced by file-allocation method
+				\item Location of directories and index blocks is important. Caching them can help.
+				\item Complexities, so should be writeen as a sperate module.
+				\item Difficult to schedule for improved rotational latency.
+				\item Disk manufactureres: implemnting disk-scheduling algorithms in the controller hardware.
+				\item OS might not want to let the disk controller do everything. Control over priorities and such.
+			\end{itemize}
+
+	\section{Disk Management}
+		\subsection{Disk Formatting}
+			\begin{itemize}
+				\item \textbf{Low-level/physical Formatting}: Divided into sectors. Fills the disk with special data structure for each secture: header, data, trailer. Header and trailer contain information for the disk controller (sector number and ECC)
+				\item \textbf{Soft error}: can be recovered with ECC
+				\item Low level formatting happens at factory.
+				\item \textbf{Logical formatting}: Creation of a file system. OS stores initial file-system data structures on the disk.
+				\item File systems group blocks together into chunks/\textbf{clusters} Disk I/O is done via blocks, but file-system I/O is done via clusters.
+				\item \textbf{Raw disk}: disk partition as large sequential array of logical blocks, without any file-system.
+			\end{itemize}
+
+		\subsection{Boot Block}
+			\begin{itemize}
+				\item Bootstrap is stored in ROM
+				\item Bootstrap loads more full bootstrap program from disk.
+				\item \textbf{System/Boot disk}: disk with boot partition: boot blocks at fixed location on disk.
+			\end{itemize}
+
+		\subsection{Bad Blocks}
+			\begin{itemize}
+				\item \textbf{Bad block}: defective sectors.
+				\item bad blocks are flagged as unusable (so file system doesn't allocat them)
+				\item More sophisticated: Controller maintains list of bad blocks (initialized during low-level formatting). Set aside spare sectors (\textbf{Sector sparing/ Forwarding}). This invalidates optimalizations by the OS.
+				\item Alternative: \textbf{Sector slipping}: Move all following blocks by one, so that the block next to the bad block becomes available.
+				\item Replacement of bad block is not totally automatic, because data in the bad block are usually lost.
+				\item \textbf{Hard error}: results in data loss.
+			\end{itemize}
+
+	\section{Swap-Space Management}
+		\subsection{Swap-Space Use}
+			\begin{itemize}
+				\item May be safer to overestimate than understimate swap space needed.
+			\end{itemize}
+
+		\subsection{Swap-Space Location}
+			\begin{itemize}
+				\item Can be in two places:
+				\begin{itemize}
+					\item Carved out of the normal file system: easy to implement, but inefficient
+					\item Separate disk partition (Raw): Separate swap-space storage manager: Algorithms optimized for speed. Because swap is reinitialized during boot, fragmentation is short-lived.
+				\end{itemize}
+			\end{itemize}
+
+	\section{Stable-Storage Implementation}
+		\begin{itemize}
+			\item Replciate required information on multiple storage devices with independent failure modes.
+			\item Coordinate the writing of updates: guaranteeing that a failure during an update will not leave all the copies in a damaged state.
+			\item Force all copies to be consistent and have correct value.
+			\item Disk write results in three outcomes:
+			\begin{itemize}
+				\item Succesfull completion
+				\item Partial failure
+				\item Total failure
+			\end{itemize}
+			\item Whenever a failure occurs, sytem needs to detect it and recover to consistent state. We need two physical blocks for each logical block.
+			\item Output operation:
+			\begin{itemize}
+				\item Write first block
+				\item write second block
+				\item Declare operation complete.
+			\end{itemize}
+			\item Recovery from failure: check each pair:
+			\begin{itemize}
+				\item Same: no error
+				\item One contains error: replace with contents of other one.
+				\item Not same but no error: replace content of first block with second block, this ensures that a write either succeeds completely or results in no change.
+			\end{itemize}
+			\item Waiting for disk writes is time consuming: Add NVRAM (non volatile) as cache. Trusted to store the data en route to the disks, part of stable storage.
+		\end{itemize}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Chapter 13
+\chapter{I/O Systems} \label{ch:Chapter13}
+	\section{Overview}
+		\begin{itemize}
+			\item Control of devices connected to the computer is a major concern.
+			\item I/O Devices vary widely in function and speed so varied methods are needed to control them. These methods form the I/O subsystem of the kernel.
+			\item Two conflicting trends:
+			\begin{itemize}
+				\item Increasing standardization of software and hardware interfaces.
+				\item Increasingly broad variety of I/O devices.
+			\end{itemize}
+			\item Kernel is structured to use device-driver modules to encapsulate the details and oddities of devices.
+			\item \textbf{Device drivers} present a uniform device-access interface to the I/O subsystem.
+		\end{itemize}
+
+	\section{I/O Hardware}
+		\begin{itemize}
+			\item General categories: storage devices, transmission devices, humin-interface devices.
+			\item Need only a few concepts to understand how the devices are attached and how the software can control the hardware.
+			\item Device communicates with computer system by sending signals through a connection point (\textbf{port}). Devices share common set of wires: \textbf{bus}: set of wires and protocol.
+			\item \textbf{daisy chain}: A plugs into B, C plugs into B,...
+			\item \textbf{Controller}: collection of electronics that can operate a port, bus or device.
+			\item How does the processor give commands/data: controller has registers for data and control signals $\rightarrow$ writing bit patterns in these registers.
+			\item Alternative: memory-mapped I/O: device-control registers are mapped into the address space of the processor.
+			\item I/O port consists of 4 registers:
+			\begin{itemize}
+				\item data-in:
+				\item data-out:
+				\item status register:
+				\item control register:
+			\end{itemize}
+		\end{itemize}
+
+		\subsection{Polling}
+			\begin{itemize}
+				\item Check in a loop
+			\end{itemize}
+
+		\subsection{Interrupts}
+			\begin{itemize}
+				\item CPU hardware as a wire (\textbf{Interrupt-request line}), CPU senses after executing every instruction. If CPU detects a signal on that line, CPU performs a state save and jumps to the \textbf{interrupt-handler routine}: this determines cause of the interrupt, performs processing, performs state restore and executes return from interrupt instruction.
+				\item Device controller \textbf{raises} an interrupt.
+				\item CPU \textbf{catches} the interrupt and \textbf{dispatches} it to the interrupt handler, the handler \textbf{clears} the interrupt.
+				\item Need more sophisticated interrupt-handling features:
+				\begin{itemize}
+					\item Defer an interrupt
+					\item Efficient way to dispatch proper interrupt handler
+					\item Multilevel interrupts
+				\end{itemize}
+				\item Provided by: \textbf{interrupt-controller hardware}
+				\item Most CPU's: two interrupt request lines, nonmaskable and maskable.
+				\item Interrupt mechanism accepts an address, mostly an offset in a table (\textbf{interrupt vector}).
+				\item \textbf{Interrupt chaining}: each element in the interrupt vector points to the head of al ist of interrupt handlers, which are checked one by one.
+				\item \textbf{Interrupt priority levels}:
+				\item Modern OS interacts with the interrupt mechanism in several ways:
+				\begin{itemize}
+					\item Boot time: OS probes the hardware buses to determine what devices are present and install the corresponding interrupt handlers.
+					\item I/O: device controllers raise interrupts.
+					\item Handle a wide variety of \textbf{exceptions}.
+				\end{itemize}
+				\item Events that trigger interrupts have a common property: occurences that induce the OS to execute an urgent, self-contained routine.
+				\item Eg: page fault is exception, so it can be handled quickly.
+				\item \textbf{Software interrupt/trap}: by system call
+				\item \textbf{Summary}: Interrupts are used throughout modern OSs to handle asynchronous events and to trap to supervisor-mode routines in the kernel. To enable the most urgent work to be done first (interrupt priorities). Device controllers, hardware faults, system calls all raise interrupts to trigger kernel routines. Beacuse interrupts are used so heavily for time-sensiteve processing, efficient interrupt handling is required for good system performance.
+			\end{itemize}
+
+		\subsection{Direct Memory Access}
+			\begin{itemize}
+				\item Large transfers: wasteful to do \textbf{Programmed I/O}
+				\item Special-purpose processor: \textbf{Direct-memory-acces (DMA)} controller.
+				\item To initiate Host writes DMA command block into memory, this block contains a pointer to the source of a transfer, pointer to the destination, and a count of the number of bytes to be transferred. Then the CPU writes the address of this command block to the DMA controller.
+				\item DMA controller operates the memory bus directly, placing addresses on the bus to perfrom transfers withouth the main CPU.
+				\item Handshaking between DMA controller and device controller is via pair of wires: \textbf{DMA-request} and \textbf{DMA-acknowledge}
+				\item Device controller places signal on DMA-request when data is available. DMA controller seizes memory bus, place the desired address on the memory-address wires and place a signal on the DMA-acknowledge wire. Device controller recieves DMA-acknowledge signal and transfers the word of data to memory and removes DMA-request signal.
+				\item When entire transfer is finished, the DMA controller interrupts the CPU
+				\item \textbf{Cycle stealing}: while DMA controller seizes memory bus, CPU can't fetch from main memory.
+				\item \textbf{Direct virtual memory access (DVMA)}: use virtual addresses that undergo translation to physical addresses. Perform transfer between two memory mapped devices without the intervention of the CPU or use of main memory.
+			\end{itemize}
+
+		\subsection{I/O Hardware Summary}
+
+	\section{Application I/O Interface}
+		\begin{itemize}
+			\item Structuring techniques and interfaces that enable I/O to be treated in a standard and uniform way.
+			\item Each general kind is accessed through a standardized set of functions: \textbf{Interface}.
+			\item Differences are encapsulated in kernel modules: "device crivers", which are nternally custom-tailored to specific devices, but export one of the standard interfaces.
+			\item Purpose of device-driver layer: hide the differnces among device controllers from the I/O subsystem.
+			\item Making I/O subsystem independent of hardware: benefits manufacturers: design new devices to be compatible ith existing host controller interface, or write new device drivers.
+			\item Devices vary on:
+			\begin{itemize}
+				\item Character-stream or block
+				\item Sequential or random access
+				\item Synchronous or asynchronous
+				\item Sharable or dedicated
+				\item Speed of operation
+				\item Read-write, read only, write only
+			\end{itemize}
+			\item Many of these differnces are hidden by the OS
+			\item Devices are grouped into a few conventional types.
+			\item Most OS: \textbf{Escape/back door}: transparently passes commands from application to a device driver.
+		\end{itemize}
+
+		\subsection{Block And Character Devices}
+			\begin{itemize}
+				\item \textbf{Direct I/O}: Mode of operation on a file that disables buffering and locking.
+				\item Memory-mapped: same emchanism used for demand-paged virtual memory acces, so efficient. Also convenient for programmers.
+				\item Keyboard: \textbf{character-stream interface}: Basic system calls: get() or put() one character. Libraries can be built that offer line-at-a-time access. Good for "spontaneous" devices or output like printers/audio boards.
+			\end{itemize}
+
+		\subsection{Network Devices}
+			\begin{itemize}
+				\item Network \textbf{socket} interface.
+				\item System calls: create a socket, connect a local socket to remote address, listen for any remote connections, send and receive packets over the connection.
+			\end{itemize}
+
+		\subsection{Clocks and Timers}
+			\begin{itemize}
+				\item Hardware clocks give three basic functions:
+				\begin{itemize}
+					\item Give the current time
+					\item Give the elapsed time
+					\item Set a timer to trigger
+				\end{itemize}
+				\item \textbf{Programmable interval timer}: hardware to measure elapsed time and trigger operations.
+				\item Set to wait a certain amount of time and then generate an interrupt. (Scheduler uses this)
+				\item OS can simulate virtual clocks for the user. Maintain list in earliest-time-first order, set the timer first.
+				\item Interrupt rate generated by the hardware clock is bad.
+				\item High-frequency counter: read value from register (does not generate interrupts).
+			\end{itemize}
+
+		\subsection{Nonblocking and Asynchronous I/O}
+			\begin{itemize}
+				\item Nonblocking: returns immediatly with amount of bytes returned
+				\item Asynchronous: returns immediatly, but receives all data at later time.
+			\end{itemize}
+
+		\subsection{Vectored I/O}
+			\begin{itemize}
+				\item Allows one system call to perform multiple I/O Operations, involving multiple locations.
+				\item Benefit: avoiding context-switching
+			\end{itemize}
+
+	\section{Kernel I/O Subsystem}
+		\subsection{I/O Scheduling}
+			\begin{itemize}
+				\item Keep track of many I/O requests at the same time: \textbf{Device-status table}: attach the wait queue to this.
+			\end{itemize}
+
+		\subsection{Buffering}
+			\begin{itemize}
+				\item For three reasons:
+				\begin{itemize}
+					\item Cope with speed mismatch between producer-consumer
+					\item Provide adaptations for devices that have different data-transfer sizes.
+					\item Support copy semantics (version of data written is guaranteed to be version at the time of the application system call) for application I/O
+				\end{itemize}
+				\item \textbf{Double buffering}: two buffers, fill one, then other, then first one again,...
+			\end{itemize}
+
+		\subsection{Caching}
+			\begin{itemize}
+				\item \textbf{Cache}: region of fast memory that holds copies of data.
+				\item Difference buffer-cache: buffer can hold the only existing copy.
+				\item Region of memory can be used for both purposes.
+			\end{itemize}
+
+		\subsection{Spooling and Device Reservation}
+			\begin{itemize}
+				\item \textbf{Spool}: buffer that holds output for a device, that cannot accept interleaved data streams.
+				\item OS intercepts all data to device, puts it in an image on the disk.
+				\item Application finishes printing: spooling system queues the corresponding spool file for output to the printer.
+			\end{itemize}
+
+		\subsection{Error Handling}
+			\begin{itemize}
+				\item Protect against errors to prevent complete system failure.
+				\item Transient reasons: mostly retry
+				\item Permanent failure: OS is unlikely to recover
+				\item General rule: I/O sytem call will return one bit of information about the status of the call.
+				\item Some hardware highly detailed error information
+				\item SCSI three levels of detail: sense key (general), additional sense code (category), additinoal sense-code qualifier (more detail)
+			\end{itemize}
+
+		\subsection{I/O Protection}
+			\begin{itemize}
+				\item Define all I/O instructions to be privileged.
+				\item Memory-mapped I/O must be protected from user access by memory-protection system. Provide locking mechanism, and allocate one process at a time.
+			\end{itemize}
+
+		\subsection{Kernel Data Structures}
+			\begin{itemize}
+				\item Can use object oriented methods
+			\end{itemize}
+
+		\subsection{Kernel I/O Subsystem Summary}
+		\begin{itemize}
+			\item Management of the name space for files and devices
+			\item Access control to files and devices
+			\item Operation ocntrol
+			\item File-system space allocation
+			\item Device allocation
+			\item Buffering, caching, spooling
+			\item I/O Scheduling
+			\item Device-status monitoring, error handling, failure recovery
+			\item Device-driver configuration and initialization
+		\end{itemize}
+
+	\section{Transforming I/O Requests to Hardware Operations}
+		\begin{itemize}
+			\item MS-DOS: precding the colon, string that identifies a specific hardware device.
+			\item UNIX: device name space incorporated in the regular file-system name space. Needs: \textbf{Mount Table}: associates prefixes of path names with specific device names. Search mount table for longest matching prefix.
+			\item Moder OS: flexiblity from multiple stages of lookup tables in the path between a request and a physical device controller: the emchanism that pass requests: general, easy to introduce new devices and drivers.
+		\end{itemize}
+
+	\section{Performance}
+		\begin{itemize}
+			\item Systems can use: \textbf{Front-end processors}: terminal I/O to reduce interrupt burden on the main CPU
+			\item Principles to improve efficiency of I/O:
+			\begin{itemize}
+				\item Reduce number of context switches
+				\item Reduce number of time that data must be copied
+				\item Reduce frequency of interrupts
+				\item Incrase concurrency by using DMA
+				\item Move procesing primites into hardware.
+				\item Balance, because overload causes idleness in other areas.
+			\end{itemize}
+			\item Where should I/O be implemented:
+			\begin{itemize}
+				\item Application level for flexible and unlikely bugs.
+				\item Reimplement in kernel
+				\item Specialized implementation in the hardware.
+			\end{itemize}
+		\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Part 5: Protection and Security
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Chapter 14
+\chapter{System Protection} \label{ch:Chapter14}
+	\textbf{Protection}: mechanism for controlling access of users to the resources.
+	\section{Goals of Protection}
+		\begin{itemize}
+			\item Protect integrity
+			\item Prevent intentional violation
+			\item Early detection can prevent contamination
+		\end{itemize}
+
+	\subsection{Principles of Protection}
+		\begin{itemize}
+			\item \textbf{Principle of least privilege}
+			\item Frequently it does not produce a more secure computing environment.
+		\end{itemize}
+
+	\section{Domain of Protection}
+		\begin{itemize}
+			\item \textbf{objects}: both hardware objects and software objects
+			\item Objects are essentailly abstract data types
+			\item \textbf{Need-to-know principle}
+			\item Goals of protection are to minimize the risk of possible security violations.
+		\end{itemize}
+
+		\subsection{Domain Structure}
+			\begin{itemize}
+				\item Process operates withing a \textbf{Protection domain}: specifies the resources that the proces may access.
+				\item Each domain defines a set of objects and the types of operations that may be invoked on each object.
+				\item \textbf{Access right}: Ability to executen an operation on an objects.
+				\item Domains may share access rights
+				\item Association between a proces and a domain can be \textbf{static} or \textbf{dynamic} (must have mechanism for domain \textbf{switching}).
+				\item Domain can be realized in a variety of ways:
+				\begin{itemize}
+					\item Each user a domain
+					\item Each process a domain
+					\item Each procedure a domain
+				\end{itemize}
+			\end{itemize}
+
+
+	\section{Access Matrix}
+		\begin{itemize}
+			\item General model of protection can be viewed abstractly as a matrix.
+			\item Ability to copy has two variants:
+			\begin{itemize}
+				\item Right is copied, then removed from original. (Transfer of right)
+				\item Propagation of the copy right may be limited, so a copy cannot be copied.
+			\end{itemize}
+			\item Owner right: controls addition and removal of rights.
+			\item \textbf{Confinement problem}: Problem of guaranteeing that no information initially held in an object can migrate outside of its execution environment. (generally unsolvable).
+		\end{itemize}
+
+	\section{Implementation of the Access Matrix}
+		\subsection{Global Table}
+			\begin{itemize}
+				\item Ordered triples: domain, object, rights-set.
+				\item Drawback: table is large, difficult to take advantage of special groupings
+			\end{itemize}
+
+		\subsection{Access Lists for Objects}
+			\begin{itemize}
+				\item Each column can be implemented as an access list for one object.
+				\item Empty entries discarded
+				\item Resulting list of pairs: domain, rightsset
+				\item Extended to define a list plus a \textbf{default set} of access rights.
+				\item First check list, then default set.
+			\end{itemize}
+
+		\subsection{Capability Lists for Domains}
+			\begin{itemize}
+				\item Associate row with its domain.
+				\item \textbf{Capability list}: list of objects together with the operations allowed on those objects.
+				\item Objects is represented by its physical name or address, called \textbf{capability}.
+				\item Possession of the capability: access is allowed.
+				\item Capability list is protected object, maintained by the OS.
+				\item Capability are distinguished from other data in one of two ways:
+				\begin{itemize}
+					\item Each object has a tag to denote wheter it is a capability or accessible data
+					\item Address space associated with a program: split into two: accessible to the program and the capability list.
+				\end{itemize}
+			\end{itemize}
+
+		\subsection{A Lock-Key Mechanism}
+			\begin{itemize}
+				\item Compromise between access lists and capability lists.
+				\item Each object has a list of unique bit patterns: \textbf{locks}
+				\item Each domain has a list of unique bit patterns: \textbf{keys}
+				\item Access an object if the key matches on of the locks
+				\item List of keys must be managed by the OS
+			\end{itemize}
+
+		\subsection{Comparison}
+			\begin{itemize}
+				\item Most systems: combination of access lists and capabilities.
+				\item Search access list, if ok, grant capabilty.
+			\end{itemize}
+
+
+	\section{Access Control}
+		\begin{itemize}
+			\item \textbf{Role-based access control (RBAC)}: Revolves around privileges: right to execute a system call (or option in system call)
+			\item Privileges can be assigned to processes.
+			\item Privileges and programs can be assigned to roles. Users are assigned roles, a user can take a role that enables a prvilege.
+			\item Decreases security risk associated with superusers and setuid programs.
+		\end{itemize}
+
+
+	\section{Revocation of Access Rights}
+		\begin{itemize}
+			\item Questions:
+			\begin{itemize}
+				\item Immediate versus delayed
+				\item Selective versus general
+				\item Partial versus total
+				\item Temporary versus permanent
+			\end{itemize}
+			\item Capabilties pose more difficult revocation:
+			\begin{itemize}
+				\item Reacquisition: periodically, capabilites are delted from each domain.
+				\item Back-pointers: list of pointers with each object, pointing to all capabilities.
+				\item Indirection: Capabilites point indrectly to objects. Each capability points to a unique entry in a global talbe, which points to the object. Revocation by deleting from global table.
+				\item Keys: Key is defined when capabilty is created. Master key is associate with each object. Creation of capability: current value of master key is associated. Keys match: operation allowed. Replace master key: invalidate all previous capabilities: Revocation.
+			\end{itemize}
+		\end{itemize}
+
+
+	\section{Language-Based Protection}
+		\subsection{Compiler-Based Enforcement}
+			\begin{itemize}
+				\item
+			\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Chapter 15
+\chapter{Security} \label{ch:Chapter15}
+	\section{The Security Problem}
+		\begin{itemize}
+			\item \textbf{Threat}: potential for a security violation.
+			\item \textbf{Attack}: attempt to break security
+			\begin{itemize}
+				\item \textbf{Breach of confidentiality}: unauthorized reading of data.
+				\item \textbf{Breach of integrity}: modificiation of data
+				\item \textbf{Breach of abailability}: destruction of data
+				\item \textbf{Theft of service}: use of resources
+				\item \textbf{Denial of service}: preventing use of system.
+			\end{itemize}
+			\item \textbf{Masquarading}: pretend to be someone else
+			\item \textbf{Replay attack}: fraudulent repeat of valid data transmission (done along with message modification)
+			\item \textbf{Man-in-the-middle attack}
+			\item \textbf{Session hijacking}: intercept active communication session.
+			\item Security measures at four levels:
+			\begin{itemize}
+				\item Physical
+				\item Human
+				\item Operating system
+				\item Network
+			\end{itemize}
+		\end{itemize}
+
+	\section{Program Threats}
+		\subsection{Trojan Horse}
+			\begin{itemize}
+				\item Code segment that misuses its environment.
+				\item Variation: \textbf{Spyware}: capture information
+				\item \textbf{Cover channels}: surreptitious communication.
+			\end{itemize}
+
+		\subsection{Trap Door}
+			\begin{itemize}
+				\item Leave a hole in the software only the designer is capable of using.
+				\item Clever trap door is in the compiler.
+			\end{itemize}
+
+		\subsection{Logic Bomb}
+			\begin{itemize}
+				\item Initiates a security incident only under specific circumstances.
+			\end{itemize}
+
+		\subsection{Stack and Buffer Overflow}
+			\begin{itemize}
+				\item Send more data than the program was expecting, until it writes in the stack, overwrite return address.
+			\end{itemize}
+
+		\subsection{Viruses}
+			\begin{itemize}
+				\item Self replicating
+				\item Virus dropper inserts virus into system.
+				\item Categories:
+				\begin{itemize}
+					\item File: append to file
+					\item Boot: Infect boot sector
+					\item Macro: triggered when program able te execute macro is run
+					\item Source code: look for source code.
+					\item Polymorphic: changes each time it's installed.
+					\item Encrypted: include decryption code
+					\item Stealth: Avoid detection by modifying the system.
+					\item Tunneling: Bypass detection by installing in the interrupt-handler chain.
+					\item Multipartite: infects multiple parts of a system.
+					\item Armored: hard to unravel and understand.
+				\end{itemize}
+			\end{itemize}
+
+	\section{System and Network Threats}
+		\subsection{Worms}
+			\begin{itemize}
+				\item Process that uses the spawn mechanism to duplicate itself.
+				\item Uses grappling hook and the main program.
+			\end{itemize}
+
+		\subsection{Port Scanning}
+			\begin{itemize}
+				\item Means to detect vulnerabilites
+				\item Port scans are detectable: send from zombie systems (previously compromised)
+			\end{itemize}
+
+		\subsection{Denial of Service}
+			\begin{itemize}
+				\item Not for gaining information, but disrupting legitimate use of a system.
+			\end{itemize}
+
+	\section{Cryptography as a Security Tool}
+		\subsection{Encryption}
+			\subsubsection{Symmetric Encryption}
+			\subsubsection{Aymmetric Encryption}
+			\subsubsection{Authentication}
+				\begin{itemize}
+					\item Constraining the set of potential senders.
+				\end{itemize}
+
+			\subsubsection{Key Distribution}
+
+
+		\subsection{Implementation of Cryptography}
+			\begin{itemize}
+				\item Cryptography can be inserted at almost any layer of the network
+			\end{itemize}
+
+	\section{User Authentication}
+		\subsection{Passwords}
+			\begin{itemize}
+				\item
+			\end{itemize}
+
+		\subsection{Password Vulnerabilities}
+			\begin{itemize}
+				\item \textbf{Age passwords}: forcing the user to change passwords at regular intervals.
+			\end{itemize}
+
+		\subsection{Securing Passwords}
+			\begin{itemize}
+				\item Hashing with salt.
+			\end{itemize}
+
+		\subsection{One-Time Passwords}
+			\begin{itemize}
+				\item User is challenged and must respond with the correct answer to the challenge.
+				\item \textbf{Two-factor authentication}: one-time password only if pin is valid. Requires something you have and something you know.
+			\end{itemize}
+
+		\subsection{Biometrics}
+			\begin{itemize}
+				\item Multifactor authentication is still better.
+			\end{itemize}
+
+	\section{Implementing Security Defenses}
+		\subsection{Security Policy}
+		\subsection{Vulnerability Assessment}
+			\begin{itemize}
+				\item \textbf{Security through obscurity}
+			\end{itemize}
+
+		\subsection{Intrusion Detection}
+			\begin{itemize}
+				\item \textbf{Signature-based detection}: search for specific behaviour
+				\item \textbf{Anomaly detection}: See if anomalous behaviour occurs.
+			\end{itemize}
+
+		\subsection{Virus Protection}
+			\begin{itemize}
+				\item Remove instructions: \textbf{Disinfect} the program
+				\item Run a program in a \textbf{Sandbox} (emulated section).
+				\item Best protection is prevention.
+			\end{itemize}
+
+		\subsection{Auditing, Accounting, and Logging}
+			\begin{itemize}
+				\item Performance changes can indicate security problems.
+			\end{itemize}
+
+	\section{Firewalling to Protect Systems and Networks}
+		\begin{itemize}
+			\item \textbf{Firewall}: a computer/appliance/router that sits between trusted and untrusted. Limits network access between two security domains.
+			\item Common implementation: Internet as untrusted domain, a semitrusted and semisecure network (\textbf{Demilitarized zone (DMZ)}) as anther domain, and company computers as a third domain.
+			\item Connections from internet are allowed, and from the company computers to the internet.
+			\item Not allowed: Internet or DMA to company computers.
+			\item Firewalls do not prevent \textbf{tunneling}: travel withing protocols.
+			\item \textbf{Spoofing}: unauthorized host pretends to be authorized by meeting some critera.
+			\item \textbf{Personal firewall}: software layer.
+		\end{itemize}
+
+	\section{Computer-Security Classifications}
+		\begin{itemize}
+			\item Four: A, B, C, D
+			\item Lowest level is D
+			\item Total of all protection systems within a computer system that correctly enforce a security policy is known as: \textbf{Trusted computer base (TCB)}.
+		\end{itemize}
+
+\end{document}

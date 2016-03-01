@@ -1,0 +1,248 @@
+H1,operating system,"A program that manages a computer's hardware, provides a basis for application programs and acts as an intermediary between user and hardware."
+H1,personal computer (PC),"An operating system that sports complex games, business applications and everything in between."
+H1,the four main components of a computer system,"the hardware, te operating system, the application programs and the users"
+H1,hardware,"The central processing unit (CPU), the memory and the input/output (I/O) devices provide the basic computing resources for the system."
+H1,application programs,"Those define the way in which the resources are used to solve users' computing problems. some examples: word processors, spreadsheets, compilers, web browsers"
+H1,resource utilisation,how various hardware and software resources are shared
+H1,the principle of mainframes and minicomputers,"Many users access the same computer through other terminals. These users share resources and may exchange information. The operating system is designed to maximise resource utilisation, to assure that hardware is used efficiently and to assure that no user takes more than its fair share."
+H1,the principle of workstations,"Many users can access a network of other workstations and servers. They have dedicated resources, but also share resources such as networking and servers, including file, compute and print servers. Their operating system is designed to compromise between individual usability and resource utilisation."
+H1,touch screen,A screen used by mobile computers. The user interacts with the system by pressing and swiping fingers across the screen rather than using a physical keyboard and mouse.
+H1,resource allocator,An operating system can be seen as a resource allocator for computer system. It acts as the manager of resources and must decide how to allocate them to specific programs and users so that it can operate the computer system efficiently and fairly.
+H1,control program,An operating system is a control program. It has to manage the execution of user programs to prevent errors and improper use of the computers. It needs to control various I/O devices too.
+H1,Moore's prediciton,The number of transistors on an integrated circuit will double every 18 months.
+H1,the three types of programs,"kernel, system programs, application programs"
+H1,kernel,the one program running at all times
+H1,system programs,"programs associated with the operating system, but not necessarily part of the kernel"
+H1,application programs,all programs not associated with the operation of the system
+H1,middleware,"a set of software frameworks that provide additional services to application developpers; examples: databases, multimedia and graphics supporting middleware"
+H1,bootstrap program,"This is the program a computer initially needs to start running. It is usually simple and is typically stored in ROM or EEPROM. It is generally known by the term firmware. It initialises all aspects of the system and it must know how to load the operating system, as well as how to start executing that system.The bootstrap program must locate the operating-system kernel and load it into memory."
+H1,ROM,"read-only memory, bootstrap program often resides on ROM"
+H1,EEPROM,"electrically erasable programmable read-only memory, bootstrap program often resides on EEPROM"
+H1,system process/system daemon,This is a system program that is loaded in to memory at boot time. It runs the entire time the kernel is running.
+H1,interrupt,"This signals the occurence of an event. Hardware may trigger interruptsat any time by sending a signal to the CPU, usually using the system bus. Software may trigger an interrupt by executing a special operation called a system call (also monitor call)."
+H1,system call,a software-generated interrupt
+H1,interrupt vector,"a table of pointers, stored in low memory, containing the adresses of the interrupt service routines for the various devices. "
+H1,RAM,"random-access memory or main memory, which is rewritable, whence general-purpose computers run their programs"
+H1,DRAM,"dynamic random-access memory, common implementation of RAM using semiconductor technology"
+H1,von Neumann architecture,computer architecture that is used in nearly all modern general-usage computers
+H1,instruction register,"the register where the instruction to be executed is stored in a typical instruction-execution cycle, as executed on a system with a von Neumann architecture"
+H1,volatile storage,"storage that needs power to maintain information, examples: registers, cache, main memory"
+H1,secondary storage,"an extension of the main memory that most computer systems provide, able to hold large quantities of data permanently"
+H1,magnetic disk,most common secondary-storage device
+H1,the hierarchy of storage devices,registers - cache - main memory - solid-state disk - magnetic disk - optical disk - magnetic tapes
+H1,semiconductor memory,"memory that uses semiconductor technology, is fast and relatively cheap, examples: registers, cache, main memory, solid-state disk"
+H1,non-volatile storage,"storage that does not need power to maintain information, examples: solid-state disk, magnetic disk, optical disk, magnetic tapes"
+H1,Solid-state disks,"storage device that is faster than magnetic disks and non-volatile, there are multiple types of solid-state disks"
+H1,PDA,personal digital assistant
+H1,NVRAM,"non-volatile RAM, consists of DRAM with battery backup power, is as fast as DRAM as long as the battery lasts"
+H1,SCSI,"small computer-system interface, device controller to which seven or more devices can be attached"
+H1,device controller,"is in charge of a specific type of device, maintains some local buffer storage and a set of special-purpose registers, is responsible for moving data between the peripheral device and the local buffer storage"
+H1,device driver,"operating systems have one for each device controller, understands the device controller, provides the rest of the operating system with a uniform interface to the device"
+H1,DMA,"direct memory access, transfer of entire block of data directly to/from memory from/to device controller buffer, only one interrupt is generated per block, CPU can do other work concurrently"
+H1,special-purpose processor,"runs a limited instruction set, does not run user processes, sometimes managed by operating system, relieves CPU of some tasks/overhead, sometimes low-level autonomous components, in that case operating system can not commmunicate with these special-purpose processors"
+H1,multiprocessor/parallel/multicore systems,"systems with two or more processors in close communication, sharing bus, sometimes sharing clock, memory and peripheral devices"
+H1,three advantages of multiprocessors,"increased throughput, economy of scale, increased reliability"
+H1,increased throughput due to multiprocessors,"more processors = more work done, speed up ratio of N processors is lower than N due to overhead"
+H1,economy of scale due to multiprocessors,"more processors on one bus= less cost, shared peripherals, mass storage and power supplies"
+H1,increased reliability due to multiprocessors,"more processors = less chance of  total failure, other processors can pick up a share of work when one fails"
+H1,graceful degradation,the ability to continue providing service proportional to the level of surviving hardware
+H1,fault tolerance,"the ability to suffer a failure of any single component and still continue operation, requires a mechanism to detect, diagnose and correct failure"
+H1,asymmetric multiprocessing,"each processor has a specific task, one is the boss processor and controls the system, other processors look to the boss for instructions or have predefined tasks"
+H1,symmetric multiprocessing,"each processor performs all tasks within the operating system, all processors are peers, each processor has its own set of registers and private/local cache, pysical memory is shared, "
+H1,uniform memory access (UMA),the situation in which access to any RAM from any CPU takes the same amount of time
+H1,non-uniform memory access (NUMA),"the situation in which access to some parts of memory may take longer to access than other parts, creating a performance penalty"
+H1,computing core,"independent actual processing unit, a multicore CPU consists of more computing cores"
+H1,multicore processor,a processor with multiple computing cores
+H1,benefits of multicore processors,"on-chip communication is faster than between-chip communication, one chip with multiple processors uses significantly less power than multiple single-core chips"
+H1,blade server,"processor boards, I/O boards, networking boards are placed in the same chassis, each blade-processor boots independently and runs its own operating system, some blade server boards are multiprocessor as well these severs consist of multiple independent multiprocessor systems"
+H1,clustered system,"type of multiprocessor system which gathers together multiple CPU's, composed of two or more individual systems joined together (loosely coupled), each node may be a single processor system or a multicore system"
+H1,loosely coupled,composed of two or more systems joined together
+H1,high availibility service,"service that will continue even if one or more systems in the cluster fail, generally obtained by adding a level of redundancy to the system"
+H1,assymetric clustering,"one machine in hot-standby mode while other is running the applications, hot-standby host machine only monitors, on failure it becomes the active server "
+H1,symmetric clustering,"two or more hosts are running applications and are monitoring each other, does require more than one available application to run"
+H1,high-performance computing environment system,"system that can supplysignificantly greater computational power than single-procesor or even SMP systems, can run an application concurrently on all computers in the cluster, requires the application to be written specifically to take advantage of the cluster"
+H1,parallelisation,"division of a program in separate components that run in parallel on individual computers in the cluster, typically designed so that once each computing node in the cluster has solved its portion of the problem, the results from all the nodes are combined in a final solution"
+H1,distributed locking manager (DLM),access control and locking to ensure that no conflicting operations occur
+H1,storage area network (SAN),"allow many systems to attach a pool of storage, if application and data stored on SAN then cluster software can assign application to run on any host that is attached to the SAN, if the host fails any other host can take over, dozens of hosts can share the same daabase, greatly increasing performance and reliability"
+H1,multiprogramming,"operating system keeps several jobs in main memory simultaneously, actually in job pool (physical memory) because main memory is too small, CPU utilisation is increased by organising jobs so that the CPU always has one to execute, operating system picks a job and begins to execute it in memory, eventually will have to wait (e.g. I/O) -> switches to other job"
+H1,timesharing/multitasking,"logical extension to multprogamming, CPU executes multiple job by switching among them, switches occur so frequently that the user can interact with each running program"
+H1,interactive computer system,"provides direct communication between user and system, user gives instructinos to operating system or program directly using input devices and wait for immediate results on an output device."
+H1,response time,"time between input and output, should typically be less than a second on interactive computer systems"
+H1,process,a program loaded into memory and executing
+H1,job scheduling,"If several jobs are ready to be brought into memory and there is not enough room for all of them, the system must choose among them."
+H1,CPU scheduling,"If several jobs are ready to run, the system must choose which job it will run first."
+H1,swapping,processes are swapped in and out of main memory to the disk
+H1,virtual memory,"a technique that allow the execution of a process that is not completely in main memory, enables to run programs that are larger than physical memory, abstracts main memory into a large uniform array of storage, separating logical memory from physical memory, frees programmers from concerns over memory-storage limitations"
+H1,logical memory,memory as viewed by the user
+H1,physical memory,memory as it actually is
+H1,interrupt driven,"If the operating system has no work, it will sit quietly, waiting for something to happen. Events are signaled y the occurence of an interrupt or trap."
+H1,trap/exception,"a software-generated interrupt, caused either by an error or by a specific requestfrom a user programthat an operating system service be performed"
+H1,mode bit,"located in the hardware of of the computer, indicates current mode: kernel or user, used to distinguish between an operating system task and a user task"
+H1,user mode,when the system is executing on behalf of a user appication
+H1,kernel/supervisor/system/priviliged mode,"When a user application requests a service from the operating system, the system must transition from user mode to kernel mode to fulfill the request."
+H1,privileged instructions,"some of the machine instructions that may cause harm and can only be executed in kernel mode, any attempt to execute them in user mode results in the hardware denying execution, examples: switching to kernel mode, I/O control, timer management, interrupt management"
+H1,virtual machine manager (VMM),"creates and manages virtual machines, changes the CPU stat to do so, has more privileges than user mode, but less than kernel mode"
+H1,life cycle of instruction execution,"initially kernel mode, control is given to user application and mode is user mode, via interrupt, trap or system call control is switched back to operating system"
+H1,timer,"can be set to interrupt the computer after a specified period, is ensured to be set to interrupt before turning control over to user"
+H1,program counter,specifies the next instruction to execute
+H1,file,"logical storage unit, a collection of related information defined by its creator"
+H1,tertiary storage,storage that is slower and lower in cost
+H1,WORM,"write once, read many times"
+H1,RW,read-write
+H1,caching,"As information is used, it is copied into a faster storage system (cache) temporarily. When information is needed, cache is checked first. If it is present, it is used. If it is not, source information is used and is brought into the cache."
+H1,cache management,the design problem concerning size and replacement policy of the cache
+H1,cache coherency,An update of a value in one cache is immediately reflected in all other caches containing that value.
+H1,I/O subsystem,"This is a component that hides the peculiarities of I/O devices. It consists of a memory-management component that includes buffering, ceching and spooling. It has a general device-driver interface and drivers for specific hardware devices. Only the device driver knows the peculiarities of the specific device."
+H1,protection,"any mechanism for controlling the access of processesor users to the resources defined by a computer system, must provide means to specify the controls to be imposed and to enforce the controls"
+H1,security,"prevention of inappropriate access even when prevention is working, also prevents attacks (e.g. viruses worms, DoS, identity theft and theft of service"
+H1,user ID,"user identifier, unique, required by protection and security to be able to distinguish users"
+H1,security ID,user ID in Windows parlance
+H1,group identifier,"identifier for a group of users, unique, required by protection and security to be able to distinguish groups of users"
+H1,escalate privileges,action that allows access to a device that is restricted
+H1,effective UID,"the user ID that is actually used for a process, for example when escalating privileges"
+H1,portals,"provide web accessibility to internal servers, used by companies"
+H1,network computers/thin clients,"terminals that understand web-based computing, used when more security or easier maintenance is desired"
+H1,firewall,protects network from security breaches
+H1,mobile computing,computing on handheld smartphones and tablet computers
+H1,network,a communication path between two or more systems
+H1,TCP/IP,"most common network protocol, provides the fundamental architecture of the internet"
+H1,LAN,"network that spans a room, building or campus, local-area network"
+H1,WAN,"network that spans buildings, cities or even countries, wide-area network"
+H1,PAN,"network that spans several metres, personal-area network"
+H1,MAN,"network that spans buildings within a city, metropolitan-area network"
+H1,network operating system,"an operating system that provides features such as file sharing across the network, along with a communication scheme that allows different processes on different computers to exchange messages."
+H1,server system,system that satisfies requests by client systems in a client-server system
+H1,client system,system that requests services from server systems in a client-server system
+H1,client-server system,a distriuted system containing server systems and client systems
+H1,compute-server system,"type of server-system, provides interface to which a client can send a request to perform an action, server executes action and sends results to the client in response (e.g. database server)"
+H1,file-server system,"provides a file-system interface where clients can create, update, read and delete files (e.g. web server that delivers files to clients running web browsers"
+H1,peer-to-peer system,distributed system model where clients and servers are not distinguished from one another
+H1,VoIP,voice over IP (e.g. Skype)
+H1,emulation,virtualisation technique that is used when the source CPU type is different from the target CPU type.
+H1,virtualisation,technology that allows operating systems to run as applications within another operating system
+H1,guest operating system,an operating system running its own applications within another operating system (virtualisation)
+H1,host operating system,an operating system in which other operating systems run their own applications (virtualisation)
+H1,cloud computing,"type of computing that delivers computing, storage and even applications as a service across a network."
+H1,public cloud,cloud available via the internet to anyone who is willing to pay for the services
+H1,private cloud,cloud run by a company for that company's own use
+H1,hybrid cloud,a cloud that includes both public and private cloud components
+H1,SaaS,"software as a service, one or more applications available via the internet"
+H1,PaaS,"platform as a service, software stack ready for application use via the internet"
+H1,Iaas,"infrastructure as a service, servers or sorage available over the internet"
+H1,embedded system,"system on devices with very specific tasks, usually primitive with little to no user interface, prefers to spend time monitoring and managing hardware devices"
+H1,ASIC,"application-specific integrated circuit, performs tasks without a operating system"
+H1,real-time operating system,"system used when rigid time measurements have been placed on the operation of a processor or the flow of data, almost always used on embeded systems"
+H1,Open-source operating system,OS available in source-code rather than as compiled binary code
+H1,Closed-source operating system,OS available as comiled binary code rather than in source-code
+H1,reverse engineering,"converting binary files to source code, information such as comments are lost though"
+H1,DRM,"digital rights management, limitation of the ability to play back movies and music or display ebooks"
+H1,copy protection,limitation of the ability to play back movies and music or display ebooks
+H1,FSF,"free software foundation, encourages the free axchange of software source code and the free use of that software"
+H1,GPL,"GNU public license, common license underwhich free software is released, requires source code to be sdistributed with any binaries and any changes to source code be released under GPL too"
+H1,GNU/Linux,"open-source operating system, started by Linus Torvalds, contributed to by thousands of programmers over the internet"
+H1,distribution,"variant (custom build) of an (open-source) operating system (e.g. RedHat, SUSE, Fedora, Debian, Ubuntu, MenuetOS for the GNU/Linux project)"
+H1,LiveCD,"operating residing on a CD-ROM, can booted and run from the CD-ROM without being installed on a systems hard disk"
+H1,LiveDVD,"operating residing on a DVD, can booted and run from the DVD without being installed on a systems hard disk"
+H1,BSD UNIX,"open-source operating system of Berkeley University (examples: FreeBSD, OpenBSD, NetBSD, DragonflyBSD)"
+H1,Solaris,"based on BSD UNIX, previously known as SunOS, UNIX-based OS of Sun MicroSystems, purchase of Sun by Oracle left the state of the project unclear, Project Illumoshas expanded from OpenSolaris"
+H2,User Interface,"tool to execute user-entered commands, common forms are command-line interface, batch inteface and graphical user interface"
+H2,command-line interface,uses text commands and a specific method for entering them
+H2,batch interface,"commands and directives to control those are entered into files, then those are executed"
+H2,graphical user interface,"window system with a pointing device to direct I/O, choose from menus and make selections, a keyboard to enter text"
+H2,shared memory,two or more processes read and write to a shared section of memory
+H2,message passing,packets of information in predefined formats are moved between processes by the OS
+H2,common classes of operating-system services,"User interface, Program execution, I/O operations, File-system manipulation, Communications, Error detection, Resource allocation, Accounting, Protection and security"
+H2,command interpreter,command-line interface that allows user to directly enter commands to be performed by the operating system
+H2,shell,command interpreter on a system with multiple command interpreters
+H2,desktop GUI,"mouse-based window-and-menu system, user moves mouse to position its pointer to images or icons on the screen that represent programs, directories, files and system functions"
+H2,folder,directory
+H2,gestures,actions to interact on a touchscreen desktop interface
+H2,sysadmins,System administrators manage computers
+H2,power users,have an advanced knowledge of a system
+H2,shell script,program that is not compiled into code but rather is interpreted by the command-line interface
+H2,system call,"provide an interface to the services made available by an OS, generally available as routines written in C or C++ (assembly for low-level tasks)"
+H2,API,"Application programming interface, specifies a set of functions that are available to an application programmer, including parameters and return values"
+H2,libc,library for programs written in the C language for UNIX and Linux
+H2,system-call interface,"serves as the link to system calls made available by the operating system, provided by the run-time support system"
+H2,run-time support system,a set of functions built into libraries included with a compiler
+H2,the six major categories of system calls,"process control, file manipulation, device manipulation, information maintenance, communications and protection"
+H2,debugger,system program designed to aid the programmer in finding and correcting errors
+H2,bugs,errors
+H2,types of process control system calls,"end, abort, load, execute, create/terminate process, get/set process attributes, wait for time, wait/signal event, allocate/free memory"
+H2,types of file management system calls,"create/delete file, open/close file, read/write/reposition file, get/set file attributes"
+H2,types of device management system calls,"request/release device, read/write/reposition, ge/set device attributes, logically atach/detach devices"
+H2,types of information maintenance system calls,"get/set time or date, get/set system data, get/set process, file, or device attributes"
+H2,types of communications system calls,"create/delete communication connection, send/receive messages, transfer status information, attach/detach remote devices"
+H2,lock,can be introduced when sharing data to ensure the integrity of shared data
+H2,single step,CPU mode in which a trap is executed after every instruction
+H2,message passing model,interprocess communication model in which the communicating processes exchange messages with one another to transfer information
+H2,host name,unique name by which a computer is known in a network
+H2,process name,unique name which is translated into an identifier by which the operating system can refer to the process
+H2,daemon,"special-purpose process most process that receive are daemons, system programs provided for that purpose"
+H2,client (concerning daemons),the source of the communication
+H2,server (concerning daemons),the receiving daemon
+H2,shared-memory model,"interprocess communication model in which the communicating processes agree to share a region of memory, data is written into and read out of the shared regions, processes are responsible for ensuring that they are not writing to the same location simultaneously."
+H2,system programs,"provide a convenient environment for program development and execution, also known as system utilities"
+H2,system utilities,"provide a convenient environment for program development and execution, also known as system programs"
+H2,categories of system programs/system utilities,"file management, status information, file modification, programming-language support, program loading and execution, communications, background services"
+H2,system programs concerning file management,"create, delete, copy, rename, print, dump, list and generally manipulate files and directories"
+H2,system programs concerning status information,"ask status information such as time, date, amount of available memory or disk space, number of users..., typically format and print to the terminal, other output device, files or display it in a window of the GUI"
+H2,registry,"used to store and retrieve configuration information, system program concerning status information"
+H2,system programs concerning file modification,"text editors to create and modify the content of files, maybe also special commands to search contents of files or perform transformations of the text"
+H2,system programs concerning programming-language support,"compilers, assemblers, debuggers, interpreters for common programming languages, often either included or separately downloadable"
+H2,system programs concerning program loading and execution,"absolute loaders, relocatable loaders, linkage editors, overlay loaders, debugging systems for higher-level languages or machine language"
+H2,system programs concerning communications,"mechanisms for creating virtual connections among processes, users and computer systems, they allow users to send messages, browse web pages, send e-mails, log in remotely or transfer files among machines"
+H2,system programs concerning background services,"start at boot-time, may halt or continue execution, known as services, subsystems or daemons, examples: network daemon, process schedulers, system error monitoring services, prints servers, ..., important activities that run in user mode rather than in kernel mode use background services"
+H2,"services, subsystems, daemons",system-program processes that are constantly running
+H2,two basic groups of design goals,user goals and system goals
+H2,examples of user goals,"system is convenient to use, easy to learn and use, reliable, safe and fast (no general agreement how to achieve them)"
+H2,examples of system goals,"system is easy to design, implement and maintain, it should be flexible, reliale, error free and efficient"
+H2,separation of policy and mechanism,policy: what to do; mechanism: how to do it
+H2,porting an OS,to move an OS to some other hardware
+H2,emulator,program that duplicates the functionality of one system to another system
+H2,monolithic system,system in which the tasks are not partitioned into small components but interwoven in one large component
+H2,layered approach system,"system in which the operating system is broken into a number of layers, the lowest layer being the hardware, each layer can invoke lower-level operations, each layer is implemented only with operations provided by lower-level layers"
+H2,microkernel,method that structures the operating system by removing all nonessential components from the kernel and implementing them as user-level programs
+H2,Mach,operating system developed by Carnegie Mellon University that modularises the kernel using the microkernel approach
+H2,Darwin,"kernel of Mac OS X, partly based on Mach"
+H2,loadable kernel module,"kernel that has a set of core components and links in additional services via modules, either at boot time or during run time, idea is to provide core services while other services are implemented dynamically, as the kernel is running, produces a system that resembles one with layered approach, but more flexible, since every module can call any other module"
+H2,Cocoa,"environment that specifies an API for objective-C, used for development of Mac OS X applications"
+H2,kernel extensions,dynamically loadable modules as referred to in Mac OS X
+H2,Cocoa Touch,API for Objective-C that provides frameworks for developping applications for iOS devices
+H2,media services layer (iOS),"layer tht provides services for graphics, audio and video"
+H2,core services layer (iOS),"provides a variety of features, including support for cloud computing and databases"
+H2,Dalvik Virtual Machine,virtual machine that is designed for android and is optimised for mobile devices with limited memory and CPU processing capabilities
+H2,debugging,"the activity of finding and fixing errors in a system, both in hardware and in software"
+H2,performance tuning,type of debugging that seeks to improve performance by removing processing bottlenecks
+H2,log file,where an OS writes error information to if a process fails
+H2,core dump,"a capture of the memory of the process, which the OS can store in a file for later analysis"
+H2,crash,failure in the kernel
+H2,crash dump,"When a crash occurs, error information is saved to a log file and the memory state is saved to a crash dump. It is often written to a section of the disk that is set aside for this purpose."
+H2,Windows Task Manager,"performance tuning tool for Windows system, includes information for current applications as well as processes, CPU and memory usage and networking statistics"
+H2,SYSGEN,"system generation, a system is configured or generated for each specific computer site used for most OS, since they are designed to run on any class of machines at a variety of sites"
+H2,booting,the procedure of startin a computer by loading the kernel
+H2,bootstrap program/bootstrap loader,"small piece of code that locates the kernel, loads it into memory and starts its execution, usually resides in ROM"
+H2,firmware,"part of the operating system with characteristics that fal somewhere between software and hardware, all forms or ROM are known as firmware"
+H2,boot block,single block at a fixed location containing a program that may be sophisticated enough to load the entire OS into memory and begin its execution
+H2,GRUB,open-source bootstrap program for linux systems
+H2,boot disk/system disk,a disk that has a boot partition
+H3,process,"program in execution, the unit of work in a modern time-sharing system"
+H3,jobs,what CPU activities are called in a batch system
+H3,tasks/user programs,what CPU activities are called in a time-sharing system
+H3,text section,program code
+H3,program counter,"current activity of the program, along with the contents of the processor register"
+H3,stack,data structure that contains temporary data
+H3,data section,contains global variables
+H3,heap,memory that is dynamically allocated during process run time
+H3,process state,defined by the current activity of that process
+H3,possible process states,"new (process is being created), running (instructions are being executed), waiting (process is waiting for some event to occur (I/O or reception of a signal)), ready (process is waiting to be assigned to a processor), terminated (process has finished execution); names may vary across OS"
+H3,PCB,"process control block/task control block, where each process is represented in the OS, contains many pieces of information"
+H3,pieces of information in PCB,"process state, program counter, CPU registers, CPU scheduling information, memory management information, accounting information, I/O status information"
+H3,thread (of execution),"component of a process, multiple threads can exist in the same process, running concurrently with the same resources"
+H3,process scheduler,selects an available process for program execution on the CPU
+H3,job queue,queue that consists of all processes in the system
+H3,ready queue,"queue that contains all processes that are residing in main memory and are ready and waiting to execute, often implemented as a linked list"
+H3,device queue,"queue that contains all proceses that are waiting for a particular I/O device, each device has its own device queue"
+H3,queueing diagram,"common representation of process scheduling, rectangles present queues, circles present resources, arrows indicate the flow processes in the system"
+H3,dispatched,selected for execution
+H3,long-term scheduler/job scheduler,

@@ -1,0 +1,62 @@
+\documentclass[10pt]{report}
+
+\usepackage{pdfpages}
+
+\begin{document}
+\titlepage
+
+\chapter{Algemene opmerkingen:}
+  \includepdf[pages={2,4,6}, nup=2x3]{pdfFiles/Opmerkingen.pdf}
+
+\chapter{Hoofdstuk 6}
+  \section{Twee fasen methode:}
+    \begin{itemize}
+      \item Als er constanten aan de rechterkant kleiner zijn dan nul. (eg: $ 5x_1 + 4x_2 \leq -5$)
+      \item Introduceer hulpprobleem met $x_0$. Doelfunctie wordt: $min\; x_0$ en aan alle beperkingen wordt $-x_0$ toegevoegd.
+      \item Kies als uitgaande degene met de meest negatieve waarde.
+      \item Als de eerste fase afloopt en $x_0$ heeft een positieve waarde, dan kent het originele probleem geen toelaatbare oplossingen.
+    \end{itemize}
+
+\chapter{Hoofdstuk 7}
+  \section{Complementary Slackness}
+    \begin{itemize}
+      \item Als een optimale oplossing van de primaal groter dan nul is: Aan de overeenkomstige beperking van de duaal wordt voldaan.
+      \item Als er te kort wordt gedaan aan de beperking (dus linkerdeel is niet gelijk aan rechterdeel), dan is de y van die rij 0.
+      \item Dan moet er aan alle beperkingen worden voldaan met de gevonden oplossingen, en alle y's moeten positief zijn.
+    \end{itemize}
+
+
+\chapter{Hoofdstuk 8}
+  \section{Stabiliteitsinterval coefficient doelfunctie}
+    \begin{itemize}
+      \item Bepaal laatste dictionair, haal hier $B^{-1}$ uit.
+      \item Bepaal $c_B$ door de coefficienten van de basisvariabelen uit de laatste dictionair, uit de doelfunctie te halen (vergeet delta niet!).
+      \item Reken $c_N - c_B B^{-1} A_N$ uit voor de spelingsvariabelen.
+      \item Hierbij is $c_N$ dus 0 en $A_N$ is $(1, 0, 0)^T,\; (0, 1, 0)^T, ...$
+      \item Stel de hierbij gevonden waarde $\leq 0$, om zo delta te bepalen.
+    \end{itemize}
+
+  \section{Stabiliteitsinterval b waarde}
+    \begin{itemize}
+      \item Reken $B^{-1} b$ uit (met delta!)
+      \item Iedere rij moet $\geq 0$ zijn.
+      \item Kan ook variabele invullen ipv waarde met delta!
+    \end{itemize}
+
+  \section{Stabiliteitsinterval a waarde}
+    \begin{itemize}
+      \item $a_{ij}$: ide rij, jde kolom
+      \item Vindt optimale oplossing en vul in in relevante beperking.
+      \item Vindt optimale oplossing duaal (compl slackness), vul in in relevante beperking.
+
+    \end{itemize}
+
+\chapter{Hoofdstuk 9}
+  \section{Spelstrategie}
+    \begin{itemize}
+      \item Matrix opstellen.
+      \item Speel als rijspeler
+      \item Primaal: max v; v $\leq$ kolom 1, ...
+      \item Som van x = 1;
+    \end{itemize}
+\end{document}
