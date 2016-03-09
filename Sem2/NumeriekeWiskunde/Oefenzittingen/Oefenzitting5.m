@@ -5,9 +5,10 @@ h = 10.^n
 y1 = (5*exp(h) - 5)./h
 y2 = (5*exp(h) - 5*exp(-h))./(2*h)
 
-rel1 = (5.-y1)/5
-rel2 = (5.-y2)/5
+rel1 = abs(5-y1)/5
+rel2 = abs(5-y2)/5
 
 figure
-plot(h, rel1)
-plot(h, rel2)
+loglog(h, rel1)
+hold on
+loglog(h, rel2)
