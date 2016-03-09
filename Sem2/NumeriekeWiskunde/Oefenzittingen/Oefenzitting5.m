@@ -9,9 +9,12 @@ rel1 = abs(5-y1)/5                %Relatieve fout is (verwacht-uitgekomen)/verwa
 rel2 = abs(5-y2)/5
 
 figure
-loglog(h, rel1)
+loglog(h, rel1)                   
 hold on                           %Nodig zodat beide plots getekend worden, ofanders wordt de eerste door de tweede overschreven.
-loglog(h, rel2)
+loglog(h, rel2)                   
+%Twee soorten fouten: benaderingsfout & afrondingsfout
+%   f'(x) != (f(x+h) - f(x) / h) alleen juist voor als h oneindig klein is, matlab kan niet zo klein, dus quotient heeft grote relatieve fout.
+%   Als h kleiner wordt wordt benadering beter, daarna gaat afrondingsfout belangrijker worden.
 
 
 % Probleem 2 -------------------------------------------------------------------------------
@@ -23,3 +26,5 @@ hold on
 k2 = 2
 hk2 = h .^k2
 loglog(h, hk2, '--')
+
+
