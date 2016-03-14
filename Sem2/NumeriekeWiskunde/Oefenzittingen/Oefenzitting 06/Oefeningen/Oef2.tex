@@ -1,0 +1,74 @@
+\documentclass[../Oefenzitting4.tex]{subfiles}
+\begin{document}
+  \subsection{Oefening 2:}
+    Beschouw dezelfde tweede-graadsveelterm $f(x) = 2x^{2} + 4x -5$ en herhaal probleem 1 met de interpolatiepunten $ \{ -1,0,1 \} $ waarbij je voor de methode van Newton de twee soorten tabellen van gedeelde differenties opstelt. Wat is de waarde van $ E_{2}(x)$? Verklaar.
+    \begin{itemize}
+    \item a) Bereken de interpolerende veelterm $y_{1}(x)$ in de punten $\{-1, 1 \} $ met de methode van Lagrange en met de methode van Newton.
+    \\
+    $
+      x_{0} = -1, f_{0} = f(1) = -7
+      \\
+      x_{1} = 0, f_{1} = f(0) = -5
+      \\
+      x_{2} = 1, f_{2} = f(1) = 1
+      \\
+      l_{0} = \frac{(x-0)(x-1)}{(-1-0)(-1-1)} = \frac{1}{2}x(x-1)
+      \\
+      l_{1} = ... = 1-x^{2}
+      \\
+      l_{2} = ... = \frac{1}{2}x(x+1)
+      \\
+      y_{2} = \frac{-7}{2}x(x-1) - 5(1-x^{2}) + frac{1}{2}x(x+1)
+      \\
+      = 2x^{2} + 4x - 5
+    $
+    \\
+    Methode van newton:
+    \\
+    $
+      \begin{matrix}
+        -1 & -7  \\
+        0  & -5  \\
+        1  & 1
+      \end{matrix}
+      \\
+      \Rightarrow
+      \\ \frac{-5+7}{0+1} = 2
+      \\ \frac{1+5}{1-0} = 6
+      \\
+      \Rightarrow
+      \\ \frac{6-2}{1+1} = 2
+      \\
+      y_{2} = -7 +2(x+1) + 2(x+1)x = 2x^{2} + 4x - 5
+
+    $
+
+    \item b) Stel het Vandermonde stelsel op en ga na dat je oplossing hieraan voldoet.
+    \\
+    $
+    \begin{bmatrix}
+      1 & 1  \\
+      1 & -1
+    \end{bmatrix}
+    \begin{bmatrix}
+      -3 \\
+      4
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+      1 \\
+      -7
+    \end{bmatrix}
+    $
+
+    \item c) Bereken de interpolatiefout $E_{1}(x)$ ...
+    \\
+    $
+        E_{1}(x) = 2x^{2} + 4x -5 - (4x -3)
+        \\
+        = 2x^{2} - 2
+    $
+  \end{itemize}
+
+
+\end{document}

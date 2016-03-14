@@ -1,0 +1,61 @@
+\documentclass[../Oefenzitting4.tex]{subfiles}
+\begin{document}
+  \subsection{Oefening 1:}
+    Beschouw de tweede-graadsveelterm $f(x) = 2x^{2} + 4x -5$
+    \begin{itemize}
+      \item a) Bereken de interpolerende veelterm $y_{1}(x)$ in de punten $\{-1, 1 \} $ met de methode van Lagrange en met de methode van Newton.
+      \\
+      $
+        x_{0} = 1, f_{0} = f(1) = 1
+        \\
+        x_{1} = -1, f_{1} = f(-1) = -7
+        \\
+        l_{0} = \frac{x+1}{1-(-1)} = \frac{1}{2}x + \frac{1}{2}
+        \\
+        l_{1} = \frac{x-1}{-1-1} = \frac{-1}{2}x + \frac{1}{2}
+        \\
+        y_{1} = \frac{1}{2}x + \frac{1}{2} - 7(\frac{-1}{2}x \frac{1}{2})
+        \\
+        = 4x -3
+      $
+      \\
+      Methode van newton:
+      \\
+      $
+        \begin{matrix}
+          1 & 1  \\
+          1 & -7
+        \end{matrix}
+        \\
+        \Rightarrow \frac{-7 - 1}{-1 - 1} = 4
+        \\
+        y_{1} = 1+4(x-1) = 4x - 3
+      $
+
+      \item b) Stel het Vandermonde stelsel op en ga na dat je oplossing hieraan voldoet.
+      \\
+      $
+      \begin{bmatrix}
+        1 & 1  \\
+        1 & -1
+      \end{bmatrix}
+      \begin{bmatrix}
+        -3 \\
+        4
+      \end{bmatrix}
+      =
+      \begin{bmatrix}
+        1 \\
+        -7
+      \end{bmatrix}
+      $
+
+      \item c) Bereken de interpolatiefout $E_{1}(x)$ ...
+      \\
+      $
+          E_{1}(x) = 2x^{2} + 4x -5 - (4x -3)
+          \\
+          = 2x^{2} - 2
+      $
+    \end{itemize}
+\end{document}
