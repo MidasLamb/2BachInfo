@@ -1,0 +1,49 @@
+\documentclass[../Oefenzitting4.tex]{subfiles}
+\begin{document}
+  \subsection{Oefening 3:}
+    \begin{itemize}
+      \item a) \\
+        $
+          B = \int dB = \int k_{m} \frac{I d\vec{s} \times \hat{r}}{r^{2}}
+        $ \\
+          $\Downarrow $ Q ligt evenwijdig met segment: $ sin(0) = sin(\pi) = 0 $
+          \\
+        $
+          B = 0
+        $
+      \item b) \\
+        Formule: \\
+          $
+            B = \int dB = \int k_{m} \frac{I d\vec{s} \times \vec{r}}{r^{2}}
+          $
+        \\
+        $\Downarrow$$k_{m}$ en $I$ zijn constant
+        \\
+        $
+          = k_{m}I \int \frac{d\vec{s} \times \vec{r}}{r^{2}}
+        $
+        \\
+        $\Downarrow$$\sin(\theta) = \frac{y}{r}$
+        \\
+        $
+          = k_{m}I \int \frac{ydx}{r^{3}}
+        $
+        \\
+        $\Downarrow$ $y$ is constante
+        \\
+        $
+          = k_{m}Iy \int \frac{dx}{r^{3}}
+        $
+        \\
+        $\Downarrow$ $r= \sqrt{x^{2}+y^{2}}$
+        \\
+        $
+          = k_{m}Iy \int \frac{dx}{(x^{2}+y^{2})^{3/2}}
+          \\
+          = k_{m}Iy \left[ \frac{x}{y^{2}(x^{2} + y^{2})^{1/2}}  \right]^{0}_{-d}
+          \\
+          = k_{m}Iy \left[ \frac{d}{y^{2}(d^{2} + y^{2})^{1/2}}  \right]
+        $
+
+    \end{itemize}
+\end{document}
