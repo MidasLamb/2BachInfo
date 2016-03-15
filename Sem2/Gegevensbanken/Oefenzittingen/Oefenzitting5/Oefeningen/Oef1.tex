@@ -1,7 +1,7 @@
 \documentclass[../Oefenzitting5.tex]{subfiles}
 \begin{document}
   \subsection{Oefening 1:}
-    \begin{enumerate}
+    \begin{enumerate}[label=\alph*)]
       \item
         $
           \{ t | R(t) \wedge t.A = t.C \}
@@ -12,11 +12,11 @@
         $
       \item
         $
-          \{ t.A, t.B, t.C, s.D, s.E | R(t) \wedge S(s) \wedge b.C = s.C \}
+          \{ t.A, t.B, t.C, s.D, s.E | R(t) \wedge S(s) \wedge t.C = s.C \}
         $
       \item
         $
-          \{ t | R(t) \wedge S(t)  \}
+          \{ t | R(t) \vee S(t)  \}
         $
       \item
         $
@@ -24,9 +24,16 @@
         $
       \item
         $
-          \{ t |
+          \{ t | R(t) \wedge \neg S(t) \}
         $
-
+      \item
+        $
+          \{ t,s | R(t) \wedge S(s) \}
+        $
+      \item
+        $
+          \{ t.B | R(t) \wedge \forall(s) (\neq S(s) \vee (\exists(x) R(x) \wedge t.B = x.B \wegde x.A = s.A)) \} 
+        $
 
     \end{enumerate}
 
