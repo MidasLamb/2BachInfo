@@ -1,0 +1,34 @@
+\documentclass[../Oefenzitting5.tex]{subfiles}
+\begin{document}
+	\subsection{Oefening 2:}
+	\begin{enumerate}
+		\item
+			$ \{ t.Naam , t.Functie, s.Naam \mid M(t) \wedge A(s) \wedge t.Afd = s.Afnr \} $
+
+	   \item
+		   % Niet zeker dat deze juist is
+		   $ \{ t.Naam \mid M(t) \wedge C(s) \wedge s.Type = BLD \wedge I(i) \wedge s.Code = i.Cursus\_code \wedge t.Mnr = i.Cursist \} $ 
+		   
+		\item
+			$ \{ t.Naam \mid M(t) \wedge ((\exists{m}) (M(m) \wedge m.Chef = t.Mnr) \vee (\exists{u}) (U(u) \wedge u.Docent = m.Mnr )) \} $
+			
+		\item
+			$ \{ t.Naam \mid M(t) \wedge \neg (\exists{m})(M(m) \wedge m.Chef = t.Mnr) \wedge (\exists{n})(M(n) \wedge (\exists{o})(M(o) \wedge o.Chef = n.Mnr) \wedge n.Salaris < t.Salaris) \} $
+			
+		\item
+			$ \{ t.Naam \mid M(t) \wedge (\forall{c}) (C(c) \Rightarrow (\exists{i}) (I(i) \wedge c.Code = i.Cursus\_code \wedge i.Cursist = t.Mnr)) \} $
+			
+		\item
+			$ \{ t.Naam \mid M(t) \wedge (\forall{i}) (I(i) \wedge i.Cursist = t.Mnr \Rightarrow i.Evaluatie \geq 4) \} $
+			
+		\item
+			$ \{ c.Code, c.Omschrijving \mid C(c) \wedge (\forall{u}) (U(u) \wedge c.Code = u.Cursus\_code \Rightarrow u.Locatie = Leuven) \} $
+			
+		\item
+			$ \{ c.Code, c.Omschrijving \mid C(c) \wedge (\forall{m}) (M(M) \Rightarrow (\exists{i}) (I(i) \wedge m.Mnr = i.Cursist \wedge c.Code = i.Cursus\_code)) \} $
+       
+	\end{enumerate}
+
+
+
+\end{document}
