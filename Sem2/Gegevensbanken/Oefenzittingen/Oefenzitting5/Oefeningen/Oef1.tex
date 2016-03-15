@@ -4,7 +4,7 @@
     \begin{enumerate}
       \item
         $
-          \{ t | R(t) ^ t.A = t.C \}
+          \{ t | R(t) \wedge t.A = t.C \}
         $
       \item
         $
@@ -12,15 +12,15 @@
         $
       \item
         $
-          \{ t, s | R(t) ^ S(s) ^ t.C = s.C  \}
+          \{ t.A, t.B, t.C, s.D, s.E | R(t) \wedge S(s) \wedge b.C = s.C \}
         $
       \item
         $
-          \{ t | R(t) v S(t)  \}
+          \{ t | R(t) \wedge S(t)  \}
         $
       \item
         $
-          \{ t | R(t) ^ S(t) \}
+          \{ t | R(t) \wedge S(t) \}
         $
       \item
         $
