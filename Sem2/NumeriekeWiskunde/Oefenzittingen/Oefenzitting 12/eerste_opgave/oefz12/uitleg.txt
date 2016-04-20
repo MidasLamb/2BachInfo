@@ -1,0 +1,11 @@
+Eerste functie
+
+we zien op die figuur drie dat die oranje zou moeten convergeren in kubische tijd, maar dit gebeurd niet, de methodes falen omdat er dubbele nulpunten zijn.
+
+Tweede functie, we zien dat het hier veel beter is.
+
+derde functie
+
+halley de paarse haalt zijn convergentie factor niet, want die gaat tot 10^20
+
+de gele is al na stappen aan de machine preciesie (zie grafiek relatieve fout) dus deze kunnen we niet bekijken 
