@@ -3,7 +3,8 @@ if k == 0
     output = 0.7;
     return;
 else
-    output = (3*(methode2(k-1))^2-methode2(k-1)+1)/(4*methode2(k-1));
+    value = methode2(k-1);
+    output = (3*(value)^2-value+1)/(4*value);
     return;
 end
 

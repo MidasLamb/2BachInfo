@@ -1,0 +1,17 @@
+Eerste methode
+
+duidelijk te zien dat de relatieve fout toeneemt
+
+en aan de andere plot zie je ook duidelijk dat de functie divergeert
+
+Tweede methode
+
+Convergeert perfect je ziet duidelijk hoe de relatieve fout naar nul gaat en de waaarde naar de juiste waarde gaat naarmate het aantal iteraties toeneemt
+
+Derde methode 
+
+Convergeert maar niet monotoom, je zit ook duidelijk hoe de relatieve fout naar nul gaat en de waarde naar de juiste waarde gaat.
+
+Omdat deze zo op en neer gaat, dat omhoog en omlaag gaan op het begin, betekend dat de functie monotoom is
+
+Vierde methode convergeert ook perfect, heel duidelijk
