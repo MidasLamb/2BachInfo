@@ -1,0 +1,8 @@
+% methode 1
+% relatieve fout
+
+K = 100;
+waardes = vpa(zeros(1, K));
+
+for k = 0:1:K
+    waardes(k) = 

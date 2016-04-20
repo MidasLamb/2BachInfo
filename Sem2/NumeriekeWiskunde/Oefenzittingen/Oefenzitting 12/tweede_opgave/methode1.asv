@@ -1,0 +1,8 @@
+function [ output ] = methode1( x, k )
+if k == 0
+    output = 0;
+    return;
+else
+    return 
+end
+
