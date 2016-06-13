@@ -4,3 +4,6 @@
 [submodule "Sem1/LineaireAlgebra/SamenvattingNorFairKing"]
 	path = Sem1/LineaireAlgebra/SamenvattingNorFairKing
 	url = https://github.com/NorfairKing/lineairealgebra.git
+[submodule "Gegevensbanken Boeksamenvatting"]
+	path = Sem2/Gegevensbanken/Boeksamenvatting
+	url = https://github.com/th0rgall/Databases.git

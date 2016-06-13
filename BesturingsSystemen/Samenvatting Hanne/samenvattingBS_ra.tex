@@ -1,0 +1,1533 @@
+\documentclass{report}
+\begin{document}
+
+\chapter{Introduction}
+\textbf{operating system} = programma $\Rightarrow$ beheert de hardware van de computer
+\\*= basis voor application programma's
+\\*= intermediary tussen de gebruiker en de hardware
+\\* $\Rightarrow$ verschillende soorten operating systems:
+\begin{itemize}
+	\item Mainframe 
+	\\*$\Rightarrow$ optimaal gebruik van hardware
+	\item Personal computer(\textbf{PC})
+	\\*$\Rightarrow$ ondersteunen zowel complexe games als business 		applications en alles ertussen
+	\item Mobile computers
+	\\*$\Rightarrow$ omgeving met gemakkelijke interface om programma's uit te voeren
+\end{itemize}
+DUS: sommige operating systems zijn ontworpen om gemakkelijk te zijn, andere om effici\"ent te zijn en andere een combinatie van de twee.
+
+\section{What Operating Systems Do}
+computersysteem:
+\begin {itemize}
+	\item \textbf{hardware}
+	\\*= \textbf{central processing unit(CPU)}, \textbf{memory} en \textbf{input/output (I/O) devices}
+	\\* $\Rightarrow$ basic computing resources voor systeem
+	\item operating system
+	\\* $\Rightarrow$ controleert de hardware en co\"ordineert het gebruik over de verschillende application programs voor de verschillende gebruikers
+	\item \textbf{application programs}
+	\\*$\Rightarrow$ hoe de resources gebruikt worden om de user' computing problems oplossen
+	\item users
+\end {itemize}
+computersysteem ook als: hardware, software en data
+\\*operating system $\Rightarrow$ geen nuttige functie op zich
+\\*= omgeving waarin andere programma's nuttig kunnen werken
+
+\subsection{User View}
+\begin{itemize}
+	\item PC
+	\\*$\Rightarrow$ bestaat uit: monitor, toetsenbord, muis en system unit
+	\\*$\Rightarrow$ ontworpen zodat \'e\'en gebruiker alle resources krijgt om het werk van de gebruiker te maximaliseren
+	\\*= ontworpen voor \textbf{ease of use}(=gebruiksgemak) met een beetje aandacht voor performance en geen voor \textbf{resource utilization}(=hoe divers hardware en software resources verdeeld zijn)
+	\item \textbf{mainframe} of \textbf{minicomputer}
+	\\*$\Rightarrow$ bestaat uit: terminals verbonden met dezelfde mainframe of minicomputer
+	\\*$\Rightarrow$ ontworpen voor maximale resource utilization
+	\item \textbf{workstations}
+	\\*$\Rightarrow$ bestaat uit: workstations verbonden met netwerken van andere workstations en \textbf{servers}
+	\\*$\Rightarrow$ ontworpen als compromis tussen individueel gebruik en resource utilization
+	\item mobile computers
+	\\*= standalone units voor individuele gebruikers vaak verbonden met netwerken door cellular of andere wireless technologies
+	\\*$\Rightarrow$ user interface gebruikmakend van \textbf{touch screen} door drukken en vegen met vingers over het scherm
+	\item embedded computers
+	\\*= computers met weinig of geen user view
+	\\*$\Rightarrow$ ontworpen om zonder user intervention te runnen
+\end{itemize}
+
+\subsection{System View}
+operating system:
+\begin{itemize}
+	\item\textbf{resource allocator}
+	\\*= kent de resources toe bij vele en mogelijk conflicting resource requests zodat het computersysteem effici\"ent en eerlijk werkt
+	\item\textbf{control program} 
+	\\*$\Rightarrow$ beheert de uitvoering van user programma's om errors te voorkomen en onjuist gebruik van de computer
+\end{itemize}
+
+\subsection{Defining Operating Systems}
+in 1960: \textbf{Moore's Law} voorspelde dat het aantal transistors op een integrated circuit zou elke 18 maanden verdubbelen
+\\$\Rightarrow$ computers werden meer functioneel en kleiner 
+\\$\Rightarrow$ meer toepassingen en een groot aantal diverse operating systems
+\\
+\\fundamentele doel van computersystemen = gebruikersprogramma's uitvoeren en het oplossen van gebruikersproblemen gemakkelijker maken
+\\ $\Rightarrow$ hardware en software ontwikkeld voor dit doel
+\\
+\\operating system = het ene programma dat altijd runt op de computer = \textbf{kernel}
+\\$\Rightarrow$ ook nog: 
+\begin{itemize}
+\item \textbf{system programs}
+\\= geassocieerd met operating system maar niet noodzakelijk deel van de kernel
+\item application programs
+\\= alle programma's die niet geassocieerd worden met operating system
+\end{itemize}
+mobile operating systems: vaak niet alleen core kernel maar ook \textbf{middleware}(= set of software frameworks die aanvullende services voorzien voor application developers)
+\\bv.: iOS en Android $\Rightarrow$ middleware die databases, multimedia en graphics ondersteunt
+
+\section{Computer-System Organization}
+\subsection{Computer-System Operation}
+modern general-purpose computersysteem
+\\$\Rightarrow$ bestaat uit: \'e\'en of meer CPU's en een aantal device controllers(\'e\'en voor elk specifiek type device) verbonden met een gemeenschappelijke bus die toegang voorziet tot shared memory
+\\$\Rightarrow$ CPU en device controllers kunnen in parallel uitvoeren met behulp van de memory controller die de toegang tot het shared memory synchroniseerd
+\\
+\\computer $\Rightarrow$ te beginnen runnen (bij opstarten of reboot) $\Rightarrow$ intieel programma 
+\\= \textbf{bootstrap program}
+\\$\Rightarrow$ bewaard in hardware in \textbf{read-only memory(ROM)} of \textbf{electrically erasable programmable read-only memory(EEPROM)} = \textbf{firmware}
+\\$\Rightarrow$ initialiseert het hele systeem
+\\$\Rightarrow$ moet weten hoe het operating system te laden en uit te voeren
+\\= operating-system kernel localiseren en in memory laden
+\\
+\\sommige services $\Rightarrow$ buiten de kernel door system programs die bij boot time in memory zijn geladen
+\\ = \textbf{system processes} of \textbf{system daemons}
+\\ $\Rightarrow$ runnen zolang de kernel runt
+\\
+\\optreden van een gebeurtenis $\Rightarrow$ gesignaliseerd door \textbf{interrupt} van:
+\begin{itemize}
+\item hardware
+\\$\Rightarrow$ op elk moment door signaal te sturen naar de CPU, meestal met de system bus
+\item software
+\\$\Rightarrow$ door een speciale operatie (=\textbf{system call}= \textbf{monitor call}) uit te voeren
+\end{itemize}
+wanneer CPU onderbroken $\Rightarrow$ stopt wat het bezig is en verplaatst onmiddelijk uitvoering naar vaste locatie(die het startadres van de service routine voor de interrupt bevat)
+\\$\Rightarrow$ interrupt service routine wordt uitgevoerd
+\\$\Rightarrow$ CPU hevat de onderbroken berekening
+\\
+\\interrupts = belangrijk deel van computerarchitectuur
+\\$\Rightarrow$ elk computer design $\Rightarrow$ eigen interrupt mechanism, maar verschillende functies zijn algemeen
+\\interrupt $\Rightarrow$ controle overdragen aan de gepaste interrupt service routine
+\\ $\Rightarrow$ straightforward method: algemene routine oproepen om de interrupt information te onderzoeken $\Rightarrow$ routine roept de interrupt-specific handler op
+\\ MAAR: interrupts moeten snel behandeld worden
+\\$\Rightarrow$ maar aantal voorgedefineerde interrupts mogelijk dus table met pointers naar interrupt routines
+\\$\Rightarrow$ interrupt routine wordt indirect opgeroepen door de table zonder intermediate routine
+\\$\Rightarrow$ in algemeen: table met pointers bewaard in low memory(houden de adressen bij van de interrupt service routines voor de verschillende devices) = array of \textbf{interrupt vector} van adressen wordt ge\"indexeerd door een uniek device number meegegeven met de interrupt request
+\\
+\\adres van onderbroken instructie $\Rightarrow$ ook bewaard worden
+\\$\Rightarrow$ oude designs $\Rightarrow$ vaste locatie
+\\$\Rightarrow$ recente designs $\Rightarrow$ op de system stack
+
+\subsection{Storage Structure}
+CPU kan enkel instructies uit het geheugen laden
+\\$\Rightarrow$ general-purpose computers runnen meeste programma's vanuit rewritable memory = main memory(\textbf{random-access memory(RAM)})
+\\$\Rightarrow$ main memory $\Rightarrow$ ge\"implementeerd in semiconductor technology = \textbf{dynamic random-access memory(DRAM)}
+\\andere vormen van memory:
+\begin{itemize}
+\item ROM
+\\ = niet veranderbaar, alleen statische programma's
+\\bv.: bootstrap program
+\item EEPROM
+\\ = veranderbaar maar niet vaak, voornamelijk statische programma's
+\\bv.: smartphones $\Rightarrow$ om fabrieksinstellingen te herstellen
+\end{itemize}
+elke vorm memory $\Rightarrow$ array van bytes(met elke byte eigen adres)
+\\$\Rightarrow$ explicit loads en stores
+\\$\Rightarrow$ CPU laadt ook automatisch instructies van main memory voor uitvoering
+\\
+\\ systeem met \textbf{von Neumann architecture}
+\\$\Rightarrow$ haalt eerst een instructie uit memory en bewaart die in \textbf{instruction register}
+\\$\Rightarrow$ instructie wordt vertaald en operands kunnen uit memory gehaald worden en in een intern register bewaard worden
+\\$\Rightarrow$ instructie wordt op operands uitgevoerd
+\\$\Rightarrow$ resultaat wordt terug in memory bewaard
+\\memory unit $\Rightarrow$ alleen een serie memory adressen(niet hoe gegenereerd of waarvoor)
+\\
+\\ideaal: programma's en data permanent in main memory
+\\ $\Rightarrow$ niet mogelijk:
+\begin{itemize}
+\item te klein
+\\ om alle benodigde programma's en data permanent te bewaren
+\item \textbf{volatile}(=vluchtig)storage device
+\\$\Rightarrow$ verliest inhoud zonder stroom of die op een andere manier verloren is gegaan
+\end{itemize}
+DUS: \textbf{second storage} als uitbreiding van main memory met als hoofdvereiste het permanent bewaren van grote hoeveelheden data
+\\ $\Rightarrow$ meest voorkomende: \textbf{magnetic disk}(storage voor zowel programma's als data)
+\\
+\\storage structuur met registers, main memory en magnetic disk = maar \'e\'en van de vele mogelijke
+\\$\Rightarrow$ andere met: cache memory, CD-ROM, magnetic tapes
+\\$\Rightarrow$ verscheidenheid kan georganiseerd worden in hierarchy(hogere levels = duur en snel, lager gaan: kost per bit daalt en acces time neemt toe)
+\\$\Rightarrow$ registers, cache, main memory en solid-state disk = semiconductor memory
+\\verschillende storage systems:
+\begin{itemize}
+\item \textbf{volatile storage}
+\\= registers, cache, main memory
+\\= verliest inhoud zonder stroom
+\item \textbf{nonvolatile storage}
+\\= solid-state disk, magnetic disk, optical disk, magnetic tapes
+\\$\Rightarrow$ zonder een dure batterij en generator backup system => data op nonvolatile storage om veilig te bewaren
+\end{itemize}
+\textbf{solid-state disks}
+\\ = sneller dan magnetic disks en nonvolatile
+\\ verschillende soorten:
+\begin{itemize}
+\item data bewaren in grote DRAM array
+\\$\Rightarrow$ bevat ook een verborgen magnetic hard disk en een batterij voor backup power
+\item flash memory
+\\ $\Rightarrow$ in camera's, \textbf{personal digital assistents(PDA's)},robots en storage op general-purpose computers
+\\$\Rightarrow$ trager dan DRAM maar geen stroom nodig om inhoud te behouden
+\item \textbf{NVRAM}
+\\= DRAM met batterij backup power
+\\= even snel als DRAM en zolang de batterij het uithoudt novolatile
+\end{itemize}
+
+\subsection{I/O Structure}
+afhankelijk van de device controller kan meer dan \'e\'en device vastgehecht worden
+\\bv.: \textbf{small computer-systems interface(SCSI)}controller $\Rightarrow$ 7 of meer devices
+\\
+\\device controller
+\\$\Rightarrow$ bestaat uit: wat local buffer storage en een set van special-purpose registers
+\\$\Rightarrow$ verplaatst de data tussen de randapparaten dat het controleert en zijn local buffer storage
+\\$\Rightarrow$ voor elke device controller $\Rightarrow$ \textbf{device driver}(begrijpt de device controller en voorziet de rest van het operating system van een uniforme interface naar het device toe
+\\
+\\start I/O operation
+\begin{enumerate}
+\item device driver: laadt de gepaste registers in de device controller
+\item device controller: inhoud bekijken $\Rightarrow$ welke actie 
+\item device controller: data verplaatsen van device naar locale buffer
+\item device controller: verplaatsen van data = compleet $\Rightarrow$ interrupt naar device driver dat operatie gedaan is
+\item device driver: geeft de controle terug aan het operating system 
+\\$\Rightarrow$ bij read: geeft data of pointer naar data terug
+\\$\Rightarrow$ bij andere operatie: geeft status informatie terug
+\end{enumerate}
+$\Rightarrow$ \'e\'en interrupt per byte voor low-speed devices
+\\= vorm van interrupt-driven I/O 
+\\$\Rightarrow$ goed voor kleine hoeveelheden data
+\\$\Rightarrow$ te veel overhead bij heel veel data verplaatsing (bv.: disk I/O)
+\\ oplossing: \textbf{direct memory access(DMA)}
+\\$\Rightarrow$ na opzetten buffers, pointers en counters voor I/O device $\Rightarrow$ device controller verplaatst een hele blok data direct naar of van zijn buffer storage naar het memory zonder tussenkomst van CPU
+\\$\Rightarrow$ maar \'e\'en interrupt per blok dat operatie gedaan is
+\\$\Rightarrow$ CPU beschikbaar voor andere taken
+\\sommige high-ends systems eerder switch dan bus architecture
+
+\section{Computer-System Architecture}
+\subsection{Single-Processor Systems}
+single-processor system:
+\\=\'e\'en main CPU in staat om general-purpose instruction set(ook instructies van gebruikersprocessen)uit te voeren
+\\$\Rightarrow$ bevat ook andere special-purpose processors: device-specific processors(bv.: disk, keyboard en graphics controllers) of op mainframes $\Rightarrow$ meer general-purpose processors
+\\
+\\special-purpose processors 
+\\$\Rightarrow$ run limited instruction set en runnen geen user processes
+\\$\Rightarrow$ soms beheerd door operating system: stuurt informatie over volgende taak en controleert hun status
+\\$\Rightarrow$ in andere systemen of omstandigheden: special-purpose microprocessors = low-level components gebouwd in de hardware, operating system kan er niet mee communiceren, voeren taken autonoom uit
+\\
+\\ maar \'e\'en general-purpose CPU $\Rightarrow$ single-processor system (aantal special-purpose microprocessoren maakt niet uit)
+
+\subsection{Multiprocessor Systems}
+\textbf{multiprocessor systems}= \textbf{parallel systems} =\textbf{multicore systems}
+\\= 2 of meer processors die communiceren, de computer bus delen en soms de clock, memory en randapparaten
+\\$\Rightarrow$ eerst in servers, dan in desktop en laptop systemen en vervolgens op mobile devices(zoals smartphone en tablet computers)
+\\$\Rightarrow$ 3 voornaamste voordelen:
+\begin{enumerate}
+\item increased throughput
+\\$\Rightarrow$ meer werk gedaan in minder tijd
+\\$\Rightarrow$ speed-up ratio met N processors is minder dan N
+\item economy of scale
+\\$\Rightarrow$ multiprocessor systemen kosten minder dan equivalente meerdere single-processor systemen $\Rightarrow$ randapparaten, massa-opslag en stroomtoevoer gedeeld 
+\item increased reliability
+\\$\Rightarrow$ als functies goed verdeeld over verschillende processors $\Rightarrow$ falen van \'e\'en processor stopt het systeem niet $\Rightarrow$ alleen trager
+\\$\Rightarrow$ cruciaal in vele applicaties
+\end{enumerate}
+\textbf{graceful degradation}
+\\= vermogen om service te voorzien proportioneel aan het aantal overlevende hardware
+\\$\Rightarrow$ verder dan graceful degradation 
+\\= \textbf{fault tolerant}
+\\$\Rightarrow$ elke single component kan falen en systeem kan toch verder operatie uitvoeren
+\\$\Rightarrow$ mechanisme om falen te detecteren, diagnoseren en indien mogelijk corrigeren
+\\bv.: HP NonStop(voordien Tandem) $\Rightarrow$ meerdere paren CPU's die in lockstep werken $\Rightarrow$ resultaat van de 2 processoren niet gelijk $\Rightarrow$ proces verplaatst naar ander paar processor 
+\\ $\Rightarrow$ duur want speciale hardware en aanzienlijk wat hardware duplication
+\\
+\\ multiple-processor systems:
+\begin{itemize}
+\item \textbf{asymmetric multiprocessing}
+\\$\Rightarrow$ elke processor is een specifieke taak toegekend
+\\$\Rightarrow$ boss processor die werk schedult en toekent aan worker processors
+\item \textbf{symmetric multiprocessing(SMP)}
+\\$\Rightarrow$ in meeste systemen
+\\$\Rightarrow$ alle processors zijn gelijken
+\\$\Rightarrow$ elke processor $\Rightarrow$ eigen set registers en local cache, maar delen physical memory
+\\bv. AIX
+\end{itemize}
+verschil tussen symmetric en asymmetric multiprocessing $\Rightarrow$ resulteert van ofwel hardware of software
+\\$\Rightarrow$ special hardware om meerdere processors te onderscheiden of software die maar \'e\'en baas toelaat en meerdere werkers
+\\
+\\multiprocessing $\Rightarrow$ voegt CPU's toe om de computing power te doen toenemen
+\\$\Rightarrow$ als CPU een integrated memory controller heeft $\Rightarrow$ toevoegen van CPU's $\Rightarrow$ toename van memory addressable in het systeem 
+\\$\Rightarrow$ kan ervoor zorgen dat een systeem zijn memory acces model verandert van \textbf{uniform memory access(UMA)} naar \textbf{non-uniform memory access(NUMA)}
+\begin{itemize}
+\item UMA
+\\= toegang tot elke RAM vanaf elke CPU duurt even lang
+\item NUMA
+\\= bij sommige delen van memory duurt het langer om te accessen dan andere delen
+\\$\Rightarrow$ operating systems kunnen NUMA penalty minimaliseren door resource management
+\end{itemize}
+recent in CPU design: meerdere computing cores op single chip
+\\= \textbf{multicore} multiprocessor systems
+\\= effici\"enter dan dan meerdere chips met single cores $\Rightarrow$ on-chip communication is sneller dan between-chip communication
+\\$\Rightarrow$ ook minder stroomverbruik bij \'e\'en chip met meerdere cores
+\\
+\\\textbf{blade servers}
+\\$\Rightarrow$ meerdere processor boards, I/O boards en networking boards worden in dezelfde chassis geplaatst
+\\$\Rightarrow$ verschil met traditionele multiprocessor systems = elke blade-processor board boots onafhankelijk en runt zijn eigen operating system 
+
+\subsection{Clustered Systems}
+\textbf{clustered system}
+\\= type van multiprocessor system dat meerdere CPU's samen verzameld
+\\$\Rightarrow$ verschillen van multiprocessor systems: samengesteld uit 2 of meer individuele systemen(of nodes) die samengevoegd zijn
+\\=\textbf{loosely coupled}
+\\$\Rightarrow$ elke node $\Rightarrow$ single processor system of multicore system
+\\in algemeen: clustered computers delen storage en zijn closely gelinkt via een local-area network LAN of een snellere interconnect(bv.: InfiniBand)
+\\
+\\ clustering $\Rightarrow$ om \textbf{high-availability} service te voorzien
+\\ $\Rightarrow$ service gaat door zelfs als \'e\'en of meer systemen in de cluster falen
+\\ in algemeen high-availability bekomen door: een niveau van redundancy(overtolligheid)in het systeem toe te voegen
+\\ $\Rightarrow$ laag van van cluster software runt op de cluster nodes
+\\$\Rightarrow$ elke node kan \'e\'en of meerdere van de andere nodes controleren (over de LAN)
+\\$\Rightarrow$ wanneer gecontroleerde machine faalt $\Rightarrow$ controlemachine neemt storage over en herstart de applicaties die aan het runnen waren op de gefaalde machine
+\\$\Rightarrow$ gebruikers zien enkel korte onderbreking van service
+\\
+\\clustering:
+\begin{itemize}
+\item \textbf{asymmetric clustering}
+\\=\'e\'en machine in \textbf{hot-standby mode} terwijl de andere de applicaties runt
+\\$\Rightarrow$ hot-standby host machine controleert de actieve server en zodra die server failt, wordt de hot-standby host de actieve server
+\item\textbf{symmetric clustering}
+\\= twee of meer hosts runnen applicaties en controleren elkaar
+\\$\Rightarrow$ effici\"enter $\Rightarrow$ gebruikt alle beschikbare hardware
+\\$\Rightarrow$ vereist wel meer dan \'e\'en applicatie beschikbaar om te runnen
+\end{itemize}
+cluster bestaat uit verschillende computersystemen verbonden via een netwerk
+\\$\Rightarrow$ gebruikt worden om \textbf{high-performance computing} environments te voorzien
+\\$\Rightarrow$ kunnen aanzienlijk grotere computational power leveren dan single-processor of SMP systems omdat een applicatie tegelijk kan runnen op alle computers in de cluster
+\\$\Rightarrow$ applicatie geschreven in voordeel van cluster = \textbf{parallelization}
+\\$\Rightarrow$ verdeelt een programma in afzonderlijke componenten die in parallel runnen op individuele computers in de cluster
+\\
+\\andere vormen van clusters: parallel clusters en clustering over een wide-area network(WAN)
+\\parallel clusters $\Rightarrow$ meerdere hosts om dezelfde data te accessen in shared storage
+\\$\Rightarrow$ gebruik van speciale versies van software en speciale releases van applicaties is vereist (bv.: Oracle Real Application Cluster = speciale versie van Oracle's database)
+\\$\Rightarrow$ elke machine runt Oracle en een laag software volgt de toegang tot de shared disk
+\\$\Rightarrow$ elke machine $\Rightarrow$ volledige toegang tot alle data in database
+\\$\Rightarrow$ shared acces $\Rightarrow$ acces control en locking om conflicting operations te voorkomen door het syteem = \textbf{distributed lock manager(DLM)} 
+\\
+\\cluster technology verandert snel $\Rightarrow$ veel verbeteringen mogelijk door \textbf{storage-area networks(SAN's)} 
+\\$\Rightarrow$ staat vele systemen toe om vast te maken aan een pool of storage
+\\$\Rightarrow$ applications en data bewaard op SAN $\Rightarrow$ cluster software kan de applicatie toekennen om te runnen op elke hosted vastgehecht aan de SAN
+\\$\Rightarrow$ als host faalt $\Rightarrow$ andere host kan overnemen
+\\in database cluster: heel veel hosts kunnen zelfde database delen
+\\$\Rightarrow$ performance en reliability nemen toe
+
+\section{Operating-System Structure}
+single program $\Rightarrow$ meestal niet of CPU of I/O devices hele tijd bezighouden
+\\single user $\Rightarrow$ vaak meerdere programma's running
+\\$\Rightarrow$\textbf{multiprogramming} $\Rightarrow$ toenemende CPU utilization door jobs te organizeren zodat CPU altijd \'e\'en om uit te voeren
+\\$\Rightarrow$ operating system $\Rightarrow$ verschillende jobs tegelijk in memory
+\\$\Rightarrow$ main memory te klein voor alle jobs, dus initieel op disk bewaard in \textbf{job pool}(= alle processen die op de disk verblijven in afwachting van toekenning aan main memory)
+\\$\Rightarrow$ wanneer uitvoerend process moet wachten $\Rightarrow$ ander proces uitvoeren uit job pool
+\\
+\\logische uitbreiding multiprogramming = \textbf{timesharing} of \textbf{multitasking}
+\\= CPU voert meerdere jobs uit door ertussen te switchen maar zo frequent dat de gebruikers met elk programma kunnen interacten terwijl het runt
+\\$\Rightarrow$ vereist \textbf{interactive} computersysteem = voorziet directe communicatie tussen user en systeem
+\\$\Rightarrow$ user geeft instructies aan operating system of programma direct door toetsenbord, muis, touch pad of touch screen en wacht voor onmiddelijke resultaten op output device
+\\$\Rightarrow$ \textbf{response time} moet kort zijn, minder dan 1 seconde
+\\
+\\time-shared operating system $\Rightarrow$ meerdere gebruikers op computer tegelijkertijd
+\\$\Rightarrow$ indruk dat computer systeem toegewijd is aan \'e\'en gebruiker hoewel het verdeeld wordt over vele gebruikers
+\\
+\\\textbf{process} = programma dat in het geheugen geladen wordt en uitvoert
+\\time sharing en multiprogramming $\Rightarrow$ vereisen verschillende jobs tegelijk in geheugen 
+\\$\Rightarrow$ verschillende jobs klaar om in geheugen gebracht te worden $\Rightarrow$ niet genoeg plek voor allemaal $\Rightarrow$ systeem moet kiezen met behulp van \textbf{job scheduling}
+\\\textbf{CPU scheduling} = kiezen welke job eerst runt 
+\\
+\\in time sharing systeem $\Rightarrow$ operating system moet redelijke response time verzekeren $\Rightarrow$ soms door \textbf{swapping}(= waarbij processen in en uit het hoofdgeheugen naar disk worden verwisseld
+\\meer gebruikte methode voor redelijke response time = \textbf{virtual memory}(= laat uitvoering van proces toe dat niet helemaal in geheugen zit)
+\\$\Rightarrow$ grote voordeel: laat gebruikers toe om grotere programma's te runnen dan eigenlijke \textbf{physical memory}
+\\$\Rightarrow$ hoofdgeheugen wordt weergegeven door grote uniforme arrray van storage, waarin \textbf{logical memory} wordt gescheiden van physical memory
+\\
+\\time-sharing systeem $\Rightarrow$ moet ook file systeem, mechanisme om resources te beschermen van ongepast gebruik, mechanisme voor job sychronizatie en communicatie voorzien
+
+\section{Operating-System Operations}
+moderne operating systems = \textbf{interrupt driven}(= als er niets te doen is, wacht operating system tot er iets gebeurt)
+\\gebeurtenissen worden gesignaliseerd door \textbf{trap} of \textbf{exception} = software-generated interrupt ofwel door error ofwel door specifiek request van user program dat operating-system service nodig heeft
+\\voor elke interrupt $\Rightarrow$ aparte segments of code bepalen welke actie 
+\\$\Rightarrow$ interrupt service routine voorzien om interrupt af te handelen
+\\
+\\omdat operating system en users hardware en software resources delen $\Rightarrow$ zorgen dat error in user programma alleen problemen veroorzaakt voor het ene programma dat runt
+\\$\Rightarrow$ met sharing $\Rightarrow$ vele processen nadelig be\"invloed door bug in \'e\'en programma 
+\\ deftig ontworpen operating system moet verzekeren dat incorrect programma er niet voor kan zorgen dat andere programma's incorrect uitvoeren
+\subsection{Dual-Mode And Multimode Operation}
+onderscheiden van uitvoering:
+\begin{itemize}
+\item operating-system code
+\item user-defined code
+\end{itemize}
+meeste besturingssystemen voorzien hardware-ondersteuning die toelaat om af te wisselen tussen verschillende modes van uitvoering
+\\$\Rightarrow$ tenminste 2 modes nodig:
+\begin{itemize}
+\item \textbf{user mode}
+\item \textbf{kernel mode}
+\\= \textbf{supervisor mode}
+\\= \textbf{system mode}
+\\= \textbf{privileged mode}
+\end{itemize}
+bit om huidige mode aan te geven in hardware = \textbf{mode bit}
+\begin{itemize}
+\item kernel
+\\ = 0
+\item user
+\\ = 1
+\end{itemize}
+bij system boot time hardware $\Rightarrow$ in kernel mode
+\\met dual mode $\Rightarrow$ operating systeem beschermen tegen errant users(en errant users tegen elkaar)
+\\bescherming door sommige machine-instructies die schade kunnen veroorzaken aan te duiden als \textbf{privileged instructions}(= alleen in kernel mode uitgevoerd)
+\\
+\\concept van modes $\Rightarrow$ uitgebreid met meer modes dan twee
+\\$\Rightarrow$ CPU's die virtualizatie ondersteunen $\Rightarrow$ vaak aparte mode om aan te geven wanneer \textbf{virtual machine manager(VMM)} (en virtualization management software) controle heeft over systeem
+\\$\Rightarrow$ meer privileges dan user processen maar minder dan kernel
+dus: eerst in kernel mode instructies uitvoeren $\Rightarrow$ dan controle aan user applicatie $\Rightarrow$ mode op user mode gezet $\Rightarrow$ daarna controle terug aan operating system via interrupt, trap of system call
+\\
+\\system calls = methode gebruikt door proces om actie aan te vragen bij operating system
+\\$\Rightarrow$ wordt behandeld door hardware als software interrupt
+\\
+\\gebrek aan hardware-supported dual mode $\Rightarrow$ serieuze tekortkomingen in systeem veroorzaken
+\\hardware protection detecteert errors die modes schenden $\Rightarrow$ normaal afgehandeld door operating system
+
+\subsection{Timer}
+om te vermijden dat user programma in oneindige loop terechtkomt om of faalt om system services te callen en controle nooit teruggeeft aan operating system
+\\$\Rightarrow$ \textbf{timer}(= gezet worden om computer te interrupten na specifieke periode))
+\\$\Rightarrow$ periode $\Rightarrow$ vast of variabel
+\\textbf{variable timer} $\Rightarrow$ meestal ge\"implementeerd door fixed-rate klok en counter
+\\voordat controle aan user wordt gegeven $\Rightarrow$ zeker zijn dat timer gezet is om te onderbreken
+\\timer gebruiken om te voorkomen dat user programma te lang runt
+
+\section{Process Management}
+programma doet niets totdat instructies worden uitgevoerd door CPU
+\\programma in uitvoering = proces
+\\proces $\Rightarrow$ bepaalde resources nodig
+\\programma = passief, proces = actief
+\\single-threaded proces $\Rightarrow$ \'e\'en \textbf{program counter} dat volgende instructie die moet uitgevoerd worden specifieert
+\\$\Rightarrow$ uitvoering ervan $\Rightarrow$ sequentieel 
+\\proces = unit van work in system
+\\system $\Rightarrow$ bestaat uit verzameling processen:
+\begin{itemize}
+\item operating-system processen
+\\$\Rightarrow$ voeren system code uit
+\item user processen
+\\$\Rightarrow$ voeren user code uit
+\end{itemize}
+alle deze processen $\Rightarrow$ gelijktijdig uitgevoerd worden
+\\operating system $\Rightarrow$ volgende activiteiten in verband met process management:
+\begin{itemize}
+\item schedulen processen en threads op CPU's
+\item creëren en verwijderen van user en system processen
+\item opschorten en hervatten processen
+\item mechanismen voor process synchronizatie voorzien
+\item mechanismen voor process communication voorzien
+\end{itemize}
+
+\section{Memory Management}
+
+
+\chapter{System Structures}
+\section{Operating-System Services}
+operating system services voor gebruiksgemak van programmer
+\\$\Rightarrow$ functies die nuttig zijn voor gebruiker:
+\begin{itemize}
+\item user interface
+\\ $\Rightarrow$ bijna alle operating systems $\Rightarrow$\textbf{user interface(UI)}
+\\in verschillende vormen:
+\begin{itemize}
+\item \textbf{command-line interface}
+\\= toetsenbord om in commands te typen in een specifiek format met specifieke opties
+\item \textbf{batch interface}
+\\= waarin commands en directives om de commands te controleren in files worden ingegeven $\Rightarrow$ files uitgevoerd
+\item \textbf{graphical user interface(GUI)}
+\\= window system met pointing device voor direct I/O, kiezen uit menu's en selecties maken en toetsenbord om tekst in te voeren
+\end{itemize}
+sommige systemen voorzien twee of alle drie
+\item program execution
+\\systeem $\Rightarrow$ programma in memory laden en uitvoeren
+\\programma $\Rightarrow$ uitvoering be\"eindigen ofwel normaal ofwel abnormaal(indicating error)
+\item I/O operations
+\\$\Rightarrow$ running programma kan I/O vereisen $\Rightarrow$ file of I/O device
+\\$\Rightarrow$ specific devicces $\Rightarrow$ speciale functies
+\\$\Rightarrow$ voor efficiency en protection $\Rightarrow$ gebruikers kunnen I/O devices niet direct controleren $\Rightarrow$ operating system moet I/O regelen
+\item file-system manipulation
+\\$\Rightarrow$ programma's $\Rightarrow$ read, write, create, delete op naam, zoeken naar gegeven file, file informatie oplijsten $\Rightarrow$ files en directories
+\\$\Rightarrow$ permissions management om toegang tot file toe te staan of weigeren op basis van file ownership 
+\\vele operating systems $\Rightarrow$ verschillende file systems
+\item communications
+\\$\Rightarrow$ communicatie tussen processen: op dezelfde computer of op hetzelfde netwerk
+\\$\Rightarrow$ ge\"implementeerd via:
+\begin{itemize}
+\item \textbf{shared memory}
+\\ = 2 of meer processen lezen en schrijven in shared section of memory
+\item \textbf{message passing}
+\\= packets information in voorgedefineerde formats worden verplaatst tussen processen door het operating system
+\end{itemize}
+\item error detection
+\\ operating system $\Rightarrow$ voortdurend errors detecteren en corrigeren
+\\ voor elk type error $\Rightarrow$ gepaste actie om correct en consistent computing te verzekeren
+\end{itemize}
+$\Rightarrow$ functies om de effici\"ente operation van het systeem zelf te verzekeren
+\\$\Rightarrow$ systemen met meerdere gebruikers $\Rightarrow$ effici\"enter door computer resources 
+te delen tussen gebruikers
+\begin{itemize}
+\item resource allocation
+\\$\Rightarrow$ meerdere gebruikers of meerdere jobs tegelijkertijd $\Rightarrow$ resources allocated aan elk van hen
+\\$\Rightarrow$ routines voor CPU te schedulen, toekennen van printers, USB storage drives en andere randapparaten
+\item accounting
+\\= usage statistics(= welke gebruikers hoeveel en welke computer resources gebruiken)
+\item protection en security
+\begin{itemize}
+\item protection
+\\= alle toegang tot system resources wordt gecontroleerd
+\item security
+\\= systeem beveiligen tegen outsiders meestal door user authentication
+\end{itemize}
+\end{itemize}
+
+\section{User and Operating-System Interface}
+verschillende manieren voor gebruiker to interface met operating system: command-line interface(= \textbf{command interpreter}, laat gebruikers toe om direct commands in te geven voor operating system) en graphical user interface(GUI)
+\subsection{Command Interpreters}
+command interpreter $\Rightarrow$ in kernel of als speciaal programma behandeld(Window en UNIX)
+\\op systemen met meerdere command interpreters = \textbf{shells}(bv.: op UNIX en Linux Bourne shell, C shell, Bourne-Again shell, Korn shell,..)
+\\$\Rightarrow$ hoofdfunctie = volgende user-specified command krijgen en uitvoeren(vooral manipuleren files)
+\\$\Rightarrow$ op 2 manieren ge\"implementeerd:
+\begin{enumerate}
+\item command interpreter zelf bevat code om het command uit te voeren
+\item meeste commands worden door system programs ge\"implementeerd 
+\\$\Rightarrow$ command interpreter verstaat commando niet
+\\$\Rightarrow$ commando wordt gebruikt om file met die naam in het geheugen te laten en uit te voeren $\Rightarrow$ gemakkelijk om nieuwe commands te cre\"eren door nieuwe file met gepaste naam
+\\$\Rightarrow$ commando-interpreter program moet niet veranderd worden voor nieuwe commands en kan klein zijn
+\end{enumerate}
+\subsection{Graphical User Interfaces}
+= user-friendly graphical user interface of GUI
+\\$\Rightarrow$ mouse-based window-and-menu system gekenmerkt door bureaublad(= \textbf{desktop})
+\\$\Rightarrow$ gebruiker verplaatst wijzer van de muis naar afbeeldingen(=\textbf{icons}) op het scherm(desktop) die programma's, files,directories en system functions voorstellen
+\\$\Rightarrow$ afhankelijk van de locatie van de wijzer van de muis $\Rightarrow$ klikken op een knop:
+\begin{itemize}
+\item programma oproepen, file of direcory(=\textbf{folder} selecteren
+\item menu laten zien dat commands bevat
+\end{itemize}
+$\Rightarrow$ first GUI = Xerox Alto computer in 1973
+\\$\Rightarrow$ Apple Macintosh computers in 1980s $\Rightarrow$ Aqua met Mac OS X
+\\
+\\ muis $\Rightarrow$ onpraktisch voor meeste mobile systems $\Rightarrow$ interactie door \textbf{gestures} op touchscreen(bv.: drukken en vegen)
+\\ in plaats van fysiek toetsenbord $\Rightarrow$ simulatie toetsenbord op touchscreen
+\\
+\\UNIX systems $\Rightarrow$ vooral command-line interfaces
+\\maar ook GUI beschikbaar: Common Desktop Environment CDE, X-Windows systems en open-soure(K Desktop Environment(KDE)en GNOME, source code hiervan kan dadelijk gelezen en aangepast worden 
+
+\subsection{Choice of Interface}
+= keuze van persoonlijke voorkeur 
+\\ \textbf{system administrators}(beheren computers) en \textbf{power users}(die uitgebreide kennis hebben van systeem) $\Rightarrow$ command-line interface, want: snellere toegang tot activiteiten die zij willen uitvoeren
+\\op sommige systemen: alleen subset van system functies beschikbaar via GUI
+\\command-line interfaces = eigen programmeerbaarheid $\Rightarrow$ herhalende taken gemakkelijker
+\\ \textbf{shell scripts} = programma's met taken die ge\"interpreteerd worden door de command-line interface (wordt niet gecompiled in uitvoerbare code)
+\\ $\Rightarrow$ vooral op systemen die command-line georiënteerd zijn = UNIX, Linux 
+\\ Windows: vooral gebruik van Windows GUI en bijna nooit MS-DOS shell interface
+\\ Mac OS: had eerst geen command-line interface, nu Aqua interface(GUI) en command-line interface
+
+\section{System Calls}
+\textbf{system calls} voorzien interface voor de services die beschikbaar worden gemaakt door een operating system 
+\\$\Rightarrow$ beschikbaar als routines geschreven in C en C++ (buiten zekere low-level taken in assembly-language instructies)
+\\ voorbeeld om gebruik van system calls te illustreren: programma schrijven om data van een file te lezen en te kopi\"eren naar een andere file
+\begin{enumerate}
+\item programma heeft input nodig
+\\= naam van 2 files: input file en output file
+\begin{itemize}
+\item in interactive system:
+\\$\Rightarrow$ reeks system calls (prompting message op scherm schrijven en van toetsenbord de karakters van de file names lezen)
+\item op mouse-based en icon-based system:
+\\$\Rightarrow$ menu met file names in een window $\Rightarrow$ source naam selecteren $\Rightarrow$ window kan geopend worden voor de destination name te specifieren
+\\$\Rightarrow$ veel I/O system calls
+\end{itemize}
+\item programma moet input file openenen en output file cre\"eren
+\\$\Rightarrow$ \'e\'en system call per operatie
+\\$\Rightarrow$ mogelijke error conditions $\Rightarrow$ vereisen bijkomende system calls
+\\$\Rightarrow$ bij openen input file: geen file met die naam of geen toegangsrechten tot die file $\Rightarrow$ programma print message(reeks system calls) en dan abnormaal be\"eindigen(system call)
+\\$\Rightarrow$ bij cre\"eren output file: al een outputfile met die naam
+\begin {itemize}
+\item 
+\end {itemize}
+
+\end{enumerate}
+
+
+\chapter{Process Concept}
+batch system $\Rightarrow$ voert \textbf{jobs} uit
+\\time-shared systeem $\Rightarrow$ \textbf{user programs} of \textbf{tasks}
+\\zelfs single-user system $\Rightarrow$ verschillende programma's tegelijk = \textbf{processes}
+
+\section{Process Concept}
+\subsection{The Process}
+proces  = programma in uitvoering
+\\$\Rightarrow$ meer dan programma code = \textbf{text section}
+\\$\Rightarrow$ bevat ook huidige activiteit 
+\begin{itemize}
+\item waarde van \textbf{program counter}
+\item inhoud registers
+\item \textbf{stack}
+\\ = bevat tijdelijke data, bv.: functieparameters, returnadressen)
+\item \textbf{data section}
+\\ = bevat globale variabelen
+\item \textbf{heap}
+\\ = geheugen dat dynamisch wordt toegewezen tijdens proces runtime
+\end{itemize}
+programma = passieve entity zoals \textbf{executable file} (= file dat lijst instructies bevat bewaard op disk)
+\\proces = actieve entity
+\\programma wordt proces wanneer uitvoerbare file in geheugen wordt geladen door:
+\begin{itemize}
+\item double-clicking icon 
+\item entering naam in command line
+\end{itemize}
+proces zelf kan execution environment zijn voor andere code (bv.: Java programming environment)
+
+\subsection{Process State}
+staat van proces $\Rightarrow$ bepaald door huidige activiteit van proces
+\\mogelijke staten:
+\begin{itemize}
+\item new
+\item running
+\item waiting
+\item ready
+\item terminated
+\end{itemize}
+
+\subsection{Process Control Block}
+elk proces wordt in operating system voorgesteld door \textbf{process control block(PCB)} = \textbf{task control blok}
+\\$\Rightarrow$ bevat veel stukken informatie geassocieerd met specifiek proces:
+\begin{itemize}
+\item process state
+\item program counter
+\item CPU registers
+\item CPU-scheduling information
+\item memory-management information
+\item accounting information
+\item I/O status information
+\end{itemize}
+
+\subsection{Threads}
+proces = programma dat single \textbf{thread} van executie uitvoert
+\\$\Rightarrow$ meeste operating systems hebben process concept uitgebreid om toe te laten dat een proces meerdere uitvoeringsthreads heeft en dus meer dan \'e\'en taak kan uitvoeren tegelijk
+
+\section{Process Scheduling}
+doel van mulitprogramming: aantal processen altijd hebben runnen om CPU utilization te maximaliseren
+\\doel van time sharing: CPU zo vaak tussen processen switchen dat gebruikers kunnen interacten met elk programma terwijl het runt
+\\om deze doelen te bereiken: \textbf{process scheduler} selecteert beschikbaar proces voor program execution op CPU
+
+\subsection{Scheduling Queues}
+%verder pagina 109
+\chapter{Multithreaded Programming}
+\chapter{Process Scheduling}
+\section{Basic Concepts}
+multiprogramming $\Rightarrow$ sommige processen die de hele tijd runnen om CPU gebruik te maximaliseren
+\\$\Rightarrow$ verschillende processen tegelijk in geheugen
+\\$\Rightarrow$ wanneer proces moet wachten wordt de CPU aan ander proces gegeven
+\\dit soort scheduling = fundamentele operating-system functie
+\subsection{CPU-I/O burst}
+succes van CPU scheduling hangt af van eigenschap van processen
+\\$\Rightarrow$ process uitvoering bestaat uit \textbf{cycle}(= processen wisselen af tussen de twee staten) van CPU execution en I/O wait
+\\procesuitvoering begint met \textbf{CPU burst}
+\\vervolgens \textbf{I/O burst}, dan weer CPU burst, weer I/O burst en eindigen met CPU burst
+\\I/O-bound programma $\Rightarrow$ veel korte CPU bursts
+\\CPU-bound programma $\Rightarrow$ paar lange CPU bursts
+\\$\Rightarrow$ verdeling kan belangrijk zijn in selectie van gepaste CPU-scheduling
+
+\subsection{CPU scheduler}
+wanneer CPU = vrij $\Rightarrow$ operating system $\Rightarrow$ proces uit ready queue selecteren om uitgevoerd te worden
+\\selectieproces door \textbf{short-term sheduler}(= CPU scheduler)
+\\= selecteert proces uit geheugen die klaar zijn om uit te voeren en kent CPU toe aan dat process
+\\$\Rightarrow$ records in ready que $\Rightarrow$ meestal process control blocks(PCBs) van processen
+
+\subsection{Preemptive Scheduling}
+CPU-scheduling beslissingen onder volgende 4 omstandigheden:
+
+\begin{enumerate}
+\item switch van running state naar waiting state van proces
+\item switch van running state naar ready state van proces
+\item switch van waiting state naar ready state van proces
+\item wanneer proces eindigt
+\end{enumerate}
+
+scheduling alleen onder omstandigheden 1 en 4 $\Rightarrow$ scheduling schema = \textbf{nonpreemtive} of \textbf{cooperative}
+\\$\Rightarrow$ wanneer CPU toegekent is aan proces $\Rightarrow$ CPU pas vrijgelaten ofwel door be\"eindiging proces ofwel door switchen naar waiting state
+\\$\Rightarrow$ vereist geen speciale hardware
+\\
+\\anders: \textbf{preemptive} scheduling
+\\$\Rightarrow$ kan resulteren in race conditions wanneer data gedeeld worden over verscheidene processen
+\\$\Rightarrow$ be\"invloedt ontwerp van operating-system kernel
+\\$\Rightarrow$ sectie met code be\"invloedt door interrupts moet beschermd worden tegen simultaan gebruik
+\\$\Rightarrow$ operating system moet bijna altijd interrupt accepteren
+\\$\Rightarrow$ anders: input verloren of output overschreven
+
+\subsection{Dispatcher}
+andere component betrokken bij CPU-scheduling functie = \textbf{dispatcher}(= module dat controle geeft van CPU aan proces dat geselecteerd is door short-term scheduler
+$\Rightarrow$ bestaat uit volgende:
+\begin{itemize}
+\item switching context
+\item switching naar user mode
+\item jumping naar juiste locatie in user program om programma te herstarten
+\end{itemize}
+$\Rightarrow$ moet zo snel mogelijk zijn
+\\\textbf{dispatch latency}= tijd die nodig is voor dispatcher om \'e\'en proces te stoppen en ander te beginnen runnen
+
+\section{Scheduling Criteria}
+\begin{itemize}
+\item CPU utilization
+\\$\Rightarrow$ CPU zo veel mogelijk bezig houden
+\\$\Rightarrow$ conceptueel CPU gebruik: van 0 tot 100 procent
+\\$\Rightarrow$ in echt systeem: van 40 procent(= licht geladen systeem) tot 90 procent(= zwaar beladen)
+\item throughput
+\\\textbf{throughput} = aantal processen die compleet zijn per tijdseenheid
+\\$\Rightarrow$ lange processen: \'e\'en proces per uur
+\\$\Rightarrow$ korte processen: tien processen per seconde
+\item turnaround time
+\\= interval vanaf toekenning van proces tot wanneer proces compleet is 
+\\= som van de periodes van wachten om in geheugen te geraken, wachten in ready queue, uitvoeren op CPU en I/O doen
+\item waiting time
+\\= som van de periodes al wachtend gespendeerd in ready queue
+\item response time
+\\= tijd vanaf toekenning of request totdat eerste antwoord wordt geproduceerd (= tijd dat het vraagt om te beginnen antwoorden, niet tijd dat vraagt om antwoord te outputten)
+\\in algemeen: gelimiteerd door snelheid output device
+\end{itemize}
+$\Rightarrow$ CPU utilization en throughput maximaliseren 
+\\$\Rightarrow$ turnaround time, waiting time en response time minimaliseren
+
+\section{Scheduling Algorithms}
+\subsection{First-Come, First-Served Scheduling}
+\textbf{first-come, first served(FCFS)}= simpelste scheduling algoritme
+\\$\Rightarrow$ proces dat eerst CPU aanvraagt, krijgt eerst CPU toegekent
+\\$\Rightarrow$ ge\"implementeerd met FIFO-queue
+\\werking: wanneer proces in ready queue binnenkomt, PCB wordt gelinkt aan tail queue
+\\wanneer CPU is vrij, wordt toegewezen aan process aan head queue
+\\$\Rightarrow$ running proces wordt verwijderd uit queue
+\\
+\\positief: code voor FCFS scheduling $\Rightarrow$ gemakkelijk te schrijven en begrijpen
+\\negatief: average waiting time onder FCFS = nogal lang
+\\
+\\\textbf{Gantt chart} = bar chart dat particular schedule illustreert inclusief start en finish tijden van elk van de deelnemende processen
+\\
+\\\textbf{convoy effect} = alle andere processen wachten voor \'e\'en groot proces om af te CPU te gaan 
+\\$\Rightarrow$ resulteert in lagere CPU en device utilization dan mogelijk kan zijn als de kortere processen eerst zouden gaan
+\\FCFS = nonpreemptive
+
+\subsection{Shortest-Job-First Scheduling}
+\textbf{shortest-job-first(SJF)}
+\\$\Rightarrow$ associeert met elk proces de lengte van de volgende CPU burst van proces
+\\$\Rightarrow$ wanneer CPU beschikbaar $\Rightarrow$ toegekend aan proces met de kleinste volgende CPU burst
+\\als de volgende CPU bursts van twee processen hetzelfdee zijn $\Rightarrow$ FCFS scheduling beslist welke eerst
+\\meer gepaste naam = shortest-next-CPU-burst
+\\SJF scheduling algorithm = bewijsbaar optimaal
+\\$\Rightarrow$ geeft minimale gemiddelde wachttijd voor gegeven set processen 
+\\moeilijkheid SJF: lengte kennen van volgende CPU aanvraag
+\\SJF $\Rightarrow$ vaak gebruikt in long-term scheduling, kan niet ge\"implementeerd worden bij short-term CPU scheduling
+\\
+\\volgende CPU burst $\Rightarrow$ meestal voorspeld als \textbf{exponential average} van de gemeten lengtes van de vorige CPU bursts
+\\ SJF $\Rightarrow$ preemptive of nonpreemptive
+\\$\Rightarrow$ keuze ontstaat wanneer nieuw proces arriveert bij ready queue terwijl vorig proces nog steeds aan het uitvoeren is $\Rightarrow$ volgende CPU burst van nieuwgearriveerde proces kan korter zijn dan wat er overblijft van huidig uitvoerend proces
+\\$\Rightarrow$ preemptive SJF $\Rightarrow$ huidig running process be\"eindigen 
+\\$\Rightarrow$ nonpreemptive SJF $\Rightarrow$ huidig running proces mag CPU burst afmaken
+\\$\Rightarrow$ preemptive SJF wordt soms \textbf{shortest-remaining-time-first} scheduling genoemd
+
+\subsection{Priority Scheduling}
+SJF = speciaal geval van \textbf{priority-scheduling} algoritme
+\\met elk proces $\Rightarrow$ priority geassocieerd en dan wordt CPU toegekend aan proces met hoogste priority
+\\dezelfde priority processen $\Rightarrow$ FCFS volgorde 
+\\hoge en lage priorities
+\begin{itemize}
+\item intern gedefineerde priorities
+\\$\Rightarrow$ gebruiken meetbare hoeveelheden om priority van proces te berekenen
+\item extern gedefineerde priorities
+\\ = ingesteld door criteria buiten operating system
+\end{itemize}
+priority scheduling $\Rightarrow$ preemptive of nonpreemptive
+\begin{itemize}
+\item preemptive
+\\ $\Rightarrow$ preempt CPU als de priority van nieuwgearriveerde proces hoger is dan de priority van huidige running proces
+\item nonpreemptive
+\\ $\Rightarrow$ nieuwgearriveerde proces wordt gewoon aan head van de queue gezet
+\end{itemize}
+groot probleem = \textbf{indefinite blocking} of \textbf{starvation} 
+\\$\Rightarrow$ proces dat klaar is om te runnen maar wachtend op CPU = blocked
+\\bij priority scheduling $\Rightarrow$ sommige low-priority processen moeten indefinitely wachten = indefinite blocking of starvation
+\\oplossing voor indefinite blocking van low-priority processen = \textbf{aging}(= gradually priority van processen dat in het systeem lange tijd aan het wachten zijn verhogen)
+
+\subsection{Round-Robin Scheduling}
+\textbf{round-robin(RR)} scheduling algoritme = speciaal ontworpen voor time-sharing systemen
+\\= gelijkaardig met FCFS scheduling maar preemption is toegevoegd het systeem in staat te stellen om te kunnen switchen tussen processen
+\\kleine unit tijd is gedefineerd = \textbf{time quantum} of \textbf{time slice}
+\\$\Rightarrow$ meestal van 10 tot 100 milliseconden in lengte
+\\$\Rightarrow$ ready queue behandeld als circular queue(= CPU scheduler gaat rond in ready queue en wijst CPU toe aan elk proces voor tijdinterval tot 1 quantum)
+\\$\Rightarrow$ ready queue = FIFO queue
+\\CPU scheduler haalt eerste proces uit ready queue $\Rightarrow$ zet timer om te onderbreken na 1 tijd quantum $\Rightarrow$ dispatches proces:
+\begin{itemize}
+\item CPU burst is minder dan 1 tijdquantum
+\\$\Rightarrow$ proces laat CPU vrijwillig los
+\item CPU burst van huidig running proces is langer dan 1 tijdquantum
+\\timer gaat af $\Rightarrow$ veroorzaakt interrupt bij operating system $\Rightarrow$ context switch $\Rightarrow$ proces aan tail ready queue $\Rightarrow$ CPU volgende proces in ready queue uitvoeren
+\end{itemize}
+
+RR $\Rightarrow$ gemiddelde wachttijd is vaak lang
+\\tijdquantum $\Rightarrow$ lang tegenover context switch time
+\\turnaround time hangt ook af van tijd quantum
+\\maar: tijdquantum ook niet te lang(anders: RR degenerate in FCFS)
+\\$\Rightarrow$ 80 procent van CPU bursts moeten korter zijn dan time quantum
+
+\subsection{Multilevel Queue Scheduling}
+andere klasse schedulingalgoritmes voor situaties waarin processen gemakkelijk geclassificeerd worden in verschillende groepen
+\\vaak verdeelt in:
+\begin{itemize}
+\item \textbf{foreground} (interactive) processes
+\item \textbf{background} (batch) processes
+\end{itemize}
+\chapter{Synchronization}
+\chapter{Deadlocks}
+in multiprogramming environment $\Rightarrow$ verschillende processen concurreren voor eindig aantal resources
+\\process $\Rightarrow$ vraagt resources aan
+\\$\Rightarrow$ resources dan niet beschikbaar $\Rightarrow$ proces in waiting state
+\\\textbf{deadlock} = wanneer waiting proces nooit meer van staat kan veranderen doordat resources dat het aangevraagd had  door andere processen vastgehouden worden
+\section{System Model}
+systeem $\Rightarrow$ bestaat uit eindig aantal resources om te verdelen over aantal concurrerende processen
+\\resources $\Rightarrow$ verdeeld over types of klassen $\Rightarrow$ bestaande uit aantal identieke instances
+\\proces $\Rightarrow$ resource aanvragen voor gebruik en loslaten na gebruik
+\\$\Rightarrow$ zoveel resources aanvragen als nodig om taak te kunnen uitvoeren
+\\resource gebruiken in volgorde:
+\begin{enumerate}
+\item request
+\\= proces vraagt resource aan 
+\\als aanvraag niet onmiddelijk toegekend kan worden $\Rightarrow$ vragende proces moet wachten tot resource kan verkrijgen
+\item use
+\\= proces kan gebruik maken van resource
+\item release
+\\= proces laat resource vrij
+\end{enumerate}
+set processen $\Rightarrow$ in deadlocked staat 
+\\= elk proces in de set wacht op event dat alleen veroorzaakt kan worden door ander proces in de set
+\\resources $\Rightarrow$ zowel physical resources(bv.: printers, memory space..) als logical resources(bv.: semaphores, files..)
+\\deadlock kan ook bij verschillende resource types
+
+\section{Deadlock Characterization}
+in deadlock: processen die nooit uitvoering be\"eindigen en system resources opgebruikt waardoor andere jobs voorkomen worden van beginnen
+\subsection{Necessary Conditions}
+deadlock als volgende condities tegelijk voorkomen
+\begin{enumerate}
+\item mutual exclusion
+\\minstens \'e\'en proces in nonsharable mode
+\\= \'e\'en proces tegelijk kan resource gebruiken
+\\als ander proces resource aanvraagd wordt dat uitgesteld tot de resource vrijgelaten wordt
+\item hold and wait
+\\proces moet minstens \'e\'en resource hebben en wachten op bijkomende resources die momenteel bijgehouden worden door andere processen
+\item no preemption
+\\resources worden niet gepreempt $\Rightarrow$ resource kan alleen vrijwillig vrijgelaten worden door proces dat het heeft nadat taak uitgevoerd is
+\item circular wait
+\\zodat $P_{0}$ wacht op resource dat $P_{1}$ heeft, $P_{1}$ wacht op resource van $P_{2}$,..., $P_{n-1}$ wacht op resource van $P_{n}$ en $P_{n}$ op resource $P_{0}$
+
+\end{enumerate} 
+vier condities $\Rightarrow$ niet helemaal onafhankelijk (circular wait impliceert hold-and-wait)
+
+\subsection{Resource-Allocation Graph}
+$\Rightarrow$ meer precies beschreven in termen van gerichte graaf = \textbf{system resource-allocation graph}
+\\= bestaat uit set knopen V en set bogen E
+\\knopen V:
+\begin{itemize}
+\item actieve processen
+\\= $P = {P_{1},P_{2},...,P_{n}}$
+\\= set bestaande uit alle actieve processen in systeem
+\\= voorgesteld door cirkel
+\item resource types
+\\= $R = {R_{1},R_{2},...,R_{m}}$
+\\= set bestaande uit alle resource types in systeem
+\\= voorgesteld door rechthoek
+
+\end{itemize}
+\textbf{request edge} = gerichte boog $P_{i} \rightarrow R_{j}$
+\\\textbf{assignment edge}= gerichte boog $R_{j} \rightarrow P_{i}$
+\\
+\\als graaf geen cycles bevat $\Rightarrow$ geen proces in systeem is deadlocked
+\\als elk resource type precies \'e\'en instance heeft $\Rightarrow$ cycle impliceert deadlock
+\\als elk resource type verschillende instances heeft $\Rightarrow$ cycle impliceert niet noodzakelijk deadlock
+
+\section{Methods for Handling Deadlocks}
+deadlocks afhandelen op 3 manieren:
+\begin{itemize}
+\item protocol voor voorkomen of vermijden van deadlocks om zo te verzekeren dat systeem nooit in deadlocked state komt
+\item toelaten dat systeem in deadlock komt, het detecteren en herstellen
+\item probleem negeren en doen alsof deadlocks nooit voorkomen
+\end{itemize}
+meeste operating system $\Rightarrow$ 3de oplossing $\Rightarrow$ application developer moet programma's schrijven die deadlocks afhandelen
+\\om te verzekeren dat deadlocks nooit voorkomen:
+\begin{itemize}
+\item \textbf{deadlock prevention} 
+\\= voorziet set methodes zodat minstens \'e\'en van de noodzakelijke condities niet geldt
+\\$\Rightarrow$ beperken hoe resources aangevraagd kunnen worden
+\item \textbf{deadlock avoidance}
+\\= vereist dat operating system op voorhand bijkomende informatie krijgt met welke resources proces gaat aanvragen en gebruiken tijdens lifetime
+\end{itemize}
+systeem $\Rightarrow$ geen deadlock-prevention of deadlock-avoidance $\Rightarrow$ deadlock kan voorkomen $\Rightarrow$ tenslotte
+\chapter{Memory-Management Strategies}
+\chapter{Virtual-Memory Management}
+\chapter{File System}
+\section{File Concept}
+operating system voorziet uniform logical view van bewaarde informatie
+\\$\Rightarrow$ van fysieke eigenschappen van storage devices naar logical storage unit =\textbf{file}(= worden gemapd door operating system op fysieke devices)
+\\$\Rightarrow$ gewoonlijk nonvolatile secondary storage
+\\$\Rightarrow$ voor gebruiker kleinste toekenning van logical secondary storage
+\\$\Rightarrow$ informatie in file = gedefine\"erd door creator
+\\$\Rightarrow$ heeft gedefineerde structuur dat afhangt van zijn type
+\begin{itemize}
+\item \textbf{text file}
+\\= volgorde karakters georganiseerd in regels (en mogelijk pagina's)
+\item \textbf{source file}
+\\= volgorde functies die verder bestaan uit declaraties gevolgd door uitvoerbare statements
+\item \textbf{executable file}
+\\= serie code sections dat de lader in het geheugen kan brengen en uitvoeren
+\end{itemize}
+\subsection{File Attributes}
+
+\chapter{Implementing File-Systems}
+\chapter{Mass-Storage Structure}
+\chapter{I/O Systems}
+\chapter{System Protection}
+protection = intern probleem
+\chapter{System Security}
+\textbf{security}: computer resources $\Rightarrow$ beschermd worden tegen unauthorized access, kwaardaardige vernietiging of alternation(= afwisseling) en toevalling inconsistency invoegen
+
+\section{The Security Problem}
+systeem = \textbf{secure} als de resources gebruikt worden en toegankelijk zijn zoals bedoelt onder alle omstandigheden
+\\$\Rightarrow$ totale security kan niet bereikt worden
+\\$\Rightarrow$ security violations: intentional(malicious) of accidental
+\\\textbf{intruder} of \textbf{cracker} = diegenen die security proberen te schenden
+\\\textbf{threat} = mogelijkheid voor een security violation(bv.: ondekking van zwakke plek)
+\\\textbf{attack} = poging om security te schenden
+\\verschillende vormen van accidental en malicious security violations:
+\begin{itemize}
+\item breach of confidentiality
+\\= ongeautoriseerd lezen van data (of diefstal van informatie)
+\item breach of integrity
+\\= ongeautoriseerd aanpassen van data
+\item breach of availability
+\\= ongeautoriseerde vernietiging van data
+\item theft of service
+\\ = ongeautoriseerd gebruik van resources
+\item denial of service
+\\= voorkomen van rechtmatig gebruik van het systeem
+\\\textbf{Denial-of-service(DOS)} = soms accidental
+\end{itemize}
+attackers gebruiken verschillende standaard methodes om een securityinbreuk te bekomen:
+\begin{itemize}
+\item \textbf{masquerading}
+\\= \'e\'en deelnemer in een communicatie doet alsof hij iemand ander is(andere host of andere persoon)
+\\= schending van \textbf{authentication}(= de correctheid van identificatie)
+\\$\Rightarrow$ om privileges te verkrijgen
+\item \textbf{replay attack}
+\\= malicious of frauduleuze herhaling van een geldige data transmission
+\\$\Rightarrow$ soms alleen: bv. herhalen van overschrijvingsaanvragen voor geld
+\\$\Rightarrow$ meestal samen met \textbf{message modification} om privileges te verkrijgen
+\item \textbf{man-in-the-middle-attack}
+\\= attacker zit in de data flow van een communicatie en doet zich voor als de zender tegenover de ontvanger en als de ontvanger tegenover de zender
+\\$\Rightarrow$ in network communicatie kan het voorafgegaan worden door \textbf{session hijacking}(waarin een actieve communicatie sessie onderschept wordt)
+\end{itemize}
+om systeem te beschermen $\Rightarrow$ veiligheidsmaatregelen op 4 niveau's:
+\begin{enumerate}
+\item physical
+\\= plaats waar computersystemen bewaard worden moeten fysiek beveiligd worden tegen gewapende of heimelijke toegang door intruders (zowel machine rooms als terminals en workstation met toegang tot de machines)
+\item{human}
+\\authorization $\Rightarrow$ alleen appropriate user hebben toegang tot systeem
+\\zelfs authorized users $\Rightarrow$ door anderen hun toegang laten gebruiken door bv. omkoping
+\\ ook op slinkse wijze aan toegang geraken door \textbf{social engineering}:
+\begin{itemize}
+\item \textbf{phishing}
+\\= een echtlijkende e-mail of webpagina misleidt een gebruiker om vertrouwelijke informatie in te geven
+\item \textbf{dumpster diving}
+\\= algemene term voor pogingen om informatie te verzamelen om ungeautoriseerde toegang tot de computer te verkrijgen (tussen vuilnis kijken, notities vinden die paswoorden bevatten..)
+\end{itemize}
+$\Rightarrow$ deze veiligheidsproblemen = management-en personeelproblemen, behoren niet tot problemen van operating system
+\item operating system
+\\zichzelf beschermen van accidentele of doelbewuste schendingen van security
+\item network
+\\$\Rightarrow$ meeste data in moderne computersystemen $\Rightarrow$ via private leased line, shared lines(bv.:Internet), wireless connections of dial-up lines
+\end{enumerate}
+zwakheid op een high level van security(physical of human) laat omzeiling van strenge low-level(operating-system) maatregelen toe
+
+\section{Program Threats}
+program threats $\Rightarrow$ gebruiken breakdown in protection mechanisms van een systeem om programma's aan te vallen
+\\processen zijn samen met de kernel de enige manieren om werk uit te voeren op een computer
+\\$\Rightarrow$ doel van crackers: programma schrijven dat breach of security cre\"eert of dat veroorzaakt een normaal proces om zijn gedrag te veranderen en een breach te cre\"eren
+\\$\Rightarrow$ \textbf{backdoor} daemon achterlaten dat informatie voorziet of gemakkelijke toegang toelaat 
+\\meest voorkomende methodes waardoor een programma security breaches veroorzaakt:
+
+\subsection{Trojan Horse}
+\textbf{Trojan Horse} = code segment dat zijn omgeving misbruikt
+\begin{itemize}
+\item bij long search paths 
+\\$\Rightarrow$ in andere directory geraken en alles kunnen doen wat de gebruiker doet
+\item login programma imitatie
+\\$\Rightarrow$ gebruiker krijgt melding verkeerd wachtwoord en logt daarna pas in op het echte login programma
+\\$\Rightarrow$ authentication key en wachtwoord zijn gestolen door login emulator
+\item spyware
+\\$\Rightarrow$ komt mee met download
+\\$\Rightarrow$ doel: downloaden van ads om te tonen op user system, pop-up browsers cre\"eren bij bezoeken van bepaalde sides of informatie verzamelen van user system en het naar een centrale site sturen(= \textbf{covert channels}, waarin heimelijke communicatie gebeurt)
+\\spyware = microvoorbeeld van macroprobleem: violation van het principe van minste privilege
+
+\end{itemize}
+daemons ge\"installeerd door 2 fouten:
+\begin{itemize}
+\item user met meer privileges dan nodig (bv. als administrator)
+\item operating system by default meer privileges geeft dan een normale user nodig heeft
+\end{itemize}
+\subsection{Trap Door}
+\textbf{trapdoor}= designer van programma of systeem laat een hole achter in de software dat alleen hij kan gebruiken
+\\slimme trapdoor $\Rightarrow$ in compiler
+\\trapdoors = moeilijk probleem want om ze te detecteren moet alle source code voor alle componenten van een systeem geanalyseerd worden(kan uit miljoenen lijnen code bestaan)
+
+\subsection{Logic Bomb}
+\textbf{logic bomb} = programma dat alleen wanneer een voorgedefineerde set parameters voldaan is een security hole cre\"eert
+\\$\Rightarrow$ hard te detecteren omdat er in normale omstandigheden geen security hole is
+
+\subsection{Stack and Buffer Overflow}
+stack-of buffer-overflow attack = meest voorkomende manier voor een attacker buiten het systeem op een netwerk of dial-up connection om ongeautoriseerde toegang te bekomen tot het doelsysteem
+\\in essentie buit de attack een bug in een programma uit
+\\attacker kan zwakke plek vinden door trail-and-error of het bestuderen van de source code indien beschikbaar
+\\ $\Rightarrow$ programma schrijven voor het volgende:
+\begin{enumerate}
+\item overflow input field, command-line argument of input buffer tot het naar de stack schrijft
+\item overschrijf het huidige returnadres op de stack met het adres van de exploit code geladen in stap 3
+\item simple set code schrijven voor de volgende plaats in de stack dat de commands omvat die de attacker wilt uitvoeren
+\end{enumerate}
+resultaat $\Rightarrow$ root shell of ander privileged command execution
+\\stack-of buffer-overflow kan voorkomen worden met bounds checking
+\\mogelijke veiligheidszwakheden van een buffer overflow:
+\\$\Rightarrow$ wanneer functie opgeroepen wordt in typische computerarchitectuur $\Rightarrow$ doorgegeven parameters, locale variabelen(= soms ook \textbf{automatic variables}),saved frame pointer en returnadres $\Rightarrow$ in stack frame
+\\saved frame pointer $\Rightarrow$ waarde van stack pointer kan veranderen tijdens functieoproep 
+\\$\Rightarrow$ laat relatieve toegang toe tot parameters en automatische variabelen
+\\
+\\\'e\'en cracker kan bug bepalen en exploit schrijjven $\Rightarrow$ iedereen met basis computer skills en toegang tot de exploit(=\textbf{script kiddie}) $\Rightarrow$ proberen om attack te lanceren op target systems
+\\
+\\buffer-overflow attack = vooral schadelijk omdat het tussen systemen gerund kan worden en zich verplaatsen over toegelaten communication channels $\Rightarrow$ moeilijk om te detecteren en te voorkomen (zelfs voorbij firewalls)
+\\
+\\oplossingen: 
+\begin{itemize}
+\item CPU $\Rightarrow$ feature dat de uitvoering van code in stack section van memory niet toelaat 
+\\ $\Rightarrow$ bv.: Sun's SPARC chip en recente versies van Solaris
+\item NXfeature
+\\= hardware implementatie met gebruik van een nieuwe bit(die associated page als nonexecutable markeert) in de page tables van de CPU's
+\end{itemize}
+
+\subsection{Viruses}
+\textbf{virus} = fragment van code in een echt programma
+\\virussen = self-replicating en ontworpen om andere programma's te infecteren
+\\$\Rightarrow$ richten verwoesting aan in systeem door files aan te passen en te verwijderen en systeemcrashes en programmastoringen te veroorzaken
+\\$\Rightarrow$ zoals de meeste binnendringaanvallen $\Rightarrow$ zeer specifiek voor architectures, operating systems en applications
+\\$\Rightarrow$ vooral probleem voor gebruikers van PC's
+\\ $\Rightarrow$ UNIX en andere multiuser operating systems = niet vatbaar voor virussen $\Rightarrow$ uitvoerbare programma's zijn beschermd van schrijven door het operating system (ook andere aspecten van het systeem zijn beschermd)
+\\
+\\verspreiden zich via e-mail(spam), downloaden besmette programma's van Internet file-sharing services of  uitwisselen van besmette disks
+\\$\Rightarrow$ ook via macros in Microsoft Office files (worden automatisch office ruimte uitgevoerd(Word, Powerpoint, Excel) en zichzelf e-mailen naar anderen in de contactenlijst van gebruiker
+\\
+\\Hoe werken virussen?
+\\wanneer virus target machine bereikt $\Rightarrow$ \textbf{virus dropper}(meestal Trojan horse) plaatst virus in systeem
+\\$\Rightarrow$ zijn onder te verdelen in verschillende hoofdcategorie\"en(veel behoren tot meer dan \'e\'en categorie)
+\begin{itemize}
+\item file
+\\= infecteert systeem door zichzelf vast te maken aan file
+\\= parasitic viruses $\Rightarrow$ laten geen hele file achter maar hostprogramma functioneert nog
+\item boot 
+\\= infecteert de boot sector van het systeem door elke uit te voeren wanneer het systeem geboot wordt en voor het operating system geladen is
+\\= memory viruses $\Rightarrow$ komen niet voor in systeem
+\item macro 
+\\ $\Rightarrow$ meeste viruses $\Rightarrow$ geschreven in low-level language (bv.: C, assembly)
+\\ $\Rightarrow$ macrovirussen $\Rightarrow$ geschreven in high-level language (bv.: Visual Basic)
+\\ = worden getriggerd wanneer programma in staat om de macro uit te voeren gerunt wordt
+\item source code
+\\= zoekt naar source code en verandert het zodat het het virus bevat en het virus helpt verspreiden
+\item polymorphic
+\\= verandert elke keer de virus' signature wanneer het ge\"installeerd wordt om detectie door antivirus software te vermijden
+\\ \textbf{virus signature} = patroon dat gebruikt kan worden om een virus te identificeren (meestal serie bytes)
+\item encrypted
+\\= omvat decryption code samen met het encrypted virus om detectie te vermijden
+\\$\Rightarrow$ virus decrypts eerst en voert dan uit
+\item stealth
+\\ = probeert detectie te vermijden door delen van het systeem aan te passen die zouden gebruikt kunnen om het te detecteren
+\item tunneling
+\\ = probeert detectie van antivirus scanner te omzeilen door zichzelf te installeren in interrupt-handler chain
+\\ $\Rightarrow$ ook in device drivers
+\item multipartite
+\\= in staat om meerdere delen van systeem te infecteren(boot sectors, memory en files)
+\\$\Rightarrow$ moelijk om te detecteren en contain
+\item armored
+\\= gecodeerd om moeilijk te maken voor antivirus researchers om te ontrafelen en te begrijpen
+\\$\Rightarrow$ kan ook gecomprimeerd zijn om detectie en disinfectie te vermijden
+\end{itemize}
+browser virus $\Rightarrow$ installeert verschillende back-door programma's waaronder \textbf{keystroke logger}(= houdt alles wat op het toetsenbord ingegeven wordt bij, bv.: wachtwoorden)
+\\$\Rightarrow$ ook om ongelimiteerde toegang op afstand door indringer toe te staan en nog \'e\'en om indringer toe te laten spam te sturen met de geïnfecteerde desktop computer
+\\
+\\\textbf{monoculture} = waarin vele systemen dezelfde harware, operating system en application software runnen
+\\$\Rightarrow$ bestaat zoiets? en verhoogt het de dreiging en schade veroorzaakt door viruses en andere security intrusions?
+
+\section{System and Network Threats}
+system en network threats $\Rightarrow$ misbruiken services en network connections, cre\"eren situatie waarin operating-system resources en user files misbruikt worden
+\\soms wordt system en network attack gebruikt om program attack te lanceren en omgekeerd
+\\
+\\hoe opener operating system is(= meer services enabled en meer functies toegestaan)$\Rightarrow$ hoe waarschijnlijker dat er bug beschikbaar is om te exploiten
+\\$\Rightarrow$ operating systems streven ernaar om \textbf{secure by default} te zijn
+\\$\Rightarrow$ bijna alle services zijn disabled bij installatietijd en moeten specifiek enabled worden door system administrators
+\\$\Rightarrow$ verminderen \textbf{attack surface}(= aantal manieren waarop een attacker kan proberen in te dringen in het systeem) van systeem
+\\
+\\ook masquerading en replay attacks worden vaak gelanceerd op netwerken tussen systemen
+
+\subsection{Worms}
+\textbf{worm} = process dat \textbf{spawn} mechanism gebruikt om zichzelf te vermenigvuldigen
+\\$\Rightarrow$ spawns kopies van zichzelf, system resources opgebruikend en wellicht alle andere processen uitsluitend
+\\$\Rightarrow$ kunnen netwerk plat leggen
+\\worm bestaat uit: \textbf{grappling hook} (= \textbf{bootstrap} = \textbf{vector} programma en main programma
+\\$\Rightarrow$ eens grappling hook op aangevallen computer systeem $\Rightarrow$ verbinden met de oorspronkelijke machine en kopie van de main worm uploaden naar "hooked" system
+\\voorbeelden: Morris en Sobig F.
+
+\subsection{Port Scanning}
+port scanning = geen attack, maar manier voor cracker om systeemzwakhedn te detecteren om aan te vallen
+\\= typisch geautomatiseerd en bevat een tool dat TCP/IP connectie naar een specifieke port of range van ports probeert te maken 
+\\$\Rightarrow$ indien er tool zou bestaan waarin elke bug van elke service van elk operating gecodeerd zat
+\\$\Rightarrow$ proberen met elke port van sytem(en) te verbinden
+\\$\Rightarrow$ elke service die antwoord $\Rightarrow$ elke gekende bug proberen
+\\$\Rightarrow$ tool bestaat niet
+\\
+\\port scans = detecteerbaar $\Rightarrow$ vaak gelanceerd van \textbf{zombie systems}(= voordien aangetaste onafhankelijke systemen die hun gebruikers bedienen terwijl ze gebruikt worden voor schandelijke doeleinden(bv.: denial-of-service attacks en spam relay))
+\\$\Rightarrow$ source van de attack en de persoon die die gelanceerd heeft is moeilijk te achterhalen
+\\$\Rightarrow$ ook onbelangrijke systemen beveiligen, niet alleen systemen met waardevolle informatie of services
+
+\subsection{Denial of Service}
+denial-of-service attacks $\Rightarrow$ verstoren van legitimate use van systeem
+\\$\Rightarrow$ meestal dringt attacker niet binnen
+\\$\Rightarrow$ gemakkelijker dan inbreken in machine
+\\$\Rightarrow$ meestal network based, 2 categorie\"en:
+\begin{itemize}
+\item zoveel resources gebruiken dat er geen nuttig werk meer gedaan kan worden
+\item network verstoren van facility
+\\$\Rightarrow$ attacks resulteren van misbruik van sommige van de fundamentele functionality van TCP/IP
+\\bv.: TCP aanvraag nooit beantwoorden met bevestiging dat de connectie compleet is
+\end{itemize}
+in algemeen: onmogelijk om DOS attacks te voorkomen, want gebruiken dezelfde mechanisms als normale operatie
+\\nog moeilijker te voorkomen en op te lossen: \textbf{distributed denial-of-service(DDOS)} attacks
+\\$\Rightarrow$ worden gelanceerd van meerdere sites tegelijk naar een gemeenschappelijk doel meestal door zombies
+\\$\Rightarrow$ soms geassocieerd met blackmail pogingen
+
+\section{Cryptography as a Security Tool}
+\textbf{cryptography} wordt gebruikt om het mogelijke aantal zender en/of ontvangers van boodschap te beperken
+\\moderne cryptography $\Rightarrow$ secrets(=\textbf{keys}) die selectief verdeeld worden naar computer in netwerk en gebruikt worden om boodschappen te verwerken
+\\$\Rightarrow$ ontvanger kan nagaan dat de boodschap gecre\"eerd was door computer die zekere key bezit
+\\$\Rightarrow$ zender kan boodschap coderen zodat alleen een computer met zeker key de boodschap kan decoderen
+
+\subsection{Encryption}
+\textbf{encryption} lost een grote verscheidenheid aan communicatieveiligheidsproblemen op $\Rightarrow$ vaak gebruikt
+\\$\Rightarrow$ beperkt het aantal mogelijke ontvangers van boodschap
+\\encryption algorithm bestaat uit volgende componenten:
+\begin{itemize}
+\item set K van keys
+\item set M van messages
+\item set C van ciphertexts
+\item encryption function: E: K -$>$ (M -$>$ C)
+\\= functie voor genereren ciphertexts uit boodschappen
+\item decryption function: D: K -$>$ (C -$>$ M)
+\\= functie voor genereren boodschappen uit ciphertexts
+\end{itemize}
+
+\subsubsection{Symmetric Encryption}
+\textbf{symmetric encryption} $\Rightarrow$ zelfde key wordt gebruikt om te encrypteren en te decrypteren
+\\meest gebruikte symmetric encryption algoritme in US voor burgerlijke toepassingen = \textbf{data-encryption standard(DES)} cipher ontworpen door National Institute of Standard and Technology(NIST)
+\\$\Rightarrow$ werkt door 64-bit value en 56-bit key te nemen en een serie transformaties uitvoeren die gebaseerd zijn op vervanging en permutatie operaties 
+\\$\Rightarrow$ DES werkt op block bits per tijd = \textbf{block cipher} en transformaties zijn van block ciphers
+\\$\Rightarrow$ als onveilig beschouwd omdat de keys onuitputtelijk doorzocht kunnen worden met gemiddelde computing resoures
+\\$\Rightarrow$ NIST maakte aanpassing = \textbf{triple DES} waarin DES algoritme 3 keer wordt herhaald (2 encrypties en 1 decryptie) op dezelfde tekst gebruikmakend van 2 of 3 keys
+\\in 2001: NIST $\Rightarrow$ nieuwe block cipher = \textbf{advanced encryption standard(AES)} 
+\\$\Rightarrow$ kan key lengths van 182,192 of 256 bits gebruiken en werkt op 128-bit blocks
+\\$\Rightarrow$ behandelen niet direct boodschappen langer dan hun vereiste block sizes
+\\
+\\veel \textbf{modes of encryption} gebaseerd op stream ciphers $\Rightarrow$ gebruikt om veilig langere boodschappen te encrypten
+\\$\Rightarrow$ meest voorkomende \textbf{stream cipher}(= ontworpen om eerder stream bytes of bits te encrypteren en decrypteren dan een block): \textbf{RC4} 
+\\$\Rightarrow$ nuttig wanneer de lengte van communicatie block cipher te traag zou maken
+\\$\Rightarrow$ key is input in pseudo-random-bit generator(= algoritme dat probeert random bits te produceren)
+\\$\Rightarrow$ output is \textbf{keystream} = oneindige set bits die gebruikt kunnen worden om een plaintext stream te encrypteren door gewoon XORing met de plaintext
+\\$\Rightarrow$ XOR(= "eXclusive OR") = operatie die 2 input bits vergelijkt en 1 output bit genereert $\Rightarrow$ bits hetzelfde $\Rightarrow$ resultaat = 0, bits verschillend $\Rightarrow$ resultaat = 1
+
+\subsubsection{Asymmetric Encryption}
+\textbf{asymmetric encryption algorithm} = verschillende encryption en decryption keys
+\\\textbf{public-key encryption} $\Rightarrow$ elke zender kan met public key communicatie encrypten maar alleen de key creator kan communicatie decrypten
+\\\textbf{RSA} = meest gebruikte asymmetric encryption algoritme
+\\$\Rightarrow$ in RSA: $k_{e}$ = public key, $k_{d}$ = private key
+\\gebruik assymetric encryption:
+\begin{enumerate}
+\item publicatie van de public key
+\\= simpel als electronische kopie van key doorgeven of complexer
+\item private key (= secret key) $\Rightarrow$ veilig bewaren aangezien iedereen met deze key boodschappen dan decrypten gecre\"eerd door de matching public key 
+\end{enumerate}
+
+\subsubsection{Authentication}
+\textbf{authentication} $\Rightarrow$ beperkt het aantal potenti\"ele zenders van boodschap
+\\$\Rightarrow$ complementair met encryption
+\\encryption algorithm bestaat uit volgende componenten:
+\begin{itemize}
+\item set K van keys
+\item set M van messages
+\item set A van authenticators
+\item function S: K -$>$ (M -$>$ A)
+\\= functie voor genereren authenticators uit boodschappen
+\item function V: K -$>$ ($M \times A$ -$>$ \{true, false\})
+\\= functie voor verifi\"eren van authenticators op boodschappen
+\end{itemize}
+\textbf{hash function} H(m) cre\"eert een kleine fixed-sized block data = \textbf{message digest} of \textbf{hash value} van message m
+\\$\Rightarrow$ werken door: boodschap te nemen, in blocks opsplisten en blocks verwerken om n-bit hash te verkrijgen
+\\$\Rightarrow$ moet collision resistant zijn
+\\veel voorkomende message-digest functions bevatten MD5(nu onveilig beschouwd, produceert 128-bit hash) en SHA-1(160-bit hash)
+\\$\Rightarrow$ message digests = nuttig voor detecteren veranderde boodschappen maar niet zo nuttig als authenticators $\Rightarrow$ authenticate H(m)
+\\2 main types authentication algoritmes:
+\begin{itemize}
+\item \textbf{message-authentication code(MAC)}
+\\= cryptographic checksum wordt gegenereerd van de boodschap door geheime key te gebruiken
+\item \textbf{digital-signature algorithm}
+\\authenticators = \textbf{digital signatures}
+
+\end{itemize}
+encryption en authentication kunnen samen of apart gebruikt worden
+\\\textbf{nonrepudation}= levert bewijs dat entity een actie heeft uitgevoerd
+\\$\Rightarrow$ met behulp van digital signatures
+
+\subsubsection{Key Distribution}
+bezorging van symmetric key $\Rightarrow$ grote uitdaging want beide partijen(en niemand anders) hebben de key nodig
+\\soms \textbf{out-of-band} = via papier of conversatie $\Rightarrow$ gaat niet goed op grote schaal
+\\= redenen voor pogingen om asymmetric key algoritmes te cre\"eren
+\\ maar 1 private key nodig voor alle public keys $\Rightarrow$ public keys moeten niet beveiligd worden
+\\ $\Rightarrow$ bewaard in \textbf{key ring}
+\\ $\Rightarrow$ bewijs nodig voor wie de eigenaar is van de public key
+\\ oplossing = \textbf{digital certificate}= public key digitaal gesigneerd door trusted party
+\\$\Rightarrow$ trusted party ontvangt identificatiebewijs van entity en verklaart dat de public key tot die entity behoort
+\\\textbf{certificate authorities} hebben eigen public keys in web browsers voordat ze verdeeld worden $\Rightarrow$ kunnen getuigen voor andere authorities(digitaal public keys van andere authorities signeren) $\Rightarrow$ web van vertrouwen
+
+\subsection{Implementation of Cryptography}
+network protocols $\Rightarrow$ georganiseerd in \textbf{layers} met elke layer werkend als de klant van diegene eronder
+\\cryptography kan ingebracht worden op bijna elke layer in OSI model
+\begin{itemize}
+\item IPSec 
+\\ = network-layer security, definieert IP packet formats die de toevoeging van authenticators en de encryption van packet inhouden toelaat
+\\$\Rightarrow$ gebruikt symmetric encryption en \textbf{Internet Key Exchange(IKE)}protocol(gebaseerd op public-key encryption) voor key uitwisseling
+\\$\Rightarrow$ wordt veel gebruikt als de basis voor \textbf{virtual private networks(VPN's)}(waarin alle traffic tussen twee IPSec eindpunten gecrypteerd is om een private network te maken uit \'e\'en dat anders public is)
+\end{itemize}
+talrijke protocols zijn ook ontworpen voor gebruik door applicaties (bv.: PGP voor het encrypteren van e-mail) maar om veiligheid te implementeren moeten de applicaties zelf gecodeerd zijn
+
+\section{User Authentication}
+groot veiligheidsprobleem voor operating systems = \textbf{user authentication}
+\subsection{Passwords}
+meest voorkomende manier om user identity te authenticaten  = \textbf{passwords}
+\\wanneer user zichzelf identificeert met user ID of account name $\Rightarrow$ vraag naar password
+\\ $\Rightarrow$ als wachtwoord ingegeven door user matcht met wachtwoord in systeem $\Rightarrow$ syteem veronderstelt dat eigenaar het account accessed
+\\wachtwoorden worden ook vaak gebruikt om objecten in computersysteem the beveiligen in afwezigheid van meer volledige protection schemes
+\\$\Rightarrow$ verschillende wachtwoorden voor verschillende acces rights
+\\in praktijk: meeste systemen vereisen maar \'e\'en wachtwoord voor gebruiker om volledige toegangsrechten te bekomen
+
+\subsection{Password Vulnerabilities}
+2 voorkomende manieren om wachtwoorden te raden:
+\begin{enumerate}
+\item intruder kent user of heeft informatie over user
+\\$\Rightarrow$ vaak gebruiken users voor de hand liggende informatie als wachtwoord
+\item brute force
+\\= enumeration proberen = alle mogelijke combinaties van valid passwords tot wachtwoord wordt gevonden
+\\$\Rightarrow$ vooral korte wachtwoorden zijn gevoelig voor deze methode
+\\= minder succesvol bij systemen die langere wachtwoorden toelaten die zowel hoofd- als kleine letters bevatten, samen met getallen en leestekens
+\end{enumerate}
+passwords kunnen ook ontdekt worden door visual of electronic monitoring
+\begin{itemize}
+\item \textbf{shoulder surfing} 
+\\ = meekijken over de schouder van gebruiker op toetsenbord wanneer de gebruiker het wachtwoord ingeeft 
+\item \textbf{sniff}
+\\= iedereen met toegang tot netwerk waar computer op zit kan network monitor toevoegen $\Rightarrow$ om to sniff(= kijken) alle data die getransferd wordt op het network inclusief user ID's en passwords
+\\$\Rightarrow$ oplossing: encrypteren van data 
+\end{itemize}
+probleem $\Rightarrow$ wachtwoorden die neergeschreven worden waar het gelezen kan worden of verloren raken (bv.: systemen met hard-to-remember of lange of frequent veranderende wachtwoorden(aantekening of hergebruik))
+\\
+\\probleem $\Rightarrow$ illegal transfer
+\\= gebruikers die account delen
+\\ $\Rightarrow$ kan resulteren in unauthorized users die toegang tot het account hebben
+\\
+\\passwords
+\begin{itemize}
+\item system-generated
+\\$\Rightarrow$ kunnen moeilijk te herinneren zijn $\Rightarrow$ neerschrijven 
+\item user-selected
+\\$\Rightarrow$ gemakkelijk te raden
+\end{itemize}
+sommige systemen $\Rightarrow$ checken wachtwoorden op de moeilijkheid van raden en cracken voor accepteren
+\\$\Rightarrow$ ook age passwords $\Rightarrow$ dwingen users hun passwords op reguliere tijdstippen te veranderen
+\\maar: gebruikers kunnen zo switchen tussen 2 wachtwoorden
+\\$\Rightarrow$ oplossing: password history voor elke gebruiker
+\\ verschillende varianten op deze simple password schema's kunnen gebruikt worden
+
+\subsection{Securing Passwords}
+computersysteem $\Rightarrow$ wachtwoorden veilig bewaren
+\\ op UNIX: wachtwoorden door hash functie gehaald zodat password list niet geheim moet gehouden worden
+\\ $\Rightarrow$ gegeven x kan f(x) berekend worden, maar gegeven f(x) zou het moeilijk of onmogelijk moeten zijn om x te berekenen
+\\systeem heeft wel geen controle meer over wachtwoorden
+\\$\Rightarrow$ iedereen met kopie van password file kan snelle hash routines ertegen runnen
+\\$\Rightarrow$ gebruikt bekend hashing algoritme $\Rightarrow$ cracker zou paswoorden kunnen bijhouden die al eerder gekraakt zijn
+\\daarom: "salt"(= bewaard random getal) in het hashing algoritme
+\\$\Rightarrow$ salt value wordt toegevoegd om te verzekeren dat twee dezelfde plaintext wachtwoorden resulteren in verschillende hashwaarden
+$\Rightarrow$ nieuwere versies van UNIX: password file enkel voor superuser
+\\ andere zwakheid in UNIX: behandelt alleen de eerste 8 karakters als significant 
+\\goede techniek om paswoord te genereren:
+eerste letter van elk woord van gemakkelijk te herinneren zin te gebruiken met zowel hoofd-als kleine letter,getal en leestekens
+\\ als spaties zijn toegelaten: \textbf{passphrase}
+
+\subsection{One-Time Passwords}
+om problemen van password sniffing en shoulder surfing te vermijden 
+\\$\Rightarrow$ set van  \textbf{paired passwords}
+\\= wanneer sessie begint $\Rightarrow$ selecteert systeem random en toont een deel van password paar $\Rightarrow$ gebruiker moet andere deel geven
+\\ gebruiker = \textbf{challenged} en \textbf{respond} met het correcte antwoord voor die challenge
+\\
+\\aanpak kan gegeneraliseerd worden tot gebruik van algoritme als wachtwoord
+\\$\Rightarrow$ algoritmische wachtwoorden kunnen niet herbruikt worden(gebruiker typt wachtwoord in en geen entity die dat wachtwoord onderschept kan het herbruiken)
+\\$\Rightarrow$ systeem en gebruiker delen symmetric password
+\\$\Rightarrow$ volgende keer andere authenticator 
+\\= \textbf{one-time password} system
+\\$\Rightarrow$ worden op verschillende manieren ge\"implementeerd:
+\\software zorgt voor H(pw,ch)
+\\pw = kan input zijn door gebruiker of gegenereerd door calculator in synchronizatie met computer
+\\$\Rightarrow$ soms pw = \textbf{personal identification number(PIN)}
+\\output = one-time password
+\\$\Rightarrow$ one-time pasword dat input vereist door gebruiken $\Rightarrow$ \textbf{two-factor authentication}($\Rightarrow$ vereist "iets dat je hebt" en "iets dat je weet"
+\\ andere variatie = gebruiken \textbf{code book} of \textbf{one-time pad}(= lijst van single-use passwords)
+\\$\Rightarrow$ elk wachtwoord op de lijst word \'e\'en keer gebruikt en dan doorstreept of gewist
+\\$\Rightarrow$ code book moet beschermd worden en het helpt dat de code book niet het systeem identificeert waarvoor de codes authenticators zijn
+
+\subsection{Biometrics}
+gebruik van biometric maatregelen
+\\$\Rightarrow$ palm-en handreaders om fysieke toegang te beveiligen $\Rightarrow$ momenteel te groot en te duur voor normale computer authentication
+\\$\Rightarrow$ fingerprintreaders $\Rightarrow$ software kan vinger scannen en vergelijken met de bewaarde om te kijken ze matchen
+\\\textbf{multifactor authentication} $\Rightarrow$ beter
+\\ maar: strenge authentication op zichzelf is niet voldoende om de ID van de gebruiker te garanderen, kan  steeds gekaapt worden als authentication sessie niet encrypted is
+
+\section{Implementing Security Defenses}
+veel security solutions
+\\ $\Rightarrow$ \textbf{defense in depth} = meer lagen van defense zijn beter dan minder lagen
+\subsection{Security Policy}
+eerste stap $\Rightarrow$ hebben van \textbf{security policy} $\Rightarrow$ meestal inclusief statement wat beveiligd wordt
+\\$\Rightarrow$ zonder policy = onmogelijk voor gebruikers en administrators om te weten wat toegestaan is, wat vereist is en wat niet toegestaan wordt
+\\$\Rightarrow$ zou \textbf{living document} moeten zijn dat regelmatig gereviewd en ge\"updated wordt om te verzekeren dat het nog steeds toepasselijk is en gevolgd wordt
+
+\subsection{Vulnerability Assessment}
+bepalen of security policy correct is ge\"implementeerd $\Rightarrow$ vulnerability assessment uitvoeren
+\\veel verschillende: social engineering, risk assessment, port scans
+\\\textbf{risk assessment} 
+\\$\Rightarrow$ probeert een waarde te plakken op de voordelen van de entity en bepaalt de kans dat security incident de entity treft en de waarde vermindert
+\\\textbf{penetration test}
+\\= waarin entity gescand wordt op gekende vulnerabilities
+\\ $\Rightarrow$ kernactiviteit van meeste vulnerability assessments
+\\vulnerability scans:
+\\$\Rightarrow$ meestal uitgevoerd wanneer computergebruik relatief laag is om impact te minimaliseren
+\\
+\\computers op netwerk $\Rightarrow$ vatbaarder voor security attacks dan standalone systems
+\\$\Rightarrow$ eerder attacks van groot aantal onbekende access points dan van gekende access points 
+\\$\Rightarrow$ potentieel ernstig veiligheidsprobleem
+\\
+\\US government $\Rightarrow$ system is zo veilig als verste connectie
+\\vaak onmogelijk om machine in room op te sluiten en geen remote access toe te staan
+\\vulnerability scans $\Rightarrow$ om problemen met network security te vinden
+\\$\Rightarrow$ zoeken in netwerk naar poorten die request beantwoorden
+\\als services ingeschakeld zijn die dat niet zouden mogen zijn $\Rightarrow$ kan toegang ertoe geblokkeerd worden of ze kunnen uitgeschakeld worden
+\\scans $\Rightarrow$ testen poorten op gekende zwakheden 
+\\
+\\security tools kunnen door crackers misbruikt worden
+\\$\Rightarrow$ sommige mensen pleiten voor \textbf{security through obscurity} (= geen tools schrijven om security te testen omdat ze gebruikt en uitgebuit kunnen worden om security holes te vinden
+\\anderzijds: crackers kunnen eigen tools schrijven
+
+\subsection{Intrusion Detection}
+\textbf{intrusion detection} $\Rightarrow$ pogingen of succesvolle inbraken in computersystemen ontdekken en beginnen en gepaste antwoorden geven aan inbraken
+\\veel verschillende technieken:
+\begin{itemize}
+\item tijdstip
+\\$\Rightarrow$ terwijl inbraak bezig is of erna
+\item onderzochte types input
+\\bv.: user-shell commands, process system calls..
+\item omvang antwoordmogelijkheden
+\begin{itemize}
+\item simpele antwoordvormen
+ \\bv.: administrator waarschuwen of de inbraak stoppen
+\item geavanceerde antwoordvormen
+\\ $\Rightarrow$ verleggen van intruder's activiteit naar \textbf{honeypot} (= valse resource zichtbaar voor attacker die echt lijkt)
+\\$\Rightarrow$ systeem monitort en wint informatie over attack
+\end{itemize}
+\end{itemize}
+veel vrijheid in ontwerp voor detecting intrusions $\Rightarrow$ grote omvang oplossingen:
+\begin{itemize}
+\item \textbf{intrusion-detection systems(IDSs)} 
+\\= alarm wanneer intrusion gedetecteerd wordt
+\item \textbf{intrusion-prevention systems(IDPs)}
+\\= gedragen zich als routers, met passerend verkeer tot intrusion gedetecteerd wordt(blokkeren intrusion en rest van het verkeer)
+\end{itemize}
+hoe intrusion detecteren?
+\begin{itemize}
+\item \textbf{signature-based detection} 
+\\= systeeminput of netwerkverkeer wordt onderzocht op specifieke behavior patterns (= \textbf{signatures}) gekend om attacks aan te geven
+\\$\Rightarrow$ probeert gevaarlijke behaviors te karakteriseren en te detecteren als er \'e\'en voorkomt
+\item \textbf{anomaly detection}
+\\= probeert via verschillende technieken abnormaal behavior in computersystemen te ontdekken
+\\$\Rightarrow$ gebaseerd op veronderstelling dat intrusions vaak abnormaal behavior veroorzaken
+\\$\Rightarrow$ probeert normaal of niet-gevaarlijk behaviors te karakteriseren en te detecteren wanneer er iets anders voorkomt dan deze behaviors
+
+\end{itemize}
+$\Rightarrow$ leveren IDSs en IDPs met zeer verschillende eigenschappen op 
+\\$\Rightarrow$ anomaly detection $\Rightarrow$ vindt vooraf ongekende methods van intrusion = \textbf{zero-day attacks}
+\\$\Rightarrow$ signature-based detection $\Rightarrow$ alleen gekende attacks identificeren die gecodeerd kunnen worden in herkenbaar patroon
+\\$\Rightarrow$ anomaly detection $\Rightarrow$ normaal systeembehavior moet accuraat gebenchmarkt worden:
+\begin{itemize}
+\item intrusion al in system 
+\\$\Rightarrow$ intrusive behavior opgenomen in normale benchmark(= criterium)
+\item benchmark $\Rightarrow$ behoorlijk compleet beeld van normaal gedrag
+\\$\Rightarrow$ anders veel \textbf{false positives}(= valse alarmen) en \textbf{false negatives}(= gemiste intrusions)
+\end{itemize}
+P|A) = kans dat een alarm op een intrusion wijst $\Rightarrow$ kan berekend worden met \textbf{Bayes' theorem}
+\\ in systemen waar security admintistrator elk alarm onderzoekt $\Rightarrow$ hoge ratio van valse alarmen (= "Christmas tree effect") $\Rightarrow$ verspilling en administrator gaat alarmen negeren
+\\dus: IDSs en IDPs moeten extreem lage false-alarm rate aanbieden
+
+\subsection{Virus Protection}
+$\Rightarrow$ vaak voorzien door antivirus programma's 
+\\sommige programma's $\Rightarrow$ effectief tegen gekende virussen
+\\$\Rightarrow$ alle programma's op systeem doorzoeken voor specifiek patroon of instructies dat virus opstelt
+\\$\Rightarrow$ gevonden $\Rightarrow$ verwijderen instructies = \textbf{disinfecting} programma
+\\antivirus programma's $\Rightarrow$ catalogi van duizenden virussen waarop ze zoeken
+\\
+\\zowel virussen als antivirus software $\Rightarrow$ meer geavanceerd
+\\antivirus programma's zoeken naar families van patronen in plaats van enkel patroon om virus te identificeren
+\\$\Rightarrow$ sommige implementeren verschillende detection algoritmes
+\\bv.: decompress compressed virussen, process anomalities
+\\ook $\Rightarrow$ program runnen in \textbf{sandbox} (= gecontroleerde of emulated sectie van systeem, waarin antivirus software gedrag van code analyseer voordat het ongemonitord gerund wordt)
+\\
+\\beste bescherming tegen computervirussen = preventie of toepassen van \textbf{safe computing}
+\\bv.: nieuwe kopiën van software legitiem kopen
+\\tegen macrovirussen: uitwisselen van Microsoft Word documents in alternatief file format = \textbf{rich text format(RTF)}
+\\$\Rightarrow$ RTF bevat niet de mogelijkheid om macro's vast te hechten
+\\andere verdediging = vermijden van openenen van e-mailbijlagen van onbekende gebruikers
+\\andere bescherming $\Rightarrow$ staat vroegtijdige detectie toe
+\\$\Rightarrow$ helemaal hard disk reformatteren
+
+\subsection{Auditing, Accounting, and Logging}
+\begin{itemize}
+\item logging
+\\= algemeen of specifiek
+\\$\Rightarrow$ alle system-call uitvoeringen kunnen gelogd worden voor analyse van program behavior(of misbehaviour)
+\\$\Rightarrow$ meestal verdacht gebeurtenissen: bv.: authentication failures en authorization failures $\Rightarrow$ inbraakpogingen
+\item accounting
+\\= gebruikt om performance changes te vinden die security problemen kunnen onthullen
+\end{itemize}
+\section{Firewalling to Protect Systems and Networks}
+hoe betrouwbare computer veilig kan verbonden worden met onbetrouwbaar netwerk
+$\Rightarrow$ oplossing: \textbf{firewall} = computer, toestel of router dat betrouwbaar en ontbetrouwbare systemen scheidt
+\\$\Rightarrow$ network firewall limiteert network access tussen de twee \textbf{security domains} en monitort en logt alle connecties
+\\$\Rightarrow$ kan ook verbindingen gebaseerd op source of destination address, source of destination poort of de richting van de verbinding limiteren
+\\
+\begin{itemize}
+\item Internet
+\\vaak ge\"implementeerd als onbetrouwbaar domein
+\item \textbf{demilitarized zone (DMZ)}
+\\= semitrusted en semisecure network
+\item company's computers
+\\$\Rightarrow$ derde domein
+\end{itemize}
+verbindingen $\Rightarrow$ toegestaan van Internet naar DMZ computers en van company computers naar Internet 
+\\$\Rightarrow$ niet toegestaan van Internet of DMZ computers naar company computers
+\\
+\\firewall zelf $\Rightarrow$ veilig en attack-proof
+\\$\Rightarrow$ voorkomt geen attacks $\Rightarrow$ \textbf{tunnel}(= reizen in protocols of verbindingen die de firewall toelaat)
+\\andere zwakheid van firewall:
+\\ = \textbf{spoofing}
+\\$\Rightarrow$ waarin ongeautoriseerde host doet alsof hij geautoriseerde host is door aan aantal authorization criteria's te voldoen
+\\
+\\in aanvulling tot meest gebruikte netwerk firewalls $\Rightarrow$ nieuwe soorten:
+\begin{itemize}
+\item \textbf{personal firewall}
+\\= softwarelaag ofwel in operating system of wel toegevoegd als applicatie
+\item \textbf{application proxy firewall}
+\\= verstaat protocols van applicaties over netwerk
+\item sommige firewalls $\Rightarrow$ ontworpen voor \'e\'en specifiek protocol
+\\bv.: \textbf{XML firewall}
+\\$\Rightarrow$ specifieke doel om XML traffic te analyseren en niet toegelaten of malformed XML te blokkeren
+\item \textbf{system-call firewalls}
+\\= zitten tussen applicaties en kernel
+\\$\Rightarrow$ monitoren system-call uitvoeringen
+\end{itemize}
+
+\section{Computer-Security Classifications}
+$\Rightarrow$ 4 security classificaties in systems door U.S. Department of Defense Trusted Computer Evaluation Criteria: A, B, C en D
+\begin{itemize}
+\item division D
+\\= laagste niveau classificatie
+\\= minimale protectie
+\\$\Rightarrow$ gebruikt voor systemen die niet voldoen aan vereisten van alle andere security classes
+\item division C
+\\= voorziet protectie en verantwoordelijkheid van gebruikers voor acties door gebruik van audit capabilities
+\begin{itemize}
+\item division C1
+\\= bevat controlevormen dat gebruikers toestaan om priv\'e-informatie te beschermen en andere gebruikers weg te houden van per ongeluk lezen of vernietigen van die data
+\\= waarin cooperating users toegang tot data hebben op hetzelfde niveau
+\\\textbf{trusted computer base(TCB)}
+\\= geheel van alle protectiesystemen binnen computersysteem(hardware, software, firmware) dat correct security policy afdwingt
+\\ TCB van C1-systeem contoleert toegang tussen gebruikers en files door toe te staan dat gebruiker specifiek objecten deelt met genoemde individuen of gedefinieerde groepen
+\\$\Rightarrow$ vereist user identification
+\item division C2
+\\= voegt individual-level access control toe aan de vereisten van C1-systeem
+
+\end{itemize}
+\item division B
+\\ = verplichte protectiesystemen met alle eigenschappen van class-C2 systeem
+\\ $\Rightarrow$ voegen gevoeligheidsniveaulabels toe aan elk object in systeem
+\begin{itemize}
+\item division B1
+\\ = labels die gebruikt worden voor beslissingen met betrekking tot verplichte toegangscontrole
+\\$\Rightarrow$ geeft ook gevoeligheidsniveau weer op de top en bottom van elke pagina van human-readable output
+\\$\Rightarrow$ op zijn minst twee hi\"erarchische niveaus security ondersteunen
+\item division B2
+\\$\Rightarrow$ breidt labels uit tot elke system resource zoals storage objects
+\\$\Rightarrow$ fysieke devices krijgen minimale en maximale security levels toegekend dat systeem gebruikt om beperkingen op te leggen gebaseerd op de fysieke omgevingen waarin de devices zich bevinden 
+\\$\Rightarrow$ ondersteunt covert channels en auditing van events die kunnen leiden tot uitbuiting van covert channels
+\item division B3
+\\ $\Rightarrow$ acces-control list dat aanduidt of gebruiker of groep al dan niet toegang heeft tot gegeven genoemd object
+\\$\Rightarrow$ mechanisme om events te controleren die inbreuk op security policy kunnen aangeven (waarschuwt security administrator en eventueel event be\"eindigen)
+\end{itemize}
+\item division A
+\\= hoogste niveau classificatie
+\\architecturaal is A1 functioneel equivalent met B3 maar door gebruikt van formele ontwerpspecificaties en verificaties zodat er een grote verzekering is dat de TCB correct ge\"implementeerd is
+
+\end{itemize}
+gebruik TCB verzekert dat systeem aspecten van security policy kan afdwingen
+\\TCB specifieert niet wat policy moet zijn
+\\meestal $\Rightarrow$ gegeven computing environment ontwikkeld security policy voor \textbf{certification}
+en heeft het plan \textbf{accredited}(= officieel erkend) door security agency
+\\sommige computing environments vereisen andere certification
+\\bv.: zoals voorzien door TEMPEST( beschermt tegen elektronisch afluisteren)
+
+\section{An Example: Windows 7}
+Microsoft Windows 7 = general-purpose operating system ontworpen om verscheidenheid aan security features en methodes te ondersteunen
+\\security model
+\\$\Rightarrow$ gebaseerd op idee van \textbf{user accounts}
+\\$\Rightarrow$ laat creatie van aantal user accounts toe 
+\\$\Rightarrow$ ge\"identificeerd door systeem met unieke security ID
+\\
+\\Wanneer user inlogt $\Rightarrow$ creatie van \textbf{security access token} (= omvat security ID voor gebruiker, security ID van eventuele groepen en lijst speciale privileges van user)
+\\$\Rightarrow$ elk proces dat Windows 7 runt voor user $\Rightarrow$ kopie van access token
+\\$\Rightarrow$ om toegang toe te laten of te weigeren tot object
+\\user authentication meestal door user name en wachtwoord
+\\
+\\gebruikt idee van subject om te verzekeren dat er niet te veel toegang wordt toegekend
+\\\textbf{subject} $\Rightarrow$ gebruikt om toelatingen voor elk programma dat gebruiker runt te volgen en te beheren
+
+\end{document} 
