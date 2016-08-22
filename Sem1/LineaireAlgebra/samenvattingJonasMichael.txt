@@ -1,0 +1,10 @@
+Samenvatting Jonas en Michael op google drive
+map met alle hoofdstukken: https://drive.google.com/drive/folders/0Byb0moQzmpI_aWtOcWNFb0F3RUE?usp=sharing
+HF0: README --> https://docs.google.com/document/d/1hLijz3EFAPC8OCIPiW44chB1wi7LgqN8mvEQYP1td_c/edit?usp=sharing
+HF1: Eerstegraadsvergelijkingen en matrices --> https://docs.google.com/document/d/1n_xh-_-Dmf3oRXiCWpQD1z9XEYB6Lh2Sc5Q7vRN6i60/edit?usp=sharing
+HF2: Determinanten --> https://docs.google.com/document/d/1pveiMJfanbG7C_xYqN13v-9xycAvq7UnHDI7zW20lOo/edit?usp=sharing
+HF3: Vectorruimten --> https://docs.google.com/document/d/12Tco1CTIe7l3JILDmyaQEJm-rt8sImEm4ljBkR6Bw0E/edit?usp=sharing
+HF4: Lineaire afbeeldingen en lineaire transformaties --> https://docs.google.com/document/d/1Mh4UX4BfRXx_5f3i5Os_Y2u3orjCbzuNKIUPtAs9mWU/edit?usp=sharing
+HF5: Eigenwaarden, eigenvectoren en diagonaliseerbaarheid --> https://docs.google.com/document/d/1167-PyXzI6puR_zJNX2rXnRS1Ix9zf_mx6TSqMiNiYg/edit?usp=sharing
+HF6: Inproductruimten en Euclidische ruimten --> https://docs.google.com/document/d/1VS0FiC9M2YkCr-TP-_xGdSI_w7c9pgv6tMmALBItrng/edit?usp=sharing
+
